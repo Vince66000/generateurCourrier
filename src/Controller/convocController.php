@@ -37,20 +37,17 @@ class testController  extends  AbstractController {
      */
     public function getProjects() :Response
     {
-        $callApi = new callAPI();
-        $method = 'GET';
-        $apiKey = 'd07b51bb74af39ccbf3d59a0e8d833033dfa3b37' ;
-        $url = 'http://localhost/dolibarr/htdocs/api/index.php/projects?sortfield=t.rowid&sortorder=ASC&limit=100';
-        $projects = $callApi->getData($method, $apiKey, $url);
+//        $callApi = new callAPI();
+//        $method = 'GET';
+//        $apiKey = 'd07b51bb74af39ccbf3d59a0e8d833033dfa3b37' ;
+//        $url = 'http://localhost/dolibarr/htdocs/api/index.php/projects?sortfield=t.rowid&sortorder=ASC&limit=100';
+//        $projects = $callApi->getData($method, $apiKey, $url);
 
-        $projectsList = json_decode($projects, true);
+//        $projectsList = json_decode($projects, true);
 
 
 
-        return  $this->render('listeProjets.html.twig', [
-            'projectsList' => $projectsList,
-
-        ]);
+        return  $this->render('formConvoc.html.twig');
     }
 
     /**
@@ -59,12 +56,17 @@ class testController  extends  AbstractController {
      */
     public function getSocByProj()
     {
-        $idSoc = $_POST['idsoc'];
+        $ref = $_POST['affaire'] . '%';
         $date = $_POST['datepicker'];
         $heure = $_POST['timepicker'];
+        $civ = $_POST['civilite'];
+        $expert = $_POST['expert'];
+        $texteLibre = $_POST['textelibre'];
+        $entreprise = $_POST['entreprise'];
+
 
         $db = new PDOConnection('mysql:host=localhost;dbname=dolibarr', 'vincent', 'root');
-        $getSoc = $db->query('SELECT 
+        $getSoc = $db->prepare ('SELECT 
 S.nom,
 S.rowid,
 S.address,
@@ -75,28 +77,32 @@ P.title
 FROM llx_societe as S
 INNER JOIN llx_projet as P
 ON S.rowid = P.fk_soc
-WHERE S.rowid =' . $idSoc);
-
+WHERE P.ref  LIKE :ref');
+        $getSoc->bindParam(':ref', $ref);
+        $getSoc->execute();
         $societe = $getSoc->fetch();
 
         $refAff = $societe['ref'];
 
         $template = $this->renderView('convocGR.html.twig', [
-            'idSoc' => $idSoc,
+//            'idSoc' => $idSoc,
+            'affaire' => $ref,
             'societe' => $societe,
             'dateRdv' => $date,
-            'heureRdv' => $heure
+            'heureRdv' => $heure,
+            'civ' => $civ,
+            'expert' => $expert,
+            'textelibre' => $texteLibre,
+            'entreprise' =>$entreprise
 
         ]);
 
         $html2pdf = new html2pdf('P', 'A4', 'fr', true, 'utf8', 10);
-//        $html2pdf->setTestIsImage(false);
-        $html2pdf->setTestTdInOnePage(true);
+        $html2pdf->setTestTdInOnePage(false);
         $html2pdf->writeHTML($template);
 
         return $html2pdf->output('convocation'. $refAff .'.pdf');
     }
-
 
 
 }
