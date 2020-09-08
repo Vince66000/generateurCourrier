@@ -1,8 +1,5 @@
 <style type="text/css">
 
-    body {
-
-    }
     #cadre {
         border: 1px solid #1b1b1b;
         margin: 5px;
@@ -14,36 +11,32 @@
         text-align: left;
         padding-left: 400px;
         margin-top: 100px;
-        line-height: 0.5em;
-        margin-bottom: 50px;
+        line-height: 1px;
+        margin-bottom: 25px;
     }
 
     #ref {
         text-align: left;
         padding-left: 10px;
-        /*padding-bottom: 5px;*/
-        /*padding-top: 5px;*/
-        /*border: 1px solid black;*/
         height: 30px;
         width: 60%;
     }
     #date_exp, #adresse_exp {
-        /*border: 10px solid #1b1b1b ;*/
+
         text-align: center;
     }
     #corps_texte {
         margin-left: 180px;
         margin-right: 40px;
+        margin-top: 60px;
         text-align: justify;
+        line-height: 15px;
 
     }
     td {
         border: solid 1px black
     }
-    /*#expert {*/
-    /*    text-align: right;*/
-    /*    padding: 40px;*/
-    /*}*/
+
 
 </style>
 <page  backimg="http://localhost/gestionCourrier/public/fondReiserCopie2.jpeg"  backimgw="100%" backimgy="30px" backimgx="35px" style="size: A4;">
@@ -53,16 +46,12 @@
         <div id="header">
 
         </div>
-
-
         <div >
             <div id="noms">
                 <p>Elne, le {{ "now" | date("d/m/Y") }}</p>
                 <p>{{ societe.nom }}</p>
                 <p>{{ societe.address }}</p>
                 <p>{{ societe.zip }} {{ societe.town }}</p>
-
-
             </div>
             {% if societe.address is empty %}
                 <div style="height: 50px; width: 100%; background-color: red; text-align: center">
@@ -94,24 +83,21 @@
                 {% elseif civ =="M" %}
                     <p>Cher Maître,</p>
                 {% endif %}
-                <p>Concernant votre dossier et, pour faire suite à la mission que vous m’avez confiée, vous prie de
-                    bien vouloir trouver, annexée(s) à la présente, copie(s) de la (des) convocation(s) par courrier(s)
-                    Recommandé(s) avec Accusé(s) de Réception que je transmets à l’entreprise <b>{{ entreprise }}</b>, (ainsi qu’à xxxx, sa compagnie d’assurances)
-                    (à l’ensemble des parties).</p>
-                {% if textelibre is not empty %}
-                    <p><b>motif :</b></p> {{ textelibre }}
-                {% endif %}
-                <p>Vous pourrez prendre note de ce que je procèderai à une réunion d’expertise contradictoire sur les lieux,</p>
+
+                <p>Je reviens vers vous concernant votre dossier et, pour faire suite à la mission que vous m'avez confiée,
+                    vous remercie de prendre note que je procèderai à une réunion d'expertise contradictoire sur les lieux,</p>
                 <p id="adresse_exp"><b> {{ societe.address }}, {{ societe.zip }} {{ societe.town }},</b></p>
                 <p id="date_exp"><b>le {{ dateRdv | format_datetime('full', 'none', locale='fr') }} à {{ heureRdv }}</b></p>
 
+                <p>Réunion à laquelle je vous remercie de bien vouloir être présent{% if civ=="F" %}e{% endif %}.</p>
+                {% if textelibre is not empty %}
+                    <p><b>Pour rappel voici les motifs de ma mission :</b> {{ textelibre }} </p>
+                {% endif %}
+                <p>Vous souhaitant bonne réception de cet envoi, je vous prie d’agréer,</p>
+                {% if civ == "F" %} Chère Madame,
+                {% elseif  civ == "H" %}Cher Monsieur, {%  elseif civ == "S" %} Chère Madame, Cher Monsieur,
+                {%  elseif civ =="D" %}Cher Docteur, {% elseif civ =="M" %}Cher Maître, {% endif %} l’expression de mes sentiments dévoués.
 
-                <p>Réunion à laquelle je vous remercie de bien vouloir être présent(e)(s).</p>
-
-                <p>Vous souhaitant bonne réception de cet envoi, je vous prie d’agréer, {% if civ == "F" %} Chère Madame,
-                    {% elseif  civ == "H" %}Cher Monsieur, {%  elseif civ == "S" %} Chère Madame, Cher Monsieur,
-                    {%  elseif civ =="D" %}Cher Docteur, {% elseif civ =="M" %}Cher Maître, {% endif %} l’expression de mes sentiments dévoués.
-                </p>
 
             </div>
             <div style="padding-left: 400px; margin-top: 40px">

@@ -10,30 +10,25 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use  \Spipu\Html2Pdf\Html2Pdf;
-use function Symfony\Component\DependencyInjection\Loader\Configurator\ref;
 
 
-class testController  extends  AbstractController {
+
+class convocController  extends  AbstractController {
 
 
     /**
-     * @var callAPI
+     * @return Response
+     * @Route("/", name="index")
      */
-    private $API;
+    public function index() :Response
+    {
+        return  $this->render('home.html.twig');
 
-//    public function __construct(callAPI $API) {
-//
-//    $this-> API = $API;
-//
-//    }
-
-//    public function getconnex() {
-//
-//
-//    }
+    }
 
     /**
-     * @Route("/", name="firstPage")
+     * Affiche le formulaire de convocs clients
+     * @Route("convocationClient", name="convocationClient")
      */
     public function getProjects() :Response
     {
@@ -46,23 +41,23 @@ class testController  extends  AbstractController {
 //        $projectsList = json_decode($projects, true);
 
 
-
-        return  $this->render('formConvoc.html.twig');
+        return  $this->render('formConvocClient.html.twig');
     }
 
     /**
-     *
-     * @Route("client", name="client")
+     * Récupèration des infos passées au formulaire et Génération du PDF
+     * @Route("generateConvCl", name="generateConvCl")
      */
-    public function getSocByProj()
+    public function getConvocClient()
     {
-        $ref = $_POST['affaire'] . '%';
+//        $dest = $_POST['destinataire'];
+        $ref =  '%' .$_POST['affaire'] . '%';
         $date = $_POST['datepicker'];
         $heure = $_POST['timepicker'];
         $civ = $_POST['civilite'];
         $expert = $_POST['expert'];
         $texteLibre = $_POST['textelibre'];
-        $entreprise = $_POST['entreprise'];
+//        $entreprise = $_POST['entreprise'];
 
 
         $db = new PDOConnection('mysql:host=localhost;dbname=dolibarr', 'vincent', 'root');
@@ -84,8 +79,9 @@ WHERE P.ref  LIKE :ref');
 
         $refAff = $societe['ref'];
 
-        $template = $this->renderView('convocGR.html.twig', [
-//            'idSoc' => $idSoc,
+
+        $template = $this->renderView('modelConvoc.html.twig', [
+
             'affaire' => $ref,
             'societe' => $societe,
             'dateRdv' => $date,
@@ -93,7 +89,7 @@ WHERE P.ref  LIKE :ref');
             'civ' => $civ,
             'expert' => $expert,
             'textelibre' => $texteLibre,
-            'entreprise' =>$entreprise
+//            'entreprise' =>$entreprise
 
         ]);
 
@@ -104,5 +100,49 @@ WHERE P.ref  LIKE :ref');
         return $html2pdf->output('convocation'. $refAff .'.pdf');
     }
 
+    /**
+     * @Route("convocationEse", name="convocationEse")
+     */
+    public function getConvocTiers() {
+
+        $db = new PDOConnection('mysql:host=localhost;dbname=dolibarr', 'vincent', 'root');
+        $getContact = $db->prepare(
+            'SELECT 
+                        llx_socpeople.firstname,
+                        llx_socpeople.lastname
+                        FROM llx_socpeople 
+                        INNER JOIN llx_societe 
+                        on llx_socpeople.fk_soc = llx_societe.rowid
+                        INNER JOIN llx_projet
+                        on llx_socpeople.fk_soc = llx_projet.fk_soc');
+
+        $getContact->execute();
+
+//        while($row = $getContact->fetchAll()) {
+//            $nom = $row['firstname'];
+//            $prenom = $row['lastname'];
+//
+//        }
+
+        foreach ($getContact as $row) {
+            $noms = $row['firstname'] . " " . $row['lastname'];
+
+        }
+    var_dump($noms);
+    return $this->render('formConvocEse.html.twig', [
+        'noms' => $noms,
+
+    ]);
+
+    }
+
+    /**
+     * @Route("generateConvEse", name="generateConvEse")
+     */
+//    public function getConvEse()
+//    {
+//
+//
+//    }
 
 }

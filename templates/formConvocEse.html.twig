@@ -72,16 +72,20 @@
 {% block body %}
 <body>
 <div class="container">
-    <h1 style="text-align: center">Générateur de convocation Client</h1>
-    <form class="col-md-10"  action="{{ path('generateConvCl')}}" method="post">
+    <h1 style="text-align: center">Générateur de convocation Entreprise</h1>
+    <form class="col-md-10"  action="{{ path('convocationClient')}}" method="post">
         <div class="row">
-            <div class="form-group col-lg">
-                <label for="affaire">Choisissez une affaire</label>
-                <input class="form-control" type="text" name="affaire" id="affaire" autocomplete="on"
-{#                       required pattern="[A][F][F][0-9]{6}"#}
-{#                       title=": AFF + 6 chiffres entre 0 et 9"#}
-                >
-            </div>
+{#            <div class="form-group col-lg">#}
+{#                <label for="affaire">Choisissez une affaire</label>#}
+{#                <input class="form-control" type="text" name="affaire" id="affaire" autocomplete="on" required pattern="[A][F][F][0-9]{6}"#}
+{#                       title=": AFF + 6 chiffres entre 0 et 9">#}
+{#            </div>#}
+            <label for="nom">Nom du contact</label>
+            <select name="nom" id="nom">
+                {% for nom in noms %}
+                <option value="nom">{{ nom }}</option>
+                {% endfor %}
+            </select>
         </div>
         <div class="row">
             <div class="form-group col-md-4">

@@ -1,0 +1,11 @@
+#timepicker {
+    margin-right: 0;
+    padding: 0;
+    background-color: #0a95bf;
+    text-align: center;
+}
+
+.ui-timepicker-container , .ui-timepicker-standard {
+    top:0; !important;
+    left: 0 ; !important;
+}
