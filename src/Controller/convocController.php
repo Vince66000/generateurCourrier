@@ -30,7 +30,7 @@ class convocController  extends  AbstractController {
      * Affiche le formulaire de convocs clients
      * @Route("convocationClient", name="convocationClient")
      */
-    public function getProjects() :Response
+    public function getFormCl() :Response
     {
 //        $callApi = new callAPI();
 //        $method = 'GET';
@@ -48,16 +48,14 @@ class convocController  extends  AbstractController {
      * Récupèration des infos passées au formulaire et Génération du PDF
      * @Route("generateConvCl", name="generateConvCl")
      */
-    public function getConvocClient()
-    {
-//        $dest = $_POST['destinataire'];
+    public function getConvocClient() {
+
         $ref =  '%' .$_POST['affaire'] . '%';
         $date = $_POST['datepicker'];
         $heure = $_POST['timepicker'];
         $civ = $_POST['civilite'];
         $expert = $_POST['expert'];
         $texteLibre = $_POST['textelibre'];
-//        $entreprise = $_POST['entreprise'];
 
 
         $db = new PDOConnection('mysql:host=localhost;dbname=dolibarr', 'vincent', 'root');
@@ -89,7 +87,6 @@ WHERE P.ref  LIKE :ref');
             'civ' => $civ,
             'expert' => $expert,
             'textelibre' => $texteLibre,
-//            'entreprise' =>$entreprise
 
         ]);
 
@@ -97,52 +94,109 @@ WHERE P.ref  LIKE :ref');
         $html2pdf->setTestTdInOnePage(false);
         $html2pdf->writeHTML($template);
 
-        return $html2pdf->output('convocation'. $refAff .'.pdf');
+        return $html2pdf->output('convocationClt'. $refAff .'.pdf');
     }
 
+
     /**
-     * @Route("convocationEse", name="convocationEse")
+     * @return Response
+     * @Route("convEse1", name="convEse1")
      */
-    public function getConvocTiers() {
+    public function getProjEse() {
+
+        return $this->render('FormConvEse1.html.twig');
+    }
+
+
+    /**
+     * @return Response
+     * @throws \Doctrine\DBAL\Driver\PDOException
+     * @Route("getProject" , name="getProject")
+     */
+    public function getProject() {
+
+        $ref = $_GET['affaire'];
 
         $db = new PDOConnection('mysql:host=localhost;dbname=dolibarr', 'vincent', 'root');
-        $getContact = $db->prepare(
-            'SELECT 
+        $getProj = $db->prepare('SELECT 
                         llx_socpeople.firstname,
                         llx_socpeople.lastname
                         FROM llx_socpeople 
                         INNER JOIN llx_societe 
                         on llx_socpeople.fk_soc = llx_societe.rowid
                         INNER JOIN llx_projet
-                        on llx_socpeople.fk_soc = llx_projet.fk_soc');
+                        on llx_socpeople.fk_soc = llx_projet.fk_soc
+                        where llx_projet.ref LIKE :ref');
+        $getProj->bindParam(':ref', $ref);
+        $getProj->execute();
 
-        $getContact->execute();
+        $res = $getProj->fetchAll();
 
-//        while($row = $getContact->fetchAll()) {
-//            $nom = $row['firstname'];
-//            $prenom = $row['lastname'];
-//
-//        }
+        return $this->render('formConvocEse.html.twig', [
+            'res' => $res,
+            'affaire' => $ref,
+        ]);
 
-        foreach ($getContact as $row) {
-            $noms = $row['firstname'] . " " . $row['lastname'];
 
-        }
-    var_dump($noms);
-    return $this->render('formConvocEse.html.twig', [
-        'noms' => $noms,
-
-    ]);
 
     }
 
     /**
-     * @Route("generateConvEse", name="generateConvEse")
+     * @Route("generateConvTiers", name="generateConvTiers")
      */
-//    public function getConvEse()
-//    {
-//
-//
-//    }
+    public function getConvocTiers() {
+
+        $ref = $_POST['affaire'];
+        $nom =  $_POST['nom'] ;
+        $date = $_POST['datepicker'];
+        $heure = $_POST['timepicker'];
+        $expert = $_POST['expert'];
+        $texteLibre = $_POST['textelibre'];
+
+
+        $db = new PDOConnection('mysql:host=localhost;dbname=dolibarr', 'vincent', 'root');
+        $getContact = $db->prepare(
+            'SELECT
+                        llx_socpeople.civility,
+                        llx_socpeople.firstname,
+                        llx_socpeople.lastname,
+                        llx_socpeople.address,
+                        llx_socpeople.zip,
+                        llx_socpeople.town,
+                        llx_projet.title,
+                        llx_projet.ref
+                        FROM llx_socpeople
+                        INNER JOIN llx_societe
+                        on llx_socpeople.fk_soc = llx_societe.rowid
+                        INNER JOIN llx_projet
+                        on llx_socpeople.fk_soc = llx_projet.fk_soc
+                        where llx_socpeople.firstname = :nom 
+                        and llx_projet.ref = "AFF000001-202009"');
+
+        $getContact->bindParam(':nom', $nom);
+        $getContact->bindParam(':ref', $ref);
+
+        $getContact->execute();
+        $contact = $getContact->fetch();
+
+
+
+    $tempTiers = $this->renderView('modelConvocEse.html.twig', [
+        'contact' => $contact,
+        'dateRdv' => $date,
+        'heureRdv' => $heure,
+        'expert' => $expert,
+        'textelibre' => $texteLibre,
+
+    ]);
+        $html2pdf = new html2pdf('P', 'A4', 'fr', true, 'utf8', 10);
+        $html2pdf->setTestTdInOnePage(false);
+        $html2pdf->writeHTML($tempTiers);
+
+        return $html2pdf->output('convocationTiers'. $ref .'.pdf');
+
+    }
+
+
 
 }

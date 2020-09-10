@@ -1,0 +1,198 @@
+<style type="text/css">
+
+    /*#cadre {*/
+    /*    border: 1px solid #1b1b1b;*/
+    /*    margin: 5px;*/
+    /*    padding: 5px;*/
+    /*    height: 95%;*/
+    /*}*/
+
+    #noms   {
+        text-align: left;
+        padding-left: 400px;
+        margin-top: 100px;
+        line-height: 1px;
+        margin-bottom: 25px;
+    }
+
+    #ref {
+        text-align: left;
+        padding-left: 10px;
+        height: 30px;
+        width: 60%;
+    }
+    #date_exp, #adresse_exp {
+
+        text-align: center;
+    }
+    #corps_texte {
+        margin-left: 180px;
+        margin-right: 40px;
+        margin-top: 60px;
+        text-align: justify;
+        line-height: 15px;
+
+    }
+    td {
+        border: solid 1px black
+    }
+
+
+</style>
+<page  backimg="http://localhost/gestionCourrier/public/fondReiserCopie3.jpeg"  backimgw="100%" backimgy="30px" backimgx="35px" style="size: A4;">
+
+
+    <div id="cadre">
+        <div id="header">
+        </div>
+        <div >
+            <div id="noms">
+                <p>Elne, le {{ "now" | date("d/m/Y") }}</p>
+                <p> {{ contact.civility }} {{ contact.firstname }} {{ contact.lastname }}</p>
+                <p>{{ contact.address }}</p>
+                <p>{{ contact.zip }} {{ contact.town }}</p>
+            </div>
+            {% if contact.address is empty %}
+                <div style="height: 50px; width: 100%; background-color: red; text-align: center">
+                    <h1> Attention,des éléments sont manquants! mettez à jour la fiche client!</h1>
+                </div>
+            {% endif %}
+            <div id="ref">
+                <table   style="border-collapse: collapse">
+                    <tr>
+                        <td><b>N/RÉF :</b></td>
+                        <td> {{ contact.ref}}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Lieux expertise :</b></td>
+                        <td>{{ contact.address }}, {{ contact.zip }} {{ contact.town }}</td>
+                    </tr>
+                </table>
+
+            </div>
+            <div id="corps_texte">
+
+                Madame, Monsieur, (Monsieur le Directeur),
+
+                Je vous informe que j’ai été saisi en qualité d’Expert en bâtiment par xxxx, demeurant au (sis(e)) xxxxxx, concernant des
+                désordres et malfaçons qui affectent leur (son) bien suite à des travaux de xxx que vous avez effectués pour leur (son) compte.
+
+                Les désordres (motifs) sont les suivants : {{ textelibre }}
+
+                La date d’apparition des désordres (du désordre) est du xxxxxx.
+
+                Afin donc de trouver une solution dans un cadre amiable à ce dossier, je vous indique que je procéderai à une réunion d’expertise contradictoire sur les lieux, xxxx, le :
+
+                xxxxxxxx
+
+                Réunion à laquelle il est impératif que vous participiez.
+
+                Je vous demanderai de bien vouloir transmettre copie de la présente convocation à votre compagnie d’assurances afin qu’elle missionne son Expert et que nous puissions trouver une solution dans un cadre amiable à ce dossier.
+
+                Dans le cas où vous n'assisteriez pas ou que vous ne seriez pas représenté (e) (s), à la réunion d'expertise du XXXXXXXX, vous vous exposeriez à ce que les constatations matérielles et l'évaluation des dommages faites par les parties présentes vous soient reconnues opposables.
+
+                Vous souhaitant bonne réception de cet envoi et comptant sur votre présence, je vous prie d’agréer, Madame, Monsieur, (Monsieur le Directeur), l’expression de mes sentiments distingués.
+
+                <p>Je reviens vers vous concernant votre dossier et, pour faire suite à la mission que vous m'avez confiée,
+                    vous remercie de prendre note que je procèderai à une réunion d'expertise contradictoire sur les lieux,</p>
+                <p id="adresse_exp"><b> {{ contact.address }}, {{ contact.zip }} {{ contact.town }},</b></p>
+                <p id="date_exp"><b>le {{ dateRdv | format_datetime('full', 'none', locale='fr') }} à {{ heureRdv }}</b></p>
+
+                <p>Réunion à laquelle je vous remercie de bien vouloir être présent.</p>
+                {% if textelibre is not empty %}
+                    <p><b>Pour rappel voici les motifs de ma mission :</b> {{ textelibre }} </p>
+                {% endif %}
+                <p>Vous souhaitant bonne réception de cet envoi, je vous prie d’agréer,</p>
+                {#                {% if civ == "F" %} Chère Madame,#}
+                {#                {% elseif  civ == "H" %}Cher Monsieur, {%  elseif civ == "S" %} Chère Madame, Cher Monsieur,#}
+                {#                {%  elseif civ =="D" %}Cher Docteur, {% elseif civ =="M" %}Cher Maître, {% endif %} l’expression de mes sentiments dévoués.#}
+
+
+            </div>
+            <div style="padding-left: 400px; margin-top: 40px">
+                <img id="signature" src='../public/signature{{ expert }}.png' alt="signature">
+
+            </div>
+        </div>
+
+        {#  Ai adapté une façon de changer le footer. méthode pas top. à changer dés que possible #}
+        <div style="text-align: center; font-size: x-small; width: 100%; height: 30px;margin-bottom: -35px; line-height: 1px; position: absolute; bottom: 0; color: gray" >
+            {% if expert == "GR" %}
+                <p>Siège social et pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
+                <p>mail : contact@assistance-expertise-batiment.com</p>
+                <p>siret : 535 111 678 00012 code NAF-APE : 7490A TVA: FR81535111678</p>
+            {% elseif expert == "JC" %}
+                <p>Siège social : ZAC Croix sud 55 rue Joseph Cugnot - 11000 NARBONNE</p>
+                <p>Pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
+                <p>mail : contact@assistance-expertise-batiment.com</p>
+                <p>siret : 833 707 771 000 22 code NAF-APE : 7120B TVA: FR53833707771 </p>
+            {% elseif expert == "JLB" %}
+                <p>Siège social : 22 Rue de la gaieté - 31400 TOULOUSE</p>
+                <p>Pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
+                <p>mail : contact@assistance-expertise-batiment.com</p>
+                <p>siret : 852 502 210 000 10 code NAF-APE : 7112B TVA: FR83852502210  </p>
+            {% elseif expert == "SB" %}
+                <p>Siège social : Hameau de Rabaute 09300 Pereille</p>
+                <p>Pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
+                <p>mail : contact@assistance-expertise-batiment.com</p>
+                <p>siret : 87846997200011 code NAF-APE : 7112B TVA: FR50878469972  </p>
+            {% elseif expert == "BCE" %}
+                <p>Siège social et pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
+                <p>mail : contact@assistance-expertise-batiment.com</p>
+                <p>siret : 535 111 678 00012 code NAF-APE : 7490A TVA: FR81535111678</p>
+            {% elseif expert == "PEC" %}
+                <p>Siège social : 41 rue Rhin et Danube - 34410 Sérignan </p>
+                <p>Pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
+                <p>mail : contact@assistance-expertise-batiment.com</p>
+                <p>siret : 	879 771 50900012 code NAF-APE : 7112B TVA: FR23879771509  </p>
+            {% elseif expert == "MC" %}
+                <p>Siège social : 6 Rue de la trille Le Dognon - 86160 Saint-Maurice-La-Clouere</p>
+                <p>Pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
+                <p>mail : contact@assistance-expertise-batiment.com</p>
+                <p>siret : 878 667 971 000 13 code NAF-APE : 7490B TVA: FR19878667971</p>
+            {% elseif expert == "PC" %}
+                <p>Siège social et pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
+                <p>mail : contact@assistance-expertise-batiment.com</p>
+                <p>siret : 535 111 678 00012 code NAF-APE : 7490A TVA: FR81535111678</p>
+            {% elseif expert == "NC" %}
+                <p>Siège social et pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
+                <p>mail : contact@assistance-expertise-batiment.com</p>
+                <p>siret : 535 111 678 00012 code NAF-APE : 7490A TVA: FR81535111678</p>
+            {% elseif expert == "TC" %}
+                <p>Siège social : 229 Avenue de la Californie - 06200 Nice  </p>
+                <p>Pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
+                <p>mail : contact@assistance-expertise-batiment.com</p>
+                <p>siret : 84875178000034 code NAF-APE : 7120B TVA: FR17848751780 </p>
+            {% elseif expert == "OD" %}
+                <p>Siège social : Moulin de Clidane - 63760 BOOUG-LASTIC </p>
+                <p>Pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
+                <p>mail : contact@assistance-expertise-batiment.com</p>
+                <p>siret : 88396119500012 code NAF-APE : 7120B TVA: FR15883961195  </p>
+            {% elseif expert == "JD" %}
+                <p>Siège social et pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
+                <p>mail : contact@assistance-expertise-batiment.com</p>
+                <p>siret : 535 111 678 00012 code NAF-APE : 7490A TVA: FR81535111678</p>
+            {% elseif expert == "BE" %}
+                <p>Siège social et pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
+                <p>mail : contact@assistance-expertise-batiment.com</p>
+                <p>siret : 535 111 678 00012 code NAF-APE : 7490A TVA: FR81535111678</p>
+            {% elseif expert == "FM" %}
+                <p>Siège social : ZAC Croix sud 55 rue Joseph Cugnot - 11000 NARBONNE -  </p>
+                <p>Pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
+                <p>mail : contact@assistance-expertise-batiment.com</p>
+                <p>siret : 833 707 771 000 22 code NAF-APE : 7120B TVA: FR53833707771 </p>
+            {% elseif expert == "LM" %}
+                <p>Siège social : 4 Allée de la Clairière - 33650 MARTILLAC  </p>
+                <p>Pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
+                <p>mail : contact@assistance-expertise-batiment.com</p>
+                <p>siret : 852 551 746 000 13 code NAF-APE : 7120B TVA: FR87852551746  </p>
+            {% elseif expert == "NU" %}
+                <p>Siège social : Espace Carousel 5B rue Picot le Carousel - 83000 Toulon  </p>
+                <p>Pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
+                <p>mail : contact@assistance-expertise-batiment.com</p>
+                <p>siret : 84893567700010 code NAF-APE : 7112B TVA: FR75884935677  </p>
+            {% endif %}
+        </div>
+
+    </div>
+</page>

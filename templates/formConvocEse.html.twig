@@ -33,38 +33,37 @@
                 dateFormat: 'dd-mm-yy'
             });
         });
-        {#$( function() {#}
-        {#    function log( message ) {#}
-        {#        $( "<div>" ).text( message ).prependTo( "#log" );#}
-        {#        $( "#log" ).scrollTop( 0 );#}
-        {#    }#}
 
-        {#    $( "#affaires" ).autocomplete({#}
-        {#        source: function( request, response ) {#}
-        {#            $.ajax( {#}
-        {#                url: {{ path('getProj')  }},#}
-        {#                type: 'POST',#}
-        {#                dataType: "jsonp",#}
-        {#                data: {#}
-        {#                    term: request.term#}
-
-        {#                },#}
-        {#                success: function( data ) {#}
-        {#                    response( data );#}
-        {#                    console.log(term);#}
-        {#                },#}
-
-        {#            } );#}
-        {#            // console.log(request.term)#}
-
-        {#        },#}
-        {#        minLength: 2,#}
-        {#        select: function( event, ui ) {#}
-        {#            log( "Selected: " + ui.item.value + " aka " + ui.item.id );#}
-        {#        }#}
-        {#    } );#}
-        {#} );#}
-
+        // $(document).ready(function(){
+        //
+        //     $("#affaireBtn").click(function(e) {
+        //
+        //         e.preventDefault();
+        //         $.post(
+        //             'getProjects.php', // Un script PHP que l'on va créer juste après
+        //             {
+        //                 affaire : $("#affaire").val(),
+        //
+        //             },
+        //             function(data){
+        //
+        //                 if(data === 'Success')
+        //                 {
+        //
+        //
+        //                     console.log('youpie')
+        //                 }
+        //                 else
+        //                 {
+        //                     console.log('bordel')
+        //
+        //                 }
+        //
+        //             },
+        //             'text'
+        //         );
+        //     });
+        // });
     </script>
 
 {% endblock %}
@@ -73,19 +72,21 @@
 <body>
 <div class="container">
     <h1 style="text-align: center">Générateur de convocation Entreprise</h1>
-    <form class="col-md-10"  action="{{ path('convocationClient')}}" method="post">
-        <div class="row">
-{#            <div class="form-group col-lg">#}
-{#                <label for="affaire">Choisissez une affaire</label>#}
-{#                <input class="form-control" type="text" name="affaire" id="affaire" autocomplete="on" required pattern="[A][F][F][0-9]{6}"#}
-{#                       title=": AFF + 6 chiffres entre 0 et 9">#}
-{#            </div>#}
-            <label for="nom">Nom du contact</label>
-            <select name="nom" id="nom">
-                {% for nom in noms %}
-                <option value="nom">{{ nom }}</option>
-                {% endfor %}
-            </select>
+    <form class="col-md-10"  action="{{ path('generateConvTiers')}}" method="post">
+        <div>
+            <div class="form-group col-md-4">
+                <label for="nom">Nom du contact</label>
+                <select name="nom" id="nom">
+                    {% for contact in res %}
+                        <option value="{{ contact.firstname ~ " " ~ contact.lastname }}">{{ contact.firstname ~ " " ~ contact.lastname }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group col-lg-8">
+                <label for="affaire">Numéro affaire</label>
+                <input id="affaire" name="affaire" type="text" value="{{ affaire }}">
+            </div>
+
         </div>
         <div class="row">
             <div class="form-group col-md-4">
@@ -141,17 +142,6 @@
                     <option value="18h30">18h30</option>
                     <option value="18h45">18h45</option>
                     <option value="19h00">19h00</option>
-                </select>
-            </div>
-            <div class="form-group col-md-4">
-                <label for="civilite">Civilité</label>
-                <select class="form-control" name="civilite" id="civilite" required>
-                    <option selected value=""></option>
-                    <option value="F">Femme</option>
-                    <option value="H">Homme</option>
-                    <option value="S">Société</option>
-                    <option value="M">Maître</option>
-                    <option value="D">Docteur</option>
                 </select>
             </div>
         </div>

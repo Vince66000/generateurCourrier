@@ -11,22 +11,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9981cd85-3793-4ddb-bfb0-4d19d119e25f" name="Default Changelist" comment="²">
-      <change beforePath="$PROJECT_DIR$/.idea/gestionCourrier.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gestionCourrier.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/TDL entete.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/entete.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/fondReiser - Copie.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/fondReiser.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/fondReiserCopie.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/logoTrame.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/signatureGR.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/test.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tv.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/convocController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/convocController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/getProjects.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/formConvocClient.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/formConvocClient.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/modelConvoc.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/modelConvoc.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/formConvocEse.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/formConvocEse.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,9 +132,9 @@
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\gestionCourrier\src\Controller" />
+      <recent name="C:\wamp64\www\gestionCourrier\public" />
       <recent name="C:\wamp64\www\gestionCourrier\src" />
       <recent name="C:\wamp64\www\gestionCourrier\src\Service" />
-      <recent name="C:\wamp64\www\gestionCourrier\public" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -173,7 +164,9 @@
       <workItem from="1599116891496" duration="6568000" />
       <workItem from="1599203717193" duration="11617000" />
       <workItem from="1599468247746" duration="4817000" />
-      <workItem from="1599555614788" duration="937000" />
+      <workItem from="1599555614788" duration="5807000" />
+      <workItem from="1599635019232" duration="16413000" />
+      <workItem from="1599721149157" duration="6172000" />
     </task>
     <servers />
   </component>
