@@ -47,11 +47,11 @@
         <div >
             <div id="noms">
                 <p>Elne, le {{ "now" | date("d/m/Y") }}</p>
-                <p>{{ societe.nom }}</p>
-                <p>{{ societe.address }}</p>
-                <p>{{ societe.zip }} {{ societe.town }}</p>
+                <p>{{ client.nom }}</p>
+                <p>{{ client.address }}</p>
+                <p>{{ client.zip }} {{ client.town }}</p>
             </div>
-            {% if societe.address is empty %}
+            {% if client.address is empty %}
                 <div style="height: 50px; width: 100%; background-color: red; text-align: center">
                     <h1> Attention,des éléments sont manquants! mettez à jour la fiche client!</h1>
                 </div>

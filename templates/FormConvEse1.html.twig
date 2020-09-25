@@ -1,15 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <form action="{{ path('getProject') }}">
-        <div class="row">
-            <div class="form-group col-lg-8">
-                <label for="affaire">Numéro affaire</label>
-                <input id="affaire" name="affaire" type="text">
+
+    <div>
+        <h1>Entrez le numéro d'affaire pour retrouver tous les contacts qui y sont liés</h1>
+        <form action="{{ path('getProject') }}" method="post">
+
+            <div class="col-md-8">
+                <div class="form-group col-lg-8">
+                    <label for="refAffaire">Numéro affaire</label>
+                    <input id="refAffaire" name="refAffaire" type="text">
+                </div>
+                <div class="form-group col-lg-4">
+                    <input type="submit">
+                </div>
             </div>
-            <div class="form-group col-lg-4">
-                <input type="submit">
-            </div>
-        </div>
-    </form>
-{% endblock %}
+        </form>
+
+    </div>
+    {% endblock %}

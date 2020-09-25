@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
               integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="../public/style/style.css">
     {% endblock %}
     {% block menu %}
         <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
@@ -15,12 +16,22 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Convocations
+                            Convocations hors civis
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ path('convocationClient') }}">Clients</a>
-                            <a class="dropdown-item" href="{{ path('convEse1') }}">Entreprises tierces</a>
-                            <a class="dropdown-item" href="#">Assurances</a>
+                            <a class="dropdown-item" href="{{ path('convEse1') }}">Entreprises tierces (lrar)</a>
+                            <a class="dropdown-item" href="#">Assurances (lrar) A VENIR</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Convocations civis
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ path('convocationClientCiv') }}">Clients</a>
+                            <a class="dropdown-item" href="{{ path('convEse1') }}">Entreprises tierces (lrar)</a>
+                            <a class="dropdown-item" href="#">Assurances (lrar) A VENIR</a>
                         </div>
                     </li>
                 </ul>

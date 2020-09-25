@@ -72,24 +72,22 @@
 {% block body %}
 <body>
 <div class="container">
-    <h1 style="text-align: center">Générateur de convocation Client</h1>
+    <h1 style="text-align: center">Générateur de convocation Client (Hors Civis)</h1>
     <form class="col-md-10"  action="{{ path('generateConvCl')}}" method="post">
         <div class="row">
             <div class="form-group col-lg">
                 <label for="affaire">Choisissez une affaire</label>
                 <input class="form-control" type="text" name="affaire" id="affaire" autocomplete="on"
-{#                       required pattern="[A][F][F][0-9]{6}"#}
-{#                       title=": AFF + 6 chiffres entre 0 et 9"#}
                 >
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-4">
-                <label for="datepicker" >Entrez une date</label>
+                <label for="datepicker" > Date RDV</label>
                 <input class="form-control" type="text" id="datepicker" name="datepicker" autocomplete="off" required>
             </div>
             <div class="form-group col-md-4">
-                <label for="timepicker">Entrez une heure</label>
+                <label for="timepicker">Heure RDV</label>
                 <select class="form-control" name="timepicker" id="timepicker" required>
                     <option selected value=""></option>
                     <option value="8h00">8h00</option>
@@ -146,8 +144,6 @@
                     <option value="F">Femme</option>
                     <option value="H">Homme</option>
                     <option value="S">Société</option>
-                    <option value="M">Maître</option>
-                    <option value="D">Docteur</option>
                 </select>
             </div>
         </div>
@@ -174,8 +170,8 @@
             </select>
         </div>
         <div>
-            <label for="textelibre">Mentions complémentaires <b>(facultatif)</b></label>
-            <textarea class="form-control" name="textelibre" id="textelibre" cols="60" rows="5"></textarea>
+            <label for="textelibre">Motifs mission<b>(facultatif)</b></label>
+            <textarea class="form-control" name="textelibre" id="textelibre" cols="60" rows="5" maxlength="480"></textarea>
         </div>
 
         <br/>
@@ -185,13 +181,6 @@
     </form>
 
 </div>
-
-
-
-
-
-
-
 </body>
 </html>
 {% endblock %}

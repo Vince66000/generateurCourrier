@@ -1,16 +1,15 @@
 <style type="text/css">
 
-    /*#cadre {*/
-    /*    border: 1px solid #1b1b1b;*/
-    /*    margin: 5px;*/
-    /*    padding: 5px;*/
-    /*    height: 95%;*/
-    /*}*/
+    #cadre {
+
+        margin-top: 120px;
+        margin-right: 120px;
+
+    }
 
     #noms   {
         text-align: left;
         padding-left: 400px;
-        margin-top: 100px;
         line-height: 1px;
         margin-bottom: 25px;
     }
@@ -21,17 +20,26 @@
         height: 30px;
         width: 60%;
     }
-    #date_exp, #adresse_exp {
+    #date_exp, #adresse_exp, #dateDesordre, #natureDesordres {
 
         text-align: center;
     }
     #corps_texte {
+
         margin-left: 180px;
         margin-right: 40px;
-        margin-top: 60px;
+        margin-top: 40px;
         text-align: justify;
         line-height: 15px;
+        page-break-after: always;
 
+    }
+    #deuxième_page {
+        margin-top: 150px;
+        margin-left: 180px;
+        margin-right: 40px;
+        text-align: justify;
+        line-height: 15px;
     }
     td {
         border: solid 1px black
@@ -39,12 +47,12 @@
 
 
 </style>
-<page  backimg="http://localhost/gestionCourrier/public/fondReiserCopie3.jpeg"  backimgw="100%" backimgy="30px" backimgx="35px" style="size: A4;">
+
+<page  backimg="http://localhost/gestionCourrier/public/fondReiserCopie3.jpeg" backbottom="10mm" backimgw="100%" backimgy="30px" backimgx="35px" style="size: A4">
 
 
     <div id="cadre">
-        <div id="header">
-        </div>
+
         <div >
             <div id="noms">
                 <p>Elne, le {{ "now" | date("d/m/Y") }}</p>
@@ -58,65 +66,89 @@
                 </div>
             {% endif %}
             <div id="ref">
+                <p style="color:red">Lettre recommandée avec accusé de réception</p>
                 <table   style="border-collapse: collapse">
                     <tr>
                         <td><b>N/RÉF :</b></td>
-                        <td> {{ contact.ref}}</td>
+                        <td> {{ client.ref}}</td>
                     </tr>
                     <tr>
                         <td><b>Lieux expertise :</b></td>
-                        <td>{{ contact.address }}, {{ contact.zip }} {{ contact.town }}</td>
+                        <td>{{ lieuxExp }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>V/Ref :</b></td>
+                        <td>{{ vref }}</td>
                     </tr>
                 </table>
-
             </div>
             <div id="corps_texte">
+                {% if contact.civility == 'MME' %}
+                    Madame,
+                {% elseif contact.civility == 'MR' %}
+                    Monsieur,
+                {% else%}
+                    Madame, Monsieur
+                {% endif %}
+                <p>Je vous informe que j’ai été saisi en qualité d’Expert en bâtiment par  {{ client.nomClient }}, demeurant au {{ client.addclient }}
+                    {{ client.cpclient }} {{ client.villeclient }}, concernant des
+                    désordres affectant le bien situé à l'adresse sus-citée : {{ lieuxExp }}.</p>
 
-                Madame, Monsieur, (Monsieur le Directeur),
+                {% if natureTrav is not empty %}
+                    <p>Les désordres sont les suivants :</p>
+                    <p id="natureDesordres"><b>{{ natureTrav }}</b></p>
+                {% endif %}
 
-                Je vous informe que j’ai été saisi en qualité d’Expert en bâtiment par xxxx, demeurant au (sis(e)) xxxxxx, concernant des
-                désordres et malfaçons qui affectent leur (son) bien suite à des travaux de xxx que vous avez effectués pour leur (son) compte.
+                {% if dateDesordre is not empty %}
+                    <p>La date d’apparition des désordres  est du :</p>
+                    <p id="dateDesordre"><b>{{ dateDesordre }}</b></p>
+                {% endif %}
 
-                Les désordres (motifs) sont les suivants : {{ textelibre }}
+                <p>Afin donc de trouver une solution dans un cadre amiable à ce dossier, je vous indique que je procéderai à une réunion d’expertise contradictoire sur les lieux,</p>
 
-                La date d’apparition des désordres (du désordre) est du xxxxxx.
-
-                Afin donc de trouver une solution dans un cadre amiable à ce dossier, je vous indique que je procéderai à une réunion d’expertise contradictoire sur les lieux, xxxx, le :
-
-                xxxxxxxx
-
-                Réunion à laquelle il est impératif que vous participiez.
-
-                Je vous demanderai de bien vouloir transmettre copie de la présente convocation à votre compagnie d’assurances afin qu’elle missionne son Expert et que nous puissions trouver une solution dans un cadre amiable à ce dossier.
-
-                Dans le cas où vous n'assisteriez pas ou que vous ne seriez pas représenté (e) (s), à la réunion d'expertise du XXXXXXXX, vous vous exposeriez à ce que les constatations matérielles et l'évaluation des dommages faites par les parties présentes vous soient reconnues opposables.
-
-                Vous souhaitant bonne réception de cet envoi et comptant sur votre présence, je vous prie d’agréer, Madame, Monsieur, (Monsieur le Directeur), l’expression de mes sentiments distingués.
-
-                <p>Je reviens vers vous concernant votre dossier et, pour faire suite à la mission que vous m'avez confiée,
-                    vous remercie de prendre note que je procèderai à une réunion d'expertise contradictoire sur les lieux,</p>
-                <p id="adresse_exp"><b> {{ contact.address }}, {{ contact.zip }} {{ contact.town }},</b></p>
+                <p id="adresse_exp"><b> {{ lieuxExp }},</b></p>
                 <p id="date_exp"><b>le {{ dateRdv | format_datetime('full', 'none', locale='fr') }} à {{ heureRdv }}</b></p>
 
-                <p>Réunion à laquelle je vous remercie de bien vouloir être présent.</p>
-                {% if textelibre is not empty %}
-                    <p><b>Pour rappel voici les motifs de ma mission :</b> {{ textelibre }} </p>
-                {% endif %}
-                <p>Vous souhaitant bonne réception de cet envoi, je vous prie d’agréer,</p>
-                {#                {% if civ == "F" %} Chère Madame,#}
-                {#                {% elseif  civ == "H" %}Cher Monsieur, {%  elseif civ == "S" %} Chère Madame, Cher Monsieur,#}
-                {#                {%  elseif civ =="D" %}Cher Docteur, {% elseif civ =="M" %}Cher Maître, {% endif %} l’expression de mes sentiments dévoués.#}
+                <p>Réunion à laquelle il est impératif que vous participiez.</p>
+
+                <p>Je vous demanderai de bien vouloir transmettre copie de la présente convocation à votre compagnie d’assurances afin qu’elle missionne son Expert et que nous puissions trouver une solution
+                    dans un cadre
+                    amiable à ce dossier.
+                </p>
 
 
             </div>
-            <div style="padding-left: 400px; margin-top: 40px">
-                <img id="signature" src='../public/signature{{ expert }}.png' alt="signature">
+            <div id="deuxième_page">
+                <p>Dans le cas où vous n'assisteriez pas ou que vous ne seriez pas
+                    {% if contact.civility == 'MME' %}
+                        représentée
+                    {% elseif contact.civility == 'MR' %}
+                        représenté
+                    {% endif %}
+                    à cette réunion, vous vous exposeriez à ce que les
+                    constatations matérielles et l'évaluation des dommages faites par les parties présentes vous soient reconnues opposables.</p>
+                <p>Vous souhaitant bonne réception de cet envoi et comptant sur votre présence, je vous prie d’agréer,
+                    {% if contact.civility == 'MME' %}
+                        Madame,
+                    {% elseif contact.civility == 'MR' %}
+                        Monsieur,
+                    {% else %}
+                        Madame, Monsieur,
+                    {% endif %}
+                    l’expression de mes sentiments distingués.
 
+                </p>
+            </div>
+            <div style="padding-left: 400px; margin-top: 20px; margin-bottom: 0; position: relative">
+                <img id="signature" src='../public/signature{{ expert }}.png' alt="signature">
             </div>
         </div>
 
+    </div>
+
+    <page_footer  style="size: A4">
         {#  Ai adapté une façon de changer le footer. méthode pas top. à changer dés que possible #}
-        <div style="text-align: center; font-size: x-small; width: 100%; height: 30px;margin-bottom: -35px; line-height: 1px; position: absolute; bottom: 0; color: gray" >
+        <div style="text-align: center; font-size: x-small; width: 100%; height: 30px;  line-height: 1px; color: gray; margin-bottom: 10px" >
             {% if expert == "GR" %}
                 <p>Siège social et pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
                 <p>mail : contact@assistance-expertise-batiment.com</p>
@@ -193,6 +225,6 @@
                 <p>siret : 84893567700010 code NAF-APE : 7112B TVA: FR75884935677  </p>
             {% endif %}
         </div>
-
-    </div>
+    </page_footer>
 </page>
+
