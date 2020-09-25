@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends '../base.html.twig' %}
 
 {% block intro%}
     <!DOCTYPE html>
@@ -77,8 +77,7 @@
         <div class="row">
             <div class="form-group col-lg">
                 <label for="affaire">Choisissez une affaire</label>
-                <input class="form-control" type="text" name="affaire" id="affaire" autocomplete="on"
-                >
+                <input class="form-control" type="text" name="affaire" id="affaire" autocomplete="on" required>
             </div>
         </div>
         <div class="row">

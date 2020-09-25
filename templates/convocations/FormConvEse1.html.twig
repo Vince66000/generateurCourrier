@@ -1,9 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends '../base.html.twig' %}
 
 {% block body %}
 
-    <div>
-        <h1>Entrez le numéro d'affaire pour retrouver tous les contacts qui y sont liés</h1>
+    <div class="container-fluid" style="width: 60%">
+        <h1 style="text-align: center">Généracteur convoc Entreprises (Hors civis)</h1>
+        <h2 style="text-align: center">Entrez le numéro d'affaire pour retrouver tous les contacts qui y sont liés</h2>
         <form action="{{ path('getProject') }}" method="post">
 
             <div class="col-md-8">

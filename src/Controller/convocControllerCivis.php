@@ -11,53 +11,40 @@ use  \Spipu\Html2Pdf\Html2Pdf;
 
 
 
-class convocController  extends  AbstractController {
+class convocControllerCivis  extends  AbstractController {
 
 
+//
+//  const dbLocal = "aeb_dol";
+//  const usrLocal = "aeb.dol";
+//  const mdpLocal = 'DmPzTs61NzG4';
 
-  const dbLocal = "aeb_dol";
-  const usrLocal = "aeb.dol";
-  const mdpLocal = 'DmPzTs61NzG4';
-
-//    const dbLocal = "dolibarr";
-//    const usrLocal = "vincent";
-//    const mdpLocal = 'root';
-
-
+    const dbLocal = "dolibarr";
+    const usrLocal = "vincent";
+    const mdpLocal = 'root';
 
     /********************************************************************************************************************************************************************************
-     *                                                     Partie Client hors civis
+     *                                                     Partie Client  civis
      * ******************************************************************************************************************************************************************************
      */
-
     /**
-     * Affichage premiè_re page de l'appli
-     * @return Response
-     * @Route("/", name="index")
+     * Affiche le formulaire de convocs clients civis
+     * @Route("convocationClientCiv", name="convocationClientCiv")
      */
-    public function index() :Response
-    {
-        return  $this->render('home.html.twig');
-
-    }
-
-    /**
-     * Affiche le formulaire de convocs clients
-     * @Route("convocationClient", name="convocationClient")
-     */
-    public function getFormCl() :Response
+    public function getFormClCiv() :Response
     {
 
-        return  $this->render('formConvocClient.html.twig');
+        return  $this->render('formConvocClientCivis.html.twig');
     }
 
     /**
      * Récupèration des infos passées au formulaire et Génération du PDF
-     * @Route("generateConvCl", name="generateConvCl")
+     * @Route("generateConvClCiv", name="generateConvClCiv")
      */
-    public function getConvocClient() {
+    public function getConvocClientCiv() {
 
         $ref =  '%' .$_POST['affaire'] . '%';
+        $nom = $_POST['nomSoc'];
         $date = $_POST['datepicker'];
         $heure = $_POST['timepicker'];
         $civ = $_POST['civilite'];
@@ -65,15 +52,10 @@ class convocController  extends  AbstractController {
         $texteLibre = $_POST['textelibre'];
 
         /**
-         * requête qui récupère les coordonées d'un client lié à une affaire particulière
+         * requête qui récupère les coordonées d'une affaire particulière
          */
         $db = new PDOConnection('mysql:host=localhost;dbname='.self::dbLocal.'', ''.self::usrLocal.'', ''.self::mdpLocal.'');
         $getSoc = $db->prepare ('SELECT
-S.nom,
-S.rowid,
-S.address,
-S.zip,
-s.town,
 P.ref,
 PE.lieuaff,
 P.title
@@ -82,11 +64,27 @@ INNER JOIN llx_societe as S
 ON  P.fk_soc = S.rowid 
 INNER JOIN llx_projet_extrafields as PE
 on P.rowid = PE.fk_object
-WHERE P.ref  LIKE :ref');
+WHERE P.ref  like :ref');
         $getSoc->bindParam(':ref', $ref);
         $getSoc->execute();
         $societe = $getSoc->fetch();
-        $refAff = $societe['ref'];
+
+
+        /**
+         * requête qui récupère les coordonées du client
+         */
+        $db2 = new PDOConnection('mysql:host=localhost;dbname='.self::dbLocal.'', ''.self::usrLocal.'', ''.self::mdpLocal.'');
+        $getClient = $db2->prepare ('SELECT
+S.nom,
+S.rowid,
+S.address,
+S.zip,
+S.town
+FROM llx_societe as S
+WHERE S.nom  = :nom ');
+        $getClient->bindParam(':nom', $nom);
+        $getClient->execute();
+        $client = $getClient->fetch();
 
         //L'adresse d'expertise contenant des caractères en trop, je l'explose et exploite seulement les fragments dont j'ai besoin
         $lieuxExp = $societe['lieuaff'];
@@ -97,9 +95,9 @@ WHERE P.ref  LIKE :ref');
             $lieuxExp3 .=  ' ' . $lieuxExp2[$i] . ' ';
 
         }
+        $refAff = $societe['ref'];
 
-
-        $template = $this->renderView('modelConvoc.html.twig', [
+        $template = $this->renderView('modelConvocClCivis.html.twig', [
 
             'affaire' => $ref,
             'societe' => $societe,
@@ -108,11 +106,12 @@ WHERE P.ref  LIKE :ref');
             'civ' => $civ,
             'expert' => $expert,
             'textelibre' => $texteLibre,
-            'lieuxexp' => utf_8_encode($lieuxExp3)
+            'lieuxexp' => utf8_encode($lieuxExp3),
+            'client' => $client
 
         ]);
 
-        $html2pdf = new html2pdf('P', 'A4', 'fr', true, 'utf-8', 10);
+        $html2pdf = new html2pdf('P', 'A4', 'fr', true, 'utf8', 10);
         $html2pdf->setTestTdInOnePage(false);
         $html2pdf->writeHTML($template);
 
@@ -122,115 +121,12 @@ WHERE P.ref  LIKE :ref');
 
 
 
-    /********************************************************************************************************************************************************************************
-     *                                                     Partie Client  civis
-     * ******************************************************************************************************************************************************************************
-     */
     /**
-     * Affiche le formulaire de convocs clients civis
-     * @Route("convocationClientCiv", name="convocationClientCiv")
+     * **********************************************************************************************************************************************************************************
+     *                                                      Partie Entreprise Civis
+     * **********************************************************************************************************************************************************************************
      */
-//    public function getFormClCiv() :Response
-//    {
-//
-//        return  $this->render('formConvocClientCivis.html.twig');
-//    }
-//
-//    /**
-//     * Récupèration des infos passées au formulaire et Génération du PDF
-//     * @Route("generateConvClCiv", name="generateConvClCiv")
-//     */
-//    public function getConvocClientCiv() {
-//
-//        $ref =  '%' .$_POST['affaire'] . '%';
-//        $nom = $_POST['nomSoc'];
-//        $date = $_POST['datepicker'];
-//        $heure = $_POST['timepicker'];
-//        $civ = $_POST['civilite'];
-//        $expert = $_POST['expert'];
-//        $texteLibre = $_POST['textelibre'];
-//
-//        /**
-//         * requête qui récupère les coordonées d'une affaire particulière
-//         */
-//        $db = new PDOConnection('mysql:host=localhost;dbname='.self::dbLocal.'', ''.self::usrLocal.'', ''.self::mdpLocal.'');
-//        $getSoc = $db->prepare ('SELECT
-//P.ref,
-//PE.lieuaff,
-//P.title
-//FROM llx_projet as P
-//INNER JOIN llx_societe as S
-//ON  P.fk_soc = S.rowid
-//INNER JOIN llx_projet_extrafields as PE
-//on P.rowid = PE.fk_object
-//WHERE P.ref  like :ref');
-//        $getSoc->bindParam(':ref', $ref);
-//        $getSoc->execute();
-//        $societe = $getSoc->fetch();
-//
-//
-//        /**
-//         * requête qui récupère les coordonées du client
-//         */
-//        $db2 = new PDOConnection('mysql:host=localhost;dbname='.self::dbLocal.'', ''.self::usrLocal.'', ''.self::mdpLocal.'');
-//        $getClient = $db2->prepare ('SELECT
-//S.nom,
-//S.rowid,
-//S.address,
-//S.zip,
-//S.town
-//FROM llx_societe as S
-//WHERE S.nom  = :nom ');
-//        $getClient->bindParam(':nom', $nom);
-//        $getClient->execute();
-//        $client = $getClient->fetch();
-//
-//        //L'adresse d'expertise contenant des caractères en trop, je l'explose et exploite seulement les fragments dont j'ai besoin
-//        $lieuxExp = $societe['lieuaff'];
-//        $lieuxExp2 = explode(" ", $lieuxExp);
-//        $count = count($lieuxExp2);
-//        $lieuxExp3 = '';
-//        for($i = 3; $i < $count  ; $i++) {
-//            $lieuxExp3 .=  ' ' . $lieuxExp2[$i] . ' ';
-//
-//        }
-//        $refAff = $societe['ref'];
-//
-//        $template = $this->renderView('modelConvocClCivis.html.twig', [
-//
-//            'affaire' => $ref,
-//            'societe' => $societe,
-//            'dateRdv' => $date,
-//            'heureRdv' => $heure,
-//            'civ' => $civ,
-//            'expert' => $expert,
-//            'textelibre' => $texteLibre,
-//            'lieuxexp' => utf8_encode($lieuxExp3),
-//            'client' => $client
-//
-//        ]);
-//
-//        $html2pdf = new html2pdf('P', 'A4', 'fr', true, 'utf8', 10);
-//        $html2pdf->setTestTdInOnePage(false);
-//        $html2pdf->writeHTML($template);
-//
-//        return $html2pdf->output('convocationClt'. $refAff .'.pdf');
-//    }
-//
-//
-//
-//
 
-    /**
-     * ******************************************************************************************************************************************************************************
-     *                                     Partie Tiers
-     * ******************************************************************************************************************************************************************************
-     */
-    /**
-     * affiche le form qui demande le numérod'affaire
-     * @return Response
-     * @Route("convEse1", name="convEse1")
-     */
     public function getProjEse() {
 
         return $this->render('FormConvEse1.html.twig');
@@ -356,10 +252,6 @@ where llx_element_contact.element_id = ( select rowid from llx_projet where ref 
 
     }
 
-    /**
-     * **********************************************************************************************************************************************************************************
-     *                                                      Partie Assurance
-     * **********************************************************************************************************************************************************************************
-     */
+
 
 }
