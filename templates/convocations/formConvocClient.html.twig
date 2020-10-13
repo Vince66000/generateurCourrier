@@ -1,4 +1,4 @@
-{% extends '../base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block intro%}
     <!DOCTYPE html>
@@ -72,7 +72,7 @@
 {% block body %}
 <body>
 <div class="container">
-    <h1 style="text-align: center">Générateur de convocation Client (Hors Civis)</h1>
+    <h1 style="text-align: center">Générateur de convocation Client</h1>
     <form class="col-md-10"  action="{{ path('generateConvCl')}}" method="post">
         <div class="row">
             <div class="form-group col-lg">

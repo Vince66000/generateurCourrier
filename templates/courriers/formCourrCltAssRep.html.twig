@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/public/CSS/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>
+    <script>
+        $( function() {
+
+            $( "#datepicker" ).datepicker({
+                firstDay: 1,
+                closeText: 'Fermer',
+                prevText: 'PrÃ©cÃ©dent',
+                nextText: 'Suivant',
+                currentText: 'Aujourd\'hui',
+                monthNames: ['Janvier', 'FÃ©vrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'AoÃ»t', 'Septembre', 'Octobre', 'Novembre', 'DÃ©cembre'],
+                monthNamesShort: ['Janv.', 'FÃ©vr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'AoÃ»t', 'Sept.', 'Oct.', 'Nov.', 'DÃ©c.'],
+                dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+                dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+                dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+                weekHeader: 'Sem.',
+                dateFormat: 'dd-mm-yy'
+            });
+        });
+
+
+    </script>
+
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .then( editor => {
+                console.log( editor );
+            } )
+            .catch( error => {
+                console.error( error );
+            } );
+
+    </script>
+
+{% endblock %}
+
+{% block body %}
+    <body>
+
+    <div class="container">
+        <h1 style="text-align: center">Courrier à client pour assistance à réception</h1>
+        <h2 style="text-align: center; color: red;"> Attention! soyez sur(e) d'avoir bien renseigné le contact "Entreprise" </h2>
+        <form class="col-md-10"  action="{{ path('generateCourrAssRec')}}" method="post">
+            <div class="row">
+                <div class="form-group col-lg">
+                    <label for="affaire">Choisissez une affaire</label>
+                    <input class="form-control" type="text" name="affaire" id="affaire" autocomplete="on" required>
+                </div>
+            </div>
+            <div>
+                <label for="expert" >Expert</label>
+                <select class="form-control" name="expert" id="expert" required>
+                    <option selected value=""></option>
+                    <option value="GR">Geoffrey REISER</option>
+                    <option value="JLB">Jean-Luc BEDEL</option>
+                    <option value="SB">StÃ©phane BERTRAND</option>
+                    <option value="JC">JÃ©rÃ©my CAPDEVILLE</option>
+                    <option value="BCE">Bastien CARLES-ESPITAU</option>
+                    <option value="PEC">Pierre-Emmanuel CAU</option>
+                    <option value="MC">MickaÃ«l CHAUMONT</option>
+                    <option value="PC">Paul COLLINET</option>
+                    <option value="NC">Nicolas COMET</option>
+                    <option value="TC">Thierry COSTELLA</option>
+                    <option value="OD">Olivier DAVID</option>
+                    <option value="JD">JÃ©rÃ´me DECOR</option>
+                    <option value="BE">Ben EL ASSIOUI</option>
+                    <option value="FM">Florian MAILHE</option>
+                    <option value="LM">Laurent MONTARU</option>
+                    <option value="NU">Norbert URSO</option>
+                </select>
+            </div>
+            <div class="row">
+                <label for="editor"></label>
+                <textarea name="desordres" id="editor" cols="30" rows="10"></textarea>
+            </div>
+            <br/>
+            <div>
+                <input class="btn btn-primary btn-lg" type="submit">
+            </div>
+        </form>
+
+    </div>
+    </body>
+    </html>
+{% endblock %}
+
+
+

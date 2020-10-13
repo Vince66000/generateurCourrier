@@ -1,37 +1,45 @@
 <style type="text/css">
 
     #cadre {
-        border: 1px solid #1b1b1b;
-        margin: 5px;
-        padding: 5px;
-        height: 95%;
+
+        margin-top: 120px;
+        margin-right: 120px;
+
     }
 
     #noms   {
         text-align: left;
         padding-left: 400px;
-        margin-top: 100px;
         line-height: 1px;
         margin-bottom: 25px;
     }
 
     #ref {
         text-align: left;
-        padding-left: 10px;
+        padding-left: 40px;
         height: 30px;
-        width: 60%;
+        width: 70%;
     }
-    #date_exp, #adresse_exp {
+    #date_exp, #adresse_exp, #dateDesordre, #natureDesordres {
 
         text-align: center;
     }
     #corps_texte {
+
         margin-left: 180px;
         margin-right: 40px;
-        margin-top: 30px;
+        margin-top: 40px;
         text-align: justify;
-        line-height: 15px;
+        line-height: 150%;
+        page-break-after: always;
 
+    }
+    #deuxième_page {
+        margin-top: 150px;
+        margin-left: 180px;
+        margin-right: 40px;
+        text-align: justify;
+        line-height: 150%;
     }
     td {
         border: solid 1px black
@@ -39,67 +47,125 @@
 
 
 </style>
-<page  backimg="http://localhost/gestionCourrier/public/fondReiserCopie2.jpeg"  backimgw="100%" backimgy="30px" backimgx="35px" style="size: A4;">
-    <div id="cadre">
-        <div id="header">
 
-        </div>
+<page  backimg="http://localhost/gestionCourrier/public/fondReiserCopie3.jpeg" backbottom="10mm" backimgw="100%" backimgy="30px" backimgx="35px" style="size: A4">
+
+
+    <div id="cadre">
+
         <div >
             <div id="noms">
-                <p>Elne, le {{ "now" | date("d/m/Y") }}</p>
-                <p>{{ client.nom }}</p>
-                <p>{{ client.address }}</p>
-                <p>{{ client.zip }} {{ client.town }}</p>
+                <p>{% if expert == "GR" %}<p>Elne{% elseif expert == "JC" %}<p>Narbonne{% elseif expert == "JLB" %}
+                <p>Toulouse{% elseif expert == "SB" %}<p>Foix{% elseif expert == "BCE" %}<p>La Rochelle{% elseif expert == "PEC" %}
+                <p>Montpellier{% elseif expert == "MC" %}<p>Poitiers{% elseif expert == "PC" %}<p>Avignon{% elseif expert == "NC" %}
+                <p>Pau{% elseif expert == "TC" %}<p>Nice{% elseif expert == "OD" %}<p>Clermont-Ferrand
+                {% elseif expert == "JD" %}<p>Nîmes{% elseif expert == "BE" %}<p>Marseille{% elseif expert == "FM" %}<p>Lyon
+                {% elseif expert == "LM" %}<p>Bordeaux{% elseif expert == "NU" %}<p>Toulon
+                    {% endif %}, le {{ "now" | date("d/m/Y") }}</p>
+                <p>{{ socAss.nom }}</p>
+                <p>{{ assurance.address }}</p>
+                <p>{{ assurance.zip }} {{ assurance.town }}</p>
             </div>
-            {% if client.address is empty %}
+            {% if assurance.address is empty %}
                 <div style="height: 50px; width: 100%; background-color: red; text-align: center">
                     <h1> Attention,des éléments sont manquants! mettez à jour la fiche client!</h1>
                 </div>
             {% endif %}
             <div id="ref">
+                <p style="color:red">Lettre recommandée avec accusé de réception {{ numReco }}</p>
                 <table   style="border-collapse: collapse">
                     <tr>
                         <td><b>N/RÉF :</b></td>
-                        <td> {{ societe.ref}}</td>
+                        <td> {{ assurance.reffAff}}</td>
                     </tr>
                     <tr>
                         <td><b>Lieux expertise :</b></td>
-                        <td>{{ lieuxexp  }}</td>
+                        <td>{{ lieuxexp }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>V/Ref :</b></td>
+                        <td>{{ vref }}</td>
                     </tr>
                 </table>
-
+                <p><u>A l'attention de {% if assurance.civility == 'MME' %}
+                            Madame
+                        {% elseif assurance.civility == 'MR' %}
+                            Monsieur
+                        {% else%}
+                            la société
+                        {% endif %} {{ assurance.firstname }} {{ assurance.lastname }} </u></p>
             </div>
             <div id="corps_texte">
-                {% if civ == "F" %}
-                    <p>Chère Madame,</p>
-                {% elseif civ == "H" %}
-                    <p>Cher Monsieur,</p>
-                {% elseif civ == "S" %}
-                    <p>Chère Madame, Cher Monsieur,</p>
+                {% if societe.civility == 'MME' %}
+                    Madame,
+                {% elseif societe.civility == 'MR' %}
+                    Monsieur,
+                {% else%}
+                    Madame, Monsieur
                 {% endif %}
-                <p>Je reviens vers vous concernant votre dossier et, pour faire suite à la mission que vous m'avez confiée,
-                    vous remercie de prendre note que je procèderai à une réunion d'expertise contradictoire sur les lieux,</p>
+                <p>Je vous informe que j’ai été saisi en qualité d’Expert en bâtiment par  {% if societe.civility == 'MME' %}
+                        Madame
+                    {% elseif societe.civility == 'MR' %}
+                        Monsieur
+                    {% else%}
+                        la société
+                    {% endif %}  {{ societe.firstname }} {{ societe.lastname }}, demeurant au {{ societe.address }}
+                    {{ societe.zip }} {{ societe.town }}, concernant des
+                    désordres affectant le bien situé à l'adresse : {{ lieuxexp }}.</p>
+
+                {% if textelibre is not empty %}
+                    <p>Les désordres sont les suivants :</p>
+                    <p id="natureDesordres"><b>{{ textelibre }}</b></p>
+                {% endif %}
+
+                {% if dateDesordre is not empty %}
+                    <p>La date d’apparition des désordres  est du :</p>
+                    <p id="dateDesordre"><b>{{ dateDesordre }}</b></p>
+                {% endif %}
+
+                <p>Vous avez agi en tant qu'assureur "Multirisques Habitation" concernant ce sinistre.
+                Il se pourrait, selon les informations en notre possession, que les travaux que vous vez pris en charge
+                , dans le cadre du contrat "Multirisques Habitation de <b>{{ montTrav }}</b> aient été insuffisamment quantifiés</p>
+
+                <p>Nous avons donc effectué un recours contre {{  nomEse.nomEse }} ayant réalisé les travaux; Recours auquel nous vous demandons
+                    de bien vouloir être présents ou de missionner un expert de votre choix.</p>
+
+
+
+
+            </div>
+            <div id="deuxième_page">
+
+                <p>Afin donc de trouver une solution dans un cadre amiable à ce dossier, je vous indique que je procéderai à une réunion d’expertise contradictoire sur les lieux,</p>
+
                 <p id="adresse_exp"><b> {{ lieuxexp }},</b></p>
                 <p id="date_exp"><b>le {{ dateRdv | format_datetime('full', 'none', locale='fr') }} à {{ heureRdv }}</b></p>
-                <p>Réunion à laquelle je vous remercie de bien vouloir être présent{% if civ=="F" %}e{% endif %}.</p>
-                {% if textelibre is not empty %}
-                    <p><b>Pour rappel voici les motifs de ma mission :</b></p>
-                    <p>{{ textelibre }}</p>
-                {% endif %}
-                <p>Vous souhaitant bonne réception de cet envoi, je vous prie d’agréer,</p>
-                {% if civ == "F" %} Chère Madame,
-                {% elseif  civ == "H" %}Cher Monsieur,
-                {%  elseif civ == "S" %} Chère Madame, Cher Monsieur,
-                {% endif %} l’expression de mes sentiments dévoués.
-            </div>
-            <div style="padding-left: 400px; margin-top: 40px">
-                <img id="signature" src='../public/signature{{ expert }}.png' alt="signature">
 
+                <p>Réunion pour laquelle je demanderai de bien vouloir missionner l'expert de votre compagnie</p>
+
+                <p>Nous vous remercions pour cette expertise de prendre en considération qu'il est indispensable d'appliquer les gestes barrières imposés concernant le COVID-19.
+
+                En l'absence de respect des gestes barrières l'accès à l'expertise pourrait vous être refusé.</p>
+                <p>Vous souhaitant bonne réception de cet envoi et comptant sur votre présence, je vous prie d’agréer,
+                    {% if assurance.civility == 'MME' %}
+                        Madame,
+                    {% elseif assurance.civility == 'MR' %}
+                        Monsieur,
+                    {% else %}
+                        Madame, Monsieur,
+                    {% endif %}
+                    l’expression de mes sentiments distingués.</p>
+            </div>
+            <div style="padding-left: 400px; margin-top: 20px; margin-bottom: 0; position: relative">
+                <img id="signature" src='../public/signature{{ expert }}.png' alt="signature">
             </div>
         </div>
 
+    </div>
+
+    <page_footer  style="size: A4">
         {#  Ai adapté une façon de changer le footer. méthode pas top. à changer dés que possible #}
-        <div style="text-align: center; font-size: x-small; width: 100%; height: 30px;margin-bottom: -35px; line-height: 1px; position: absolute; bottom: 0; color: gray" >
+        <div style="text-align: center; font-size: x-small; width: 100%; height: 30px;  line-height: 1px; color: gray; margin-bottom: 10px" >
             {% if expert == "GR" %}
                 <p>Siège social et pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
                 <p>mail : contact@assistance-expertise-batiment.com</p>
@@ -138,9 +204,10 @@
                 <p>mail : contact@assistance-expertise-batiment.com</p>
                 <p>siret : 535 111 678 00012 code NAF-APE : 7490A TVA: FR81535111678</p>
             {% elseif expert == "NC" %}
-                <p>Siège social et pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
+                <p>Siège social : 	48 Avenue du 8 Mai 1945 Bât A Lot 9 - 64100 Bayonne</p>
+                <p>pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
                 <p>mail : contact@assistance-expertise-batiment.com</p>
-                <p>siret : 535 111 678 00012 code NAF-APE : 7490A TVA: FR81535111678</p>
+                <p>siret : 889 630 935 00019 code NAF-APE : 7120B TVA: FR91889630935 </p>
             {% elseif expert == "TC" %}
                 <p>Siège social : 229 Avenue de la Californie - 06200 Nice  </p>
                 <p>Pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
@@ -152,18 +219,19 @@
                 <p>mail : contact@assistance-expertise-batiment.com</p>
                 <p>siret : 88396119500012 code NAF-APE : 7120B TVA: FR15883961195  </p>
             {% elseif expert == "JD" %}
-                <p>Siège social et pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
+                <p>Siège social : 100 route de Nîmes, 30132 Caissargues</p>
+                <p>et pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
                 <p>mail : contact@assistance-expertise-batiment.com</p>
-                <p>siret : 535 111 678 00012 code NAF-APE : 7490A TVA: FR81535111678</p>
+                <p>siret : 889 600 904 00011 code NAF-APE : 7112B TVA: FR60830377925</p>
             {% elseif expert == "BE" %}
                 <p>Siège social et pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
                 <p>mail : contact@assistance-expertise-batiment.com</p>
                 <p>siret : 535 111 678 00012 code NAF-APE : 7490A TVA: FR81535111678</p>
             {% elseif expert == "FM" %}
-                <p>Siège social : ZAC Croix sud 55 rue Joseph Cugnot - 11000 NARBONNE -  </p>
+                <p>Siège social : 2 Rue de Coysevox 69001  - Lyon</p>
                 <p>Pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
                 <p>mail : contact@assistance-expertise-batiment.com</p>
-                <p>siret : 833 707 771 000 22 code NAF-APE : 7120B TVA: FR53833707771 </p>
+                <p>siret : 88898757500014 code NAF-APE : 7120B TVA: FR94843314600  </p>
             {% elseif expert == "LM" %}
                 <p>Siège social : 4 Allée de la Clairière - 33650 MARTILLAC  </p>
                 <p>Pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
@@ -176,7 +244,6 @@
                 <p>siret : 84893567700010 code NAF-APE : 7112B TVA: FR75884935677  </p>
             {% endif %}
         </div>
-
-    </div>
+    </page_footer>
 </page>
 

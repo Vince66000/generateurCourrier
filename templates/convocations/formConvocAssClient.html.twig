@@ -1,0 +1,167 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/public/CSS/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.js"></script>
+    <script>
+        $( function() {
+
+            $( "#datepicker" ).datepicker({
+                firstDay: 1,
+                closeText: 'Fermer',
+                prevText: 'PrÃ©cÃ©dent',
+                nextText: 'Suivant',
+                currentText: 'Aujourd\'hui',
+                monthNames: ['Janvier', 'FÃ©vrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'AoÃ»t', 'Septembre', 'Octobre', 'Novembre', 'DÃ©cembre'],
+                monthNamesShort: ['Janv.', 'FÃ©vr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'AoÃ»t', 'Sept.', 'Oct.', 'Nov.', 'DÃ©c.'],
+                dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+                dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+                dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+                weekHeader: 'Sem.',
+                dateFormat: 'dd-mm-yy'
+            });
+        });
+
+
+    </script>
+
+{% endblock %}
+
+{% block body %}
+    <body>
+    <div class="container">
+        <h1 style="text-align: center">Générateur de convocation Assurance du client</h1>
+        <h2 style="text-align: center; color: red;"> Attention! soyez sur(e) d'avoir bien renseigné le contact "assurance client'" </h2>
+        <form class="col-md-10"  action="{{ path('generateConvClt')}}" method="post">
+            <div class="row">
+                <div class="form-group col-lg">
+                    <label for="affaire">Choisissez une affaire</label>
+                    <input class="form-control" type="text" name="affaire" id="affaire" autocomplete="on" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label for="datepicker" > Date RDV</label>
+                    <input class="form-control" type="text" id="datepicker" name="datepicker" autocomplete="off" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="timepicker">Heure RDV</label>
+                    <select class="form-control" name="timepicker" id="timepicker" required>
+                        <option selected value=""></option>
+                        <option value="8h00">8h00</option>
+                        <option value="8h15">8h15</option>
+                        <option value="8h30">8h30</option>
+                        <option value="8h45">8h45</option>
+                        <option value="9h00">9h00</option>
+                        <option value="9h15">9h15</option>
+                        <option value="9h30">9h30</option>
+                        <option value="9h45">9h45</option>
+                        <option value="10h00">10h00</option>
+                        <option value="10h15">10h15</option>
+                        <option value="10h30">10h30</option>
+                        <option value="10h45">10h45</option>
+                        <option value="11h00">11h00</option>
+                        <option value="11h15">11h15</option>
+                        <option value="11h30">11h30</option>
+                        <option value="11h45">11h45</option>
+                        <option value="12h00">12h00</option>
+                        <option value="12h15">12h15</option>
+                        <option value="12h30">12h30</option>
+                        <option value="12h45">12h45</option>
+                        <option value="13h00">13h00</option>
+                        <option value="13h15">13h15</option>
+                        <option value="13h30">13h30</option>
+                        <option value="13h45">13h45</option>
+                        <option value="14h00">14h00</option>
+                        <option value="14h15">14h15</option>
+                        <option value="14h30">14h30</option>
+                        <option value="14h45">14h45</option>
+                        <option value="15h00">15h00</option>
+                        <option value="15h15">15h15</option>
+                        <option value="15h30">15h30</option>
+                        <option value="15h45">15h45</option>
+                        <option value="16h00">16h00</option>
+                        <option value="16h15">16h15</option>
+                        <option value="16h30">16h30</option>
+                        <option value="16h45">16h45</option>
+                        <option value="17h00">17h00</option>
+                        <option value="17h15">17h15</option>
+                        <option value="17h30">17h30</option>
+                        <option value="17h45">17h45</option>
+                        <option value="18h00">18h00</option>
+                        <option value="18h15">18h15</option>
+                        <option value="18h30">18h30</option>
+                        <option value="18h45">18h45</option>
+                        <option value="19h00">19h00</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="civilite">Civilité</label>
+                    <select class="form-control" name="civilite" id="civilite" required>
+                        <option selected value=""></option>
+                        <option value="F">Femme</option>
+                        <option value="H">Homme</option>
+                        <option value="S">Société</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <label for="expert" >Expert</label>
+                <select class="form-control" name="expert" id="expert" required>
+                    <option selected value=""></option>
+                    <option value="GR">Geoffrey REISER</option>
+                    <option value="JLB">Jean-Luc BEDEL</option>
+                    <option value="SB">Stéphane BERTRAND</option>
+                    <option value="JC">Jérémy CAPDEVILLE</option>
+                    <option value="BCE">Bastien CARLES-ESPITAU</option>
+                    <option value="PEC">Pierre-Emmanuel CAU</option>
+                    <option value="MC">Mickaël CHAUMONT</option>
+                    <option value="PC">Paul COLLINET</option>
+                    <option value="NC">Nicolas COMET</option>
+                    <option value="TC">Thierry COSTELLA</option>
+                    <option value="OD">Olivier DAVID</option>
+                    <option value="JD">Jérôme DECOR</option>
+                    <option value="BE">Ben EL ASSIOUI</option>
+                    <option value="FM">Florian MAILHE</option>
+                    <option value="LM">Laurent MONTARU</option>
+                    <option value="NU">Norbert URSO</option>
+                </select>
+            </div>
+            <div>
+                <label for="textelibre">Motifs mission<b>(facultatif)</b></label>
+                <textarea class="form-control" name="textelibre" id="textelibre" cols="60" rows="5" maxlength="480"></textarea>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label for="vref">v/ref</label>
+                    <input class="form-control" name="vref" id="vref" type="text">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="dateDesordre">Date désordres</label>
+                    <input class="form-control" name="dateDesordre" id="dateDesordre">
+                </div>
+                <div class="form-group col md-4">
+                    <label for="montTrav">Montant déjà pris en charge </label>
+                    <input class="form-control" name="montTrav" id="montTrav" type="text">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="numReco">Numéro recommandé</label>
+                    <input class="form-control" name="numReco" id="numReco" type="text">
+                </div>
+            </div>
+            <br/>
+            <div>
+                <input class="btn btn-primary btn-lg" type="submit">
+            </div>
+        </form>
+
+    </div>
+    </body>
+    </html>
+{% endblock %}

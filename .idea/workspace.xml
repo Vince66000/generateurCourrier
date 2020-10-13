@@ -11,12 +11,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9981cd85-3793-4ddb-bfb0-4d19d119e25f" name="Default Changelist" comment="²">
+      <change beforePath="$PROJECT_DIR$/.idea/gestionCourrier.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gestionCourrier.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/style/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/CSS/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/convocController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/convocController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/FormConvEse1.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/FormConvEse1.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/convocControllerCivis.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/formConvocClient.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/formConvocClient.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/formConvocEse.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/formConvocEse.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/convocation CIVIS/formConvocClientCivis.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/convocation CIVIS/modelConvocClCivis.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/convocations/FormConvEse1.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/convocations/FormConvEse1.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/convocations/formConvocClient.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/convocations/formConvocClient.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/convocations/formConvocEse.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/convocations/formConvocEse.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/convocations/modelConvoc.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/convocations/modelConvoc.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/convocations/modelConvocEse.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/convocations/modelConvocEse.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,6 +121,10 @@
       <path value="$PROJECT_DIR$/vendor/spipu/html2pdf" />
       <path value="$PROJECT_DIR$/vendor/tecnickcom/tcpdf" />
       <path value="$PROJECT_DIR$/vendor/phpstan/phpstan" />
+      <path value="$PROJECT_DIR$/vendor/phpoffice/phpword" />
+      <path value="$PROJECT_DIR$/vendor/phpoffice/common" />
+      <path value="$PROJECT_DIR$/vendor/pclzip/pclzip" />
+      <path value="$PROJECT_DIR$/vendor/zendframework/zend-escaper" />
     </include_path>
   </component>
   <component name="ProjectId" id="1gagi9cVi1GpPvZn068wRs1qDid" />
@@ -124,20 +140,37 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Controller" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="Symfony2.SettingsForm" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\gestionCourrier\templates\convocationCivis" />
       <recent name="C:\wamp64\www\gestionCourrier\src\Controller" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\gestionCourrier\templates\courriers" />
+      <recent name="C:\wamp64\www\gestionCourrier\templates\convocations" />
+      <recent name="C:\wamp64\www\gestionCourrier\templates\convocation CIVIS" />
       <recent name="C:\wamp64\www\gestionCourrier\src\Controller" />
       <recent name="C:\wamp64\www\gestionCourrier\public" />
-      <recent name="C:\wamp64\www\gestionCourrier\src" />
-      <recent name="C:\wamp64\www\gestionCourrier\src\Service" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="HtmlToWord.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/src/Controller/HtmlToWord.php">
+      <CommandLine>
+        <PhpTestInterpreterSettings>
+          <option name="interpreterName" value="PHP 7.4" />
+        </PhpTestInterpreterSettings>
+      </CommandLine>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="PHP Script.HtmlToWord.php" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -184,6 +217,23 @@
       <workItem from="1600845451736" duration="7327000" />
       <workItem from="1600951473511" duration="595000" />
       <workItem from="1601019186480" duration="17182000" />
+      <workItem from="1601044955214" duration="499000" />
+      <workItem from="1601276260231" duration="13324000" />
+      <workItem from="1601363796659" duration="10659000" />
+      <workItem from="1601449370835" duration="8297000" />
+      <workItem from="1601474454716" duration="595000" />
+      <workItem from="1601539002032" duration="11084000" />
+      <workItem from="1601621906769" duration="2568000" />
+      <workItem from="1601627729163" duration="13138000" />
+      <workItem from="1601649797949" duration="6000" />
+      <workItem from="1601884569261" duration="4475000" />
+      <workItem from="1601970563541" duration="6933000" />
+      <workItem from="1601982366247" duration="9314000" />
+      <workItem from="1602141935967" duration="5000" />
+      <workItem from="1602157935847" duration="1217000" />
+      <workItem from="1602227142063" duration="10161000" />
+      <workItem from="1602244207510" duration="6360000" />
+      <workItem from="1602572252425" duration="15875000" />
     </task>
     <servers />
   </component>
@@ -211,18 +261,46 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="705" y="344" key="#Notifications/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1598425015427" />
-    <state x="450" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1599045145147">
+    <state x="722" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1601976645146">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="450" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1599045145147" />
-    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1598861530106">
+    <state x="722" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1601976645146" />
+    <state x="355" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1601276363311">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1598861530106" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1599033029479">
+    <state x="355" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1601276363311" />
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1601976652426">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1599033029479" />
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1601976652426" />
+    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1602231768755">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1602231768755" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1601892689303">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1601892689303" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1601987220445">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1601987220445" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1601987220445">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1601987220445" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1601987220445">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1601987220445" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1601987220445">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1601987220445" />
+    <state x="739" y="243" key="NewPhpClassDialog" timestamp="1601982784852">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="739" y="243" key="NewPhpClassDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1601982784852" />
     <state x="794" y="443" key="NewPhpFileDialog" timestamp="1598861445036">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

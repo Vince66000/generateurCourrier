@@ -1,4 +1,4 @@
-{% extends '../base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block intro%}
     <!DOCTYPE html>
@@ -11,7 +11,7 @@
 {% block javascripts %}
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/public/style/style.css">
+    <link rel="stylesheet" href="/public/CSS/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.js"></script>
@@ -40,7 +40,7 @@
 
 {% block body %}
 <body>
-<div class="container-fluid" style="width: 60%">
+<div class="container-fluid" style=" width: 60%">
 
     <h1 style="text-align: center">Générateur de convocation Entreprise</h1>
     <br/>
@@ -50,8 +50,8 @@
                 <label for="nom">Nom du contact</label>
                 <select class="form-control" name="nom" id="nom">
                     {% for contact in res %}
-                        <option value="{{ contact.firstname ~ " " ~ contact.lastname ~ " "  ~ contact.poste }}">
-                            {{ contact.firstname ~ " " ~ contact.lastname ~ " | " ~  contact.poste}}</option>
+                        <option value="{{ contact.firstname ~ " " ~ contact.lastname ~ " "  ~ contact.libelle }}">
+                            {{ contact.firstname ~ " " ~ contact.lastname ~ " " ~  contact.libelle}}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -152,6 +152,12 @@
             <div class="form-group col-md-4">
                 <label for="vref">v/ref</label>
                 <input class="form-control" name="vref" id="vref" type="text">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-8">
+                <label for="numReco">Numéro recommandé</label>
+                <input class="form-control" name="numReco" id="numReco">
             </div>
         </div>
         <br/>
