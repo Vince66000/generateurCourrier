@@ -12,7 +12,7 @@
     #noms   {
         text-align: left;
         padding-left: 400px;
-        line-height: 1px;
+        line-height: normal;
         margin-bottom: 25px;
     }
 
@@ -21,6 +21,7 @@
         padding-left: 40px;
         height: 30px;
         width: 70%;
+        font-size: 80%;
     }
     #date_exp, #adresse_exp, #dateDesordre, #natureDesordres {
 
@@ -53,7 +54,7 @@
 
 </style>
 
-<page  backimg="http://localhost/gestionCourrier/public/fondReiserCopie3.jpeg" backbottom="10mm" backimgw="100%" backimgy="30px" backimgx="35px" style="size: A4">
+<page  backimg="../public/fondReiserCopie3.jpeg" backbottom="10mm" backimgw="100%" backimgy="30px" backimgx="35px" style="size: A4">
 
 
     <div id="cadre">
@@ -66,13 +67,13 @@
                 {% elseif expert == "TC" %}<p>Nice{% elseif expert == "OD" %}<p>Clermont-Ferrand{% elseif expert == "JD" %}<p>Nîmes{% elseif expert == "BE" %}
                 <p>Marseille{% elseif expert == "FM" %}<p>Lyon{% elseif expert == "LM" %}<p>Bordeaux{% elseif expert == "NU" %}<p>Toulon
                     {% endif %}, le {{ "now" | date("d/m/Y") }}</p>
-                <p>{{ socAss.nom }}</p>
-                <p>{{ assurance.address }}</p>
-                <p>{{ assurance.zip }} {{ assurance.town }}</p>
+                <p><b>{{ socAss.nom }}<br/>
+                {{ assurance.address }}<br/>
+                {{ assurance.zip }} {{ assurance.town }}</b></p>
             </div>
             {% if assurance.address is empty %}
                 <div style="height: 50px; width: 100%; background-color: red; text-align: center">
-                    <h1> Attention,des éléments sont manquants! mettez à jour la fiche client!</h1>
+                    <h1> Attention,des éléments sont manquants! Veuillez mettre le dossier à jour!</h1>
                 </div>
             {% endif %}
             <div id="ref">
@@ -91,8 +92,7 @@
                         <td>{% if vref is not empty %}{{ vref }}{% endif %}</td>
                     </tr>
                 </table>
-                <p><u>A l'attention de {% if client.civility == 'MME' %}Madame{% elseif client.civility == 'MR' %}Monsieur
-                        {% else%} la société {% endif %} {{ assurance.firstname }} {{ assurance.lastname }} </u></p>
+                <p><u> {% if interlocuteur is not empty %}A l'attention de {{  interlocuteur }} {% endif %} </u></p>
             </div>
             <div id="corps_texte">
                 {% if assurance.civility == 'MME' %}
@@ -102,13 +102,14 @@
                 {% else%}
                     Madame, Monsieur
                 {% endif %}
-                <p>Je vous informe que j’ai été saisi en qualité d’Expert en bâtiment par  {% if client.civility == 'MME' %}
+                <p>Je vous informe que j’ai été saisi en qualité d’Expert en bâtiment par {% if pj is not empty %}
+                        la protection juridique {{ pj.nomPJ }} {% if dossier is not empty %}  dossier N°{{ dossier }} {%  endif %} pour le compte de {% endif %}  {% if client.civility == 'MME' %}
                         Madame
                     {% elseif client.civility == 'MR' %}
                         Monsieur
                     {% else%}
                         La société
-                    {% endif %} {{ client.firstname }} {{ client.lastname }}, demeurant au {{ client.address }}
+                    {% endif %} {{ client.firstname }} {{ client.lastname | upper }}, demeurant au {{ client.address }}
                     {{ client.zip }} {{ client.town }}, concernant des
                     désordres affectant le bien situé à l'adresse : {{ lieuxexp }}.</p>
 
@@ -118,8 +119,7 @@
                 {% endif %}
 
                 {% if dateDes is not empty %}
-                    <p>La date d’apparition des désordres  est du :</p>
-                    <p id="dateDesordre"><b>{{ dateDes }}</b></p>
+                    <p>La date d’apparition des désordres  est du : {{ dateDes }}</p>
                 {% endif %}
 
                 <p>Afin donc de trouver une solution dans un cadre amiable à ce dossier, je vous indique que je procéderai à une réunion d’expertise contradictoire sur les lieux,</p>
@@ -129,14 +129,16 @@
 
                 <p>Réunion pour laquelle je demanderai de bien vouloir missionner l'expert de votre compagnie.</p>
 
-                <p>Je vous demanderai de bien vouloir transmettre copie de la présente convocation à votre compagnie d’assurances afin qu’elle missionne son Expert et que nous puissions trouver une solution
-                    dans un cadre
-                    amiable à ce dossier.
-                </p>
+
 
 
             </div>
             <div id="deuxième_page">
+{#                <p>Je vous demanderai de bien vouloir transmettre copie de la présente convocation à votre compagnie d’assurances afin qu’elle missionne son Expert et que nous puissions trouver une solution#}
+{#                    dans un cadre#}
+{#                    amiable à ce dossier.#}
+{#                </p>#}
+
                 <p>J'ai également convoqué {{ nomEse.nom }} à cette réunion, suivant courrier joint en annexe.</p>
                 <p>Pourriez-vous me confirmer, <u>si possible par retour de courrier</u> qu'un expert de votre compagnie sera bien présent sur les lieux aux jour et heures mentionnées si-avant?</p>
 

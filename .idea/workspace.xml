@@ -15,20 +15,38 @@
       <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/style/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/CSS/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/signatureBCE.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signatureBCE.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/signatureBE.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signatureBE.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/signatureFM.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signatureFM.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/signatureGR.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signatureGR.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/signatureJC.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signatureJC.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/signatureJD.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signatureJD.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/signatureJLB.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signatureJLB.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/signatureLM.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signatureLM.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/signatureMC.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signatureMC.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/signatureNC.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signatureNC.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/signatureNU.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signatureNU.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/signatureOD.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signatureOD.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/signaturePC.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signaturePC.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/signaturePEC.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signaturePEC.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/signatureSB.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signatureSB.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/signatureTC.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signatureTC.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/HtmlToWord.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/convocController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/convocController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/convocControllerCivis.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/courrierController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/courrierController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/convocation CIVIS/formConvocClientCivis.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/convocation CIVIS/modelConvocClCivis.html.twig" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/convocations/FormConvEse1.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/convocations/FormConvEse1.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/convocations/formConvocAssClient.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/convocations/formConvocAssClient.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/convocations/formConvocAssTiers.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/convocations/formConvocAssTiers.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/convocations/formConvocClient.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/convocations/formConvocClient.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/convocations/formConvocEse.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/convocations/formConvocEse.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/convocations/modelConvoc.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/convocations/modelConvoc.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/convocations/modelConvocAssClt.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/convocations/modelConvocAssClt.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/convocations/modelConvocAssEse.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/convocations/modelConvocAssEse.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/convocations/modelConvocEse.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/convocations/modelConvocEse.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/courriers/formCourrCltAssRep.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courriers/formCourrCltAssRep.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/courriers/modelCourrierCltAssRep.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courriers/modelCourrierCltAssRep.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,15 +158,12 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="com.jetbrains.php.phpunit.codeGeneration.PhpNewTestDialog.defaultLibrary" value="PHPUnit" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/courriers" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="Symfony2.SettingsForm" />
+    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\gestionCourrier\templates\convocationCivis" />
-      <recent name="C:\wamp64\www\gestionCourrier\src\Controller" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\gestionCourrier\templates\courriers" />
       <recent name="C:\wamp64\www\gestionCourrier\templates\convocations" />
@@ -156,8 +171,31 @@
       <recent name="C:\wamp64\www\gestionCourrier\src\Controller" />
       <recent name="C:\wamp64\www\gestionCourrier\public" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\gestionCourrier\templates\courriers" />
+      <recent name="C:\wamp64\www\gestionCourrier\templates\convocationCivis" />
+      <recent name="C:\wamp64\www\gestionCourrier\src\Controller" />
+    </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="PHPUnit.convocControllerTest2.testIndex">
+    <configuration name="convocControllerTest2.testGetConvocAssurance" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <CommandLine>
+        <PhpTestInterpreterSettings>
+          <option name="interpreterName" value="PHP 7.4" />
+        </PhpTestInterpreterSettings>
+      </CommandLine>
+      <TestRunner class="App\Controller\convocControllerTest2" file="$PROJECT_DIR$/convocControllerTest2.php" method="testGetConvocAssurance" scope="Method" />
+      <method v="2" />
+    </configuration>
+    <configuration name="convocControllerTest2.testIndex" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <CommandLine>
+        <PhpTestInterpreterSettings>
+          <option name="interpreterName" value="PHP 7.4" />
+        </PhpTestInterpreterSettings>
+      </CommandLine>
+      <TestRunner class="App\Controller\convocControllerTest2" file="$PROJECT_DIR$/convocControllerTest2.php" method="testIndex" scope="Method" />
+      <method v="2" />
+    </configuration>
     <configuration name="HtmlToWord.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/src/Controller/HtmlToWord.php">
       <CommandLine>
         <PhpTestInterpreterSettings>
@@ -168,6 +206,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="PHPUnit.convocControllerTest2.testIndex" />
+        <item itemvalue="PHPUnit.convocControllerTest2.testGetConvocAssurance" />
         <item itemvalue="PHP Script.HtmlToWord.php" />
       </list>
     </recent_temporary>
@@ -233,7 +273,18 @@
       <workItem from="1602157935847" duration="1217000" />
       <workItem from="1602227142063" duration="10161000" />
       <workItem from="1602244207510" duration="6360000" />
-      <workItem from="1602572252425" duration="15875000" />
+      <workItem from="1602572252425" duration="23741000" />
+      <workItem from="1602660231013" duration="11353000" />
+      <workItem from="1602746079708" duration="19007000" />
+      <workItem from="1602832201586" duration="12703000" />
+      <workItem from="1602855965419" duration="4017000" />
+      <workItem from="1603091221194" duration="849000" />
+      <workItem from="1603106412717" duration="7582000" />
+      <workItem from="1603177820938" duration="11348000" />
+      <workItem from="1603265897923" duration="12000" />
+      <workItem from="1603266528473" duration="2238000" />
+      <workItem from="1603283872612" duration="4528000" />
+      <workItem from="1603350776942" duration="17253000" />
     </task>
     <servers />
   </component>
@@ -261,6 +312,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="705" y="344" key="#Notifications/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1598425015427" />
+    <state x="540" y="175" key="#Test_Frameworks" timestamp="1602682144048">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="540" y="175" key="#Test_Frameworks/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1602682144048" />
     <state x="722" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1601976645146">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -269,34 +324,34 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="355" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1601276363311" />
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1601976652426">
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1602836262063">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1601976652426" />
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1602836262063" />
     <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1602231768755">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1602231768755" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1601892689303">
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1603115617023">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1601892689303" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1601987220445">
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1603115617023" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1602682260386">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1601987220445" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1601987220445">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1602682260386" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1602682260386">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1601987220445" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1601987220445">
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1602682260386" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1602682260385">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1601987220445" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1601987220445">
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1602682260385" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1602682260386">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1601987220445" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1602682260386" />
     <state x="739" y="243" key="NewPhpClassDialog" timestamp="1601982784852">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -305,10 +360,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="794" y="443" key="NewPhpFileDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1598861445036" />
-    <state x="461" y="165" key="SettingsEditor" timestamp="1598432318351">
+    <state x="461" y="165" key="SettingsEditor" timestamp="1602683083653">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1598432318351" />
+    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1602683083653" />
+    <state width="498" height="446" key="SwitcherDM" timestamp="1602763183511">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="498" height="446" key="SwitcherDM/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1602763183511" />
+    <state x="727" y="328" width="466" height="645" key="com.jetbrains.php.test.PhpNewTestDialog" timestamp="1602682031852">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="727" y="328" width="466" height="645" key="com.jetbrains.php.test.PhpNewTestDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1602682031852" />
     <state x="1962" y="0" width="1459" height="597" key="dock-window-1" timestamp="1599056256022">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>

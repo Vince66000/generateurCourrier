@@ -2,21 +2,28 @@
 
 {% block body %}
 
-    <div class="container-fluid" style="width: 60%">
-        <h1 style="text-align: center">Généracteur convoc Entreprises (Hors civis)</h1>
-        <h2 style="text-align: center">Entrez le numéro d'affaire pour retrouver tous les contacts qui y sont liés</h2>
-        <form action="{{ path('getProject') }}" method="post">
+    <div class="container" >
+        <h1 style="text-align: center">Généracteur de convocations pour Entreprises </h1>
+        <h4 style="text-align: center">Entrez le numéro d'affaire pour retrouver la ou les entreprise(s) qui y sont liés</h4>
+        <br/>
+        <div class="row justify-content-center" style="margin-left: auto; margin-right: auto">
+            <form class="col-md-10" action="{{ path('getProject') }}" method="post">
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="refAffaire">Numéro affaire</label>
+                        <input class="form-control" id="refAffaire" name="refAffaire" type="text">
+                    </div>
 
-            <div class="col-md-8">
-                <div class="form-group col-lg-8">
-                    <label for="refAffaire">Numéro affaire</label>
-                    <input id="refAffaire" name="refAffaire" type="text">
                 </div>
-                <div class="form-group col-lg-4">
-                    <input type="submit">
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <input class="btn btn-primary" style="width: 100%" type="submit" value="Suivant">
+                    </div>
                 </div>
-            </div>
-        </form>
+
+            </form>
+
+        </div>
 
     </div>
-    {% endblock %}
+{% endblock %}

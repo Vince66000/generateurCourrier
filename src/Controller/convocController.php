@@ -14,10 +14,11 @@ use  \Spipu\Html2Pdf\Html2Pdf;
 class convocController  extends  AbstractController {
 
 
-//
+
 //  const dbLocal = "aeb_dol";
 //  const usrLocal = "aeb.dol";
 //  const mdpLocal = 'DmPzTs61NzG4';
+
 
     const dbLocal = "dolibarr";
     const usrLocal = "vincent";
@@ -62,9 +63,7 @@ class convocController  extends  AbstractController {
         $ref =  '%' .$_POST['affaire'] . '%';
         $date = $_POST['datepicker'];
         $heure = $_POST['timepicker'];
-        $civ = $_POST['civilite'];
         $expert = $_POST['expert'];
-        $texteLibre = $_POST['textelibre'];
         $client = 'Client(e)';
 
         /**
@@ -101,7 +100,7 @@ class convocController  extends  AbstractController {
         $lieuxExp2 = explode(" ", $lieuxExp);
         $count = count($lieuxExp2);
         $lieuxExp3 = '';
-        for($i = 3; $i < $count  ; $i++) {
+        for($i = 4; $i < $count  ; $i++) {
             $lieuxExp3 .=  ' ' . $lieuxExp2[$i] . ' ';
 
         }
@@ -113,9 +112,7 @@ class convocController  extends  AbstractController {
             'societe' => $societe,
             'dateRdv' => $date,
             'heureRdv' => $heure,
-            'civ' => $civ,
             'expert' => $expert,
-            'textelibre' => $texteLibre,
             'lieuxexp' => utf8_encode($lieuxExp3)
 
         ]);
@@ -156,6 +153,9 @@ class convocController  extends  AbstractController {
 
         $ref =  '%'. $_POST['refAffaire'] . '%' ;
         $client = 'Client(e)';
+        $entreprise = 'Entreprise' . '%';
+        $tiers = 'Tiers' . '%';
+
 
         $db = new PDOConnection('mysql:host=localhost;dbname='.self::dbLocal.'', ''.self::usrLocal.'', ''.self::mdpLocal.'');
         $getProj = $db->prepare('select                    
@@ -168,9 +168,12 @@ class convocController  extends  AbstractController {
                         inner join llx_c_type_contact on llx_element_contact.fk_c_type_contact = llx_c_type_contact.rowid
                         where llx_element_contact.element_id = ( select rowid from llx_projet where ref like :ref ) 
                         and fk_c_type_contact != 160
+                        and llx_c_type_contact.libelle IN  ("Entreprise", "Entreprise 2", "Entreprise 3", "Tiers", "Tier 2", "Teirs 3")  
                         ');
 
         $getProj->bindParam(':ref', $ref);
+       // $getProj->bindParam(':entreprise', $entreprise);
+      //  $getProj->bindParam(':tiers', $tiers);
 //        $getProj->bindParam(':client', $client);
         $getProj->execute();
 
@@ -179,6 +182,7 @@ class convocController  extends  AbstractController {
         return $this->render('convocations/formConvocEse.html.twig', [
             'res' => $res,
             'affaire' => $ref,
+
         ]);
 
 
@@ -195,8 +199,8 @@ class convocController  extends  AbstractController {
         $affaire = '%' . $_POST['affaire'] . '%';
         $nom = $_POST['nom'];
         $noms = explode(" ", $nom);
-        $prenom = $noms[0];
-        $nom = $noms[1];
+//        $prenom = $noms[0];
+        $nom = '%' . $noms[1] . '%';
         $date = $_POST['datepicker'];
         $heure = $_POST['timepicker'];
         $expert = $_POST['expert'];
@@ -204,6 +208,9 @@ class convocController  extends  AbstractController {
         $natureTrav = $_POST['natureTrav'];
         $vref = $_POST['vref'];
         $numReco = $_POST['numReco'];
+        $interlocuteur = $_POST['interlocuteur'];
+        $dossier = $_POST['dossier'];
+        $pj =$_POST['pj'] ;
 
         $db = new PDOConnection('mysql:host=localhost;dbname=' . self::dbLocal . '', '' . self::usrLocal . '', '' . self::mdpLocal . '');
         $getClient = $db->prepare(
@@ -224,19 +231,18 @@ class convocController  extends  AbstractController {
                         ON llx_projet.rowid = llx_projet_extrafields.fk_object
                         INNER JOIN llx_socpeople
                         ON llx_element_contact.fk_socpeople = llx_socpeople.rowid
-                        WHERE llx_projet.ref LIKE  :affaire
-                        AND llx_socpeople.firstname = :prenom
-                        AND llx_socpeople.lastname = :nom');
+                        WHERE llx_projet.ref LIKE  :affaire                      
+                        AND llx_socpeople.lastname like :nom');
 
         $getClient->bindParam(':affaire', $affaire);
-        $getClient->bindParam(':prenom', $prenom);
+//        $getClient->bindParam(':prenom', $prenom);
         $getClient->bindParam(':nom', $nom);
         $getClient->execute();
         $client = $getClient->fetch();
 
         $natContact = 'Client(e)';
 
-        $db = new PDOConnection('mysql:host=localhost;dbname='.self::dbLocal.'', ''.self::usrLocal.'', ''.self::mdpLocal.'');
+//        $db = new PDOConnection('mysql:host=localhost;dbname='.self::dbLocal.'', ''.self::usrLocal.'', ''.self::mdpLocal.'');
         $getProj = $db->prepare('select   
                         llx_socpeople.civility as clientCiv,                 
                         llx_socpeople.lastname as clientPrenom, 
@@ -257,42 +263,96 @@ class convocController  extends  AbstractController {
         $getProj->bindParam(':ref', $affaire);
         $getProj->bindParam(':client', $natContact);
         $getProj->execute();
-
         $res = $getProj->fetch();
-//        echo '<pre>';
-//        var_dump($res);
-//        echo '</pre>';
-        $lieuxExp = $client['lieuaff'];
-        $lieuxExp2 = explode(" ", $lieuxExp);
-        $count = count($lieuxExp2);
-        $lieuxExp3 = '';
         $id_soc = $client['fk_soc'];
 
-        for ($i = 3; $i < ($count - 1); $i++) {
-            $lieuxExp3 .= ' ' . $lieuxExp2[$i] . ' ';
-
-        }
-
-        $db = new PDOConnection('mysql:host=localhost;dbname='.self::dbLocal.'', ''.self::usrLocal.'', ''.self::mdpLocal.'');
         $getNameSoc = $db->prepare('SELECT nom as nomSoc FROM llx_societe where rowid = :fk_soc');
         $getNameSoc->bindParam(':fk_soc', $id_soc);
         $getNameSoc->execute();
         $nameSoc = $getNameSoc->fetch();
-//        var_dump($nameSoc);
-        $tempTiers = $this->renderView('convocations/modelConvocEse.html.twig', [
-            'client' => $client,
-            'dateRdv' => $date,
-            'heureRdv' => $heure,
-            'expert' => $expert,
-            'dateDesordre' => $dateDesordre,
-            'natureTrav' => $natureTrav,
-            'lieuxExp' => utf8_encode($lieuxExp3),
-            'vref' => $vref,
-            'res' => $res,
-            'nameSoc' => $nameSoc,
-            'numReco' => $numReco
 
-        ]);
+        if ($pj == 'oui') {
+
+            $getPJ1 = $db->prepare('select            
+                        llx_socpeople.lastname,  
+                        llx_socpeople.firstname,
+                        llx_socpeople.address,
+                        llx_socpeople.zip,
+                        llx_socpeople.fk_soc,
+                        llx_socpeople.town,
+                        llx_c_type_contact.libelle
+                        from llx_element_contact 
+                        inner join llx_projet on llx_element_contact.element_id = llx_projet.rowid 
+                        inner join llx_socpeople on llx_element_contact.fk_socpeople = llx_socpeople.rowid 
+                        inner join llx_c_type_contact on llx_element_contact.fk_c_type_contact = llx_c_type_contact.rowid
+                        where llx_element_contact.element_id = ( select rowid from llx_projet where ref like :ref ) 
+                        and fk_c_type_contact != 160
+                        and llx_c_type_contact.libelle = "P.J"');
+
+            $getPJ1->bindParam(':ref', $affaire);
+            $getPJ1->execute();
+            $PJ1 = $getPJ1->fetch();
+            $fkSocPJ = $PJ1['fk_soc'];
+
+
+            $getPJ2 = $db->prepare('SELECT nom as nomPJ FROM llx_societe where rowid = :fk_soc ');
+            $getPJ2->bindParam('fk_soc', $fkSocPJ);
+            $getPJ2->execute();
+            $PJ2 = $getPJ2->fetch();
+
+        }
+
+
+        $lieuxExp = $client['lieuaff'];
+        $lieuxExp2 = explode(" ", $lieuxExp);
+        $count = count($lieuxExp2);
+        $lieuxExp3 = '';
+
+
+        for ($i = 4; $i < $count ; $i++) {
+            $lieuxExp3 .= ' ' . $lieuxExp2[$i] . ' ';
+
+        }
+        if ($pj == 'oui') {
+
+            $tempTiers = $this->renderView('convocations/modelConvocEse.html.twig', [
+                'client' => $client,
+                'dateRdv' => $date,
+                'heureRdv' => $heure,
+                'expert' => $expert,
+                'dateDesordre' => $dateDesordre,
+                'natureTrav' => $natureTrav,
+                'lieuxExp' => utf8_encode($lieuxExp3),
+                'vref' => $vref,
+                'res' => $res,
+                'nameSoc' => $nameSoc,
+                'numReco' => $numReco,
+                'pj' => $PJ2,
+                'interlocuteur' => $interlocuteur,
+                'dossier' => $dossier
+
+            ]);
+        }
+        else {
+            $tempTiers = $this->renderView('convocations/modelConvocEse.html.twig', [
+                'client' => $client,
+                'dateRdv' => $date,
+                'heureRdv' => $heure,
+                'expert' => $expert,
+                'dateDesordre' => $dateDesordre,
+                'natureTrav' => $natureTrav,
+                'lieuxExp' => utf8_encode($lieuxExp3),
+                'vref' => $vref,
+                'res' => $res,
+                'pj' => '',
+                'nameSoc' => $nameSoc,
+                'numReco' => $numReco,
+                'interlocuteur' => $interlocuteur,
+                'dossier' => $dossier
+
+            ]);
+        }
+
         $html2pdf = new html2pdf('P', 'A4', 'fr', true, 'utf-8', 10);
 
         $html2pdf->writeHTML($tempTiers);
@@ -313,9 +373,77 @@ class convocController  extends  AbstractController {
     public function getFormAssTiers() :Response
     {
 
-        return  $this->render('convocations/formConvocAssTiers.html.twig');
+
+
+        return  $this->render('convocations/formConvocAssTiers1.html.twig');
     }
 
+    /**
+     * @return Response
+     * @Route("convocationsAssEse2", name="convocationsAssEse2")
+     */
+    public function getProject2()
+    {
+
+        $ref = '%' . $_POST['refAffaire'] . '%';
+        $client = 'Client(e)';
+        $entreprise = 'Entreprise' . '%';
+        $assureur = 'Assureur' . '%';
+
+
+        $db = new PDOConnection('mysql:host=localhost;dbname=' . self::dbLocal . '', '' . self::usrLocal . '', '' . self::mdpLocal . '');
+        $getEse = $db->prepare('select                    
+                        llx_socpeople.lastname, 
+                        llx_socpeople.firstname, 
+                        llx_socpeople.rowid, 
+                        llx_projet.ref,
+                        llx_c_type_contact.libelle
+                        from llx_element_contact 
+                        inner join llx_projet on llx_element_contact.element_id = llx_projet.rowid 
+                        inner join llx_socpeople on llx_element_contact.fk_socpeople = llx_socpeople.rowid 
+                        inner join llx_c_type_contact on llx_element_contact.fk_c_type_contact = llx_c_type_contact.rowid
+                        where llx_element_contact.element_id = ( select rowid from llx_projet where ref like :ref ) 
+                        and fk_c_type_contact != 160
+                        and llx_c_type_contact.libelle like :entreprise
+                        ');
+
+        $getEse->bindParam(':ref', $ref);
+        $getEse->bindParam(':entreprise', $entreprise);
+//        $getProj->bindParam(':client', $client);
+        $getEse->execute();
+
+        $Ese = $getEse->fetchAll();
+
+        $db = new PDOConnection('mysql:host=localhost;dbname=' . self::dbLocal . '', '' . self::usrLocal . '', '' . self::mdpLocal . '');
+        $getAss = $db->prepare('select                    
+                        llx_socpeople.lastname, 
+                        llx_socpeople.firstname, 
+                        llx_socpeople.rowid, 
+                        llx_c_type_contact.libelle
+                        from llx_element_contact 
+                        inner join llx_projet on llx_element_contact.element_id = llx_projet.rowid 
+                        inner join llx_socpeople on llx_element_contact.fk_socpeople = llx_socpeople.rowid 
+                        inner join llx_c_type_contact on llx_element_contact.fk_c_type_contact = llx_c_type_contact.rowid
+                        where llx_element_contact.element_id = ( select rowid from llx_projet where ref like :ref ) 
+                        and fk_c_type_contact != 160
+                        and llx_c_type_contact.libelle like :assureur
+                        ');
+
+        $getAss->bindParam(':ref', $ref);
+        $getAss->bindParam(':assureur', $assureur);
+//        $getProj->bindParam(':client', $client);
+        $getAss->execute();
+
+        $Ass = $getAss->fetchAll();
+
+        return $this->render('convocations/formConvocAssTiers.html.twig', [
+
+            'ese' => $Ese,
+            'ass' => $Ass,
+            'affaire' => $ref
+
+        ]);
+    }
     /**
      * Récupèration des infos passées au formulaire et Génération du PDF
      * @Route("generateConvAss", name="generateConvAss")
@@ -325,7 +453,6 @@ class convocController  extends  AbstractController {
         $ref2 =  '%' .$_POST['affaire'] . '%';
         $date = $_POST['datepicker'];
         $heure = $_POST['timepicker'];
-        $civ = $_POST['civilite'];
         $expert = $_POST['expert'];
         $texteLibre = $_POST['textelibre'];
         $client = 'Client(e)';
@@ -334,6 +461,9 @@ class convocController  extends  AbstractController {
         $numReco = $_POST['numReco'];
         $vref = $_POST['vref'];
         $dateDes = $_POST['dateDesordre'];
+        $pj = $_POST['pj'];
+        $interlocuteur = $_POST['interlocuteur'];
+        $numDoss = $_POST['dossier'];
 
         /**
          * requête qui récupère les coordonées d'un client lié à une affaire particulière
@@ -430,7 +560,7 @@ class convocController  extends  AbstractController {
         $fk_socEse = $Ese['fk_soc2'];
 
         $db3 = new PDOConnection('mysql:host=localhost;dbname='.self::dbLocal.'', ''.self::usrLocal.'', ''.self::mdpLocal.'');
-
+        $ref3 = $Ese['ref'];
         $getEse = $db3->prepare('SELECT nom from llx_societe where rowid = :fk_soc');
         $getEse->bindParam(':fk_soc', $fk_socEse);
 
@@ -442,36 +572,98 @@ class convocController  extends  AbstractController {
         $lieuxExp2 = explode(" ", $lieuxExp);
         $count = count($lieuxExp2);
         $lieuxExp3 = '';
-        for($i = 3; $i < $count  ; $i++) {
+        for($i = 4; $i < $count  ; $i++) {
             $lieuxExp3 .=  ' ' . $lieuxExp2[$i] . ' ';
 
         }
 
 
-        $template = $this->renderView('convocations/modelConvocAssEse.html.twig', [
+        if($pj == 'oui')
+        {
+            $getPJ1 = $db->prepare('select            
+                        llx_socpeople.lastname,  
+                        llx_socpeople.firstname,
+                        llx_socpeople.address,
+                        llx_socpeople.zip,
+                        llx_socpeople.fk_soc,
+                        llx_socpeople.town,
+                        llx_c_type_contact.libelle
+                        from llx_element_contact 
+                        inner join llx_projet on llx_element_contact.element_id = llx_projet.rowid 
+                        inner join llx_socpeople on llx_element_contact.fk_socpeople = llx_socpeople.rowid 
+                        inner join llx_c_type_contact on llx_element_contact.fk_c_type_contact = llx_c_type_contact.rowid
+                        where llx_element_contact.element_id = ( select rowid from llx_projet where ref like :ref ) 
+                        and fk_c_type_contact != 160
+                        and llx_c_type_contact.libelle = "P.J"');
+
+            $getPJ1->bindParam(':ref', $ref2);
+            $getPJ1->execute();
+            $PJ1 = $getPJ1->fetch();
+            $fkSocPJ = $PJ1['fk_soc'];
+
+            $getPJ2 = $db->prepare('SELECT nom as nomPJ FROM llx_societe where rowid = :fk_soc ');
+            $getPJ2->bindParam('fk_soc', $fkSocPJ);
+            $getPJ2->execute();
+            $PJ2 = $getPJ2->fetch();
+        }
 
 
-            'client' => $client,
-            'assurance' => $assurance,
-            'dateRdv' => $date,
-            'heureRdv' => $heure,
-            'civ' => $civ,
-            'expert' => $expert,
-            'textelibre' => $texteLibre,
-            'lieuxexp' => utf8_encode($lieuxExp3),
-            'socAss' => $socAss,
-            'nomEse' => $nomEse,
-            'vref' => $vref,
-            'numReco' => $numReco,
-            'dateDes' => $dateDes
+        if ($pj == 'oui')
+        {
+            $template = $this->renderView('convocations/modelConvocAssEse.html.twig', [
 
-        ]);
 
+                'client' => $client,
+                'assurance' => $assurance,
+                'dateRdv' => $date,
+                'heureRdv' => $heure,
+                'expert' => $expert,
+                'textelibre' => $texteLibre,
+                'lieuxexp' => utf8_encode($lieuxExp3),
+                'socAss' => $socAss,
+                'nomEse' => $nomEse,
+                'vref' => $vref,
+                'numReco' => $numReco,
+                'pj' => $PJ2,
+                'dateDes' => $dateDes,
+                'interlocuteur' => $interlocuteur,
+                'dossier' => $numDoss
+
+            ]);
+
+
+        } else
+
+            $template = $this->renderView('convocations/modelConvocAssEse.html.twig', [
+
+
+                'client' => $client,
+                'assurance' => $assurance,
+                'dateRdv' => $date,
+                'heureRdv' => $heure,
+                'expert' => $expert,
+                'textelibre' => $texteLibre,
+                'lieuxexp' => utf8_encode($lieuxExp3),
+                'socAss' => $socAss,
+                'nomEse' => $nomEse,
+                'vref' => $vref,
+                'numReco' => $numReco,
+                'pj' => '',
+                'dateDes' => $dateDes,
+                'interlocuteur' => $interlocuteur,
+                'dossier' => $numDoss
+
+            ]);
+
+        {
+
+        }
         $html2pdf = new html2pdf('P', 'A4', 'fr', true, 'utf-8', 10);
         $html2pdf->setTestTdInOnePage(false);
         $html2pdf->writeHTML($template);
 
         return $html2pdf->output('convocationAssEse'. $refAff .'.pdf');
+
     }
 
 
@@ -512,6 +704,7 @@ class convocController  extends  AbstractController {
         $dateDesordre = $_POST['dateDesordre'];
         $montTrav = $_POST['montTrav'];
         $numReco = $_POST['numReco'];
+        $interlocuteur = $_POST['interlocuteur'];
 
         /**
          * requête qui récupère les coordonées d'un client lié à une affaire particulière
@@ -576,13 +769,13 @@ class convocController  extends  AbstractController {
 
 
 
-            $db3 = new PDOConnection('mysql:host=localhost;dbname='.self::dbLocal.'', ''.self::usrLocal.'', ''.self::mdpLocal.'');
-            $getSocAss = $db3->prepare('SELECT nom from llx_societe where rowid = :fk_soc');
+        $db3 = new PDOConnection('mysql:host=localhost;dbname='.self::dbLocal.'', ''.self::usrLocal.'', ''.self::mdpLocal.'');
+        $getSocAss = $db3->prepare('SELECT nom from llx_societe where rowid = :fk_soc');
 
-            $getSocAss->bindParam(':fk_soc', $fk_soc);
+        $getSocAss->bindParam(':fk_soc', $fk_soc);
 
-            $getSocAss->execute();
-            $socAss = $getSocAss->fetch();
+        $getSocAss->execute();
+        $socAss = $getSocAss->fetch();
 
 
 
@@ -627,7 +820,7 @@ class convocController  extends  AbstractController {
         $lieuxExp2 = explode(" ", $lieuxExp);
         $count = count($lieuxExp2);
         $lieuxExp3 = '';
-        for($i = 3; $i < $count  ; $i++) {
+        for($i = 4; $i < $count  ; $i++) {
             $lieuxExp3 .=  ' ' . $lieuxExp2[$i] . ' ';
 
         }
@@ -648,7 +841,8 @@ class convocController  extends  AbstractController {
             'nomEse' => $nomEse,
             'dateDesordre' => $dateDesordre,
             'montTrav' => $montTrav,
-            'numReco' => $numReco
+            'numReco' => $numReco,
+            'interlocuteur' => $interlocuteur
 
         ]);
 

@@ -10,8 +10,9 @@
     #noms   {
         text-align: left;
         padding-left: 400px;
-        line-height: 1px;
+        line-height: normal;
         margin-bottom: 25px;
+
     }
 
     #ref {
@@ -19,6 +20,7 @@
         padding-left: 40px;
         height: 30px;
         width: 70%;
+        font-size: 80%;
     }
     #date_exp, #adresse_exp, #dateDesordre, #natureDesordres {
 
@@ -48,23 +50,23 @@
 
 </style>
 
-<page  backimg="http://localhost/gestionCourrier/public/fondReiserCopie3.jpeg" backbottom="10mm" backimgw="100%" backimgy="30px" backimgx="35px" style="size: A4">
-
+<page  backimg="../public/fondReiserCopie3.jpeg" backbottom="10mm" backimgw="100%" backimgy="30px" backimgx="35px" style="size: A4">
 
     <div id="cadre">
 
         <div >
             <div id="noms">
-                <p>{% if expert == "GR" %}<p>Elne{% elseif expert == "JC" %}<p>Narbonne{% elseif expert == "JLB" %}
+                {% if expert == "GR" %}<p>Elne{% elseif expert == "JC" %}<p>Narbonne{% elseif expert == "JLB" %}
                 <p>Toulouse{% elseif expert == "SB" %}<p>Foix{% elseif expert == "BCE" %}<p>La Rochelle{% elseif expert == "PEC" %}
                 <p>Montpellier{% elseif expert == "MC" %}<p>Poitiers{% elseif expert == "PC" %}<p>Avignon{% elseif expert == "NC" %}
                 <p>Pau{% elseif expert == "TC" %}<p>Nice{% elseif expert == "OD" %}<p>Clermont-Ferrand
                 {% elseif expert == "JD" %}<p>Nîmes{% elseif expert == "BE" %}<p>Marseille{% elseif expert == "FM" %}<p>Lyon
                 {% elseif expert == "LM" %}<p>Bordeaux{% elseif expert == "NU" %}<p>Toulon
                     {% endif %}, le {{ "now" | date("d/m/Y") }}</p>
-                <p>{{ socAss.nom }}</p>
-                <p>{{ assurance.address }}</p>
-                <p>{{ assurance.zip }} {{ assurance.town }}</p>
+                <br/>
+                <p><b>{{ socAss.nom }} <br/>
+                {{ assurance.address }} <br/>
+                {{ assurance.zip }} {{ assurance.town }}</b></p>
             </div>
             {% if assurance.address is empty %}
                 <div style="height: 50px; width: 100%; background-color: red; text-align: center">
@@ -87,13 +89,7 @@
                         <td>{{ vref }}</td>
                     </tr>
                 </table>
-                <p><u>A l'attention de {% if assurance.civility == 'MME' %}
-                            Madame
-                        {% elseif assurance.civility == 'MR' %}
-                            Monsieur
-                        {% else%}
-                            la société
-                        {% endif %} {{ assurance.firstname }} {{ assurance.lastname }} </u></p>
+                <p><u>{% if interlocuteur is not empty %}A l'attention de {{  interlocuteur }}{% endif %} </u></p>
             </div>
             <div id="corps_texte">
                 {% if societe.civility == 'MME' %}
@@ -119,33 +115,30 @@
                 {% endif %}
 
                 {% if dateDesordre is not empty %}
-                    <p>La date d’apparition des désordres  est du :</p>
-                    <p id="dateDesordre"><b>{{ dateDesordre }}</b></p>
+                    <p>La date d’apparition des désordres  est du :  {{ dateDesordre }}</p>
                 {% endif %}
 
                 <p>Vous avez agi en tant qu'assureur "Multirisques Habitation" concernant ce sinistre.
-                Il se pourrait, selon les informations en notre possession, que les travaux que vous vez pris en charge
-                , dans le cadre du contrat "Multirisques Habitation de <b>{{ montTrav }}</b> aient été insuffisamment quantifiés</p>
+                    Il se pourrait, selon les informations en notre possession, que les travaux que vous avez pris en charge,
+                    dans le cadre du contrat "Multirisques Habitation de <b>{{ montTrav }}</b> aient été insuffisamment quantifiés</p>
 
                 <p>Nous avons donc effectué un recours contre {{  nomEse.nomEse }} ayant réalisé les travaux; Recours auquel nous vous demandons
                     de bien vouloir être présents ou de missionner un expert de votre choix.</p>
-
-
-
-
             </div>
+
             <div id="deuxième_page">
 
-                <p>Afin donc de trouver une solution dans un cadre amiable à ce dossier, je vous indique que je procéderai à une réunion d’expertise contradictoire sur les lieux,</p>
+                <p>Afin donc de trouver une solution dans un cadre amiable à ce dossier, je vous indique que je procéderai à une
+                    réunion d’expertise contradictoire sur les lieux,</p>
 
                 <p id="adresse_exp"><b> {{ lieuxexp }},</b></p>
                 <p id="date_exp"><b>le {{ dateRdv | format_datetime('full', 'none', locale='fr') }} à {{ heureRdv }}</b></p>
 
                 <p>Réunion pour laquelle je demanderai de bien vouloir missionner l'expert de votre compagnie</p>
 
-                <p>Nous vous remercions pour cette expertise de prendre en considération qu'il est indispensable d'appliquer les gestes barrières imposés concernant le COVID-19.
-
-                En l'absence de respect des gestes barrières l'accès à l'expertise pourrait vous être refusé.</p>
+                <p>Nous vous remercions pour cette expertise de prendre en considération qu'il est indispensable d'appliquer les gestes
+                    barrières imposés concernant le COVID-19. En l'absence de respect des gestes barrières l'accès à l'expertise pourrait
+                    vous être refusé.</p>
                 <p>Vous souhaitant bonne réception de cet envoi et comptant sur votre présence, je vous prie d’agréer,
                     {% if assurance.civility == 'MME' %}
                         Madame,

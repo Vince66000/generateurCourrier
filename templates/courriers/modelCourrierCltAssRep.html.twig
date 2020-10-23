@@ -30,7 +30,7 @@
         margin-right: 40px;
         margin-top: 30px;
         text-align: justify;
-        line-height: 15px;
+        line-height: 150%;
 
     }
     td {
@@ -44,7 +44,12 @@
 
         <div >
             <div id="noms">
-                <p>Elne, le {{ "now" | date("d/m/Y") }}</p>
+                {% if expert == "GR" %}<p>Elne{% elseif expert == "JC" %}<p>Narbonne{% elseif expert == "JLB" %}<p>Toulouse
+                {% elseif expert == "SB" %}<p>Foix{% elseif expert == "BCE" %}<p>La Rochelle{% elseif expert == "PEC" %}<p>Montpellier
+                {% elseif expert == "MC" %}<p>Poitiers{% elseif expert == "PC" %}<p>Avignon{% elseif expert == "NC" %}<p>Pau
+                {% elseif expert == "TC" %}<p>Nice{% elseif expert == "OD" %}<p>Clermont-Ferrand{% elseif expert == "JD" %}<p>Nîmes{% elseif expert == "BE" %}
+                <p>Marseille{% elseif expert == "FM" %}<p>Lyon{% elseif expert == "LM" %}<p>Bordeaux{% elseif expert == "NU" %}<p>Toulon
+                    {% endif %}, le {{ "now" | date("d/m/Y") }}</p>
                 <p>{% if client.civility is not empty%} {{ client.civility}} {% endif %} {{ client.firstname }} {{ client.lastname }}</p>
                 <p>{{ client.address }}</p>
                 <p>{{ client.zip }} {{ client.town }}</p>
@@ -69,16 +74,22 @@
             </div>
             <div id="corps_texte">
 
-                <p>Je reviens vers vous concernant votre dossier et, pour faire suite à la mission que vous m'avez confiée,
-                    vous remercie de prendre note que je procèderai à une réunion d'expertise contradictoire sur les lieux,</p>
-                <p id="adresse_exp"><b> {{ lieuxexp }},</b></p>
+                <p>Chère Madame, Cher Monsieur,</p>
 
-                <p>Réunion à laquelle je vous remercie de bien vouloir être présent.</p>
-                {% if texteLibre is not empty %}
-                    <p><b>Pour rappel voici les motifs de ma mission :</b></p>
-                    <p>{{ texteLibre }}</p>
-                {% endif %}
-                <p>Vous souhaitant bonne réception de cet envoi, je vous prie d’agréer,</p>
+                <p>Je reviens vers vous concernant votre dossier {{ client.ref }} et fais suite à la validation de notre proposition commerciale.</p>
+
+                <p>Afin que nous puissions organiser la réunion de réception, il est indispensable que vous vous mettiez en relation avec mon Cabinet
+                afin de déterminer une date possible pour l'organisation de ladite réunion.</p>
+
+                <p>Une fois la date fixée, il sera nécessaire que vous convoquiez, par voie de Recommandé avec Accusé de Réception, la Société
+                {{ nomSociete.nom }} à ladite réunion en indiquant notamment en objet « réunion de réception ».</p>
+
+                <p>Cette réunion de réception doit se tenir quinze jours minimum suivant l'envoi de la lettre Recommandée avec Accusé de Réception.
+                    Je vous saurais grés de bien vouloir me faire parvenir copie de ce courrier pour la bonne tenue de mon dossier.</p>
+
+                <p>Vous souhaitant bonne réception de la présente et me tenant à votre disposition pour tout complément d’informations ou intervention,
+                je vous prie d’agréer, Chère Madame, Cher Monsieur, l’expression de mes sentiments dévoués.</p>
+
 
             </div>
             <div style="padding-left: 400px; margin-top: 40px">

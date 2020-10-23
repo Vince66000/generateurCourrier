@@ -40,26 +40,27 @@
 
 {% block body %}
 <body>
-<div class="container-fluid" style=" width: 60%">
+<div class="container">
 
     <h1 style="text-align: center">Générateur de convocation Entreprise</h1>
+    <h2 style="text-align: center">Attention! assurez vous de bien avoir renseigner le ou les contacts type "Entreprise"</h2>
     <br/>
-    <form class="col-md-8"  action="{{ path('generateConvTiers')}}" method="post" style="margin-right: auto; margin-left: auto; width: 100%">
+    <form class="col-md-12"  action="{{ path('generateConvTiers')}}" method="post" style="margin-right: auto; margin-left: auto">
         <div class="row">
             <div class="form-group col-md-4">
                 <label for="nom">Nom du contact</label>
                 <select class="form-control" name="nom" id="nom">
                     {% for contact in res %}
                         <option value="{{ contact.firstname ~ " " ~ contact.lastname ~ " "  ~ contact.libelle }}">
-                            {{ contact.firstname ~ " " ~ contact.lastname ~ " " ~  contact.libelle}}</option>
+                            {{ contact.firstname ~ " " ~ (contact.lastname | upper)  ~ " " ~  contact.libelle}}</option>
                     {% endfor %}
                 </select>
             </div>
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-4">
                 <label for="datepicker" >date RDV</label>
                 <input class="form-control" type="text" id="datepicker" name="datepicker" autocomplete="off" required>
             </div>
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-4">
                 <label for="timepicker">heure RDV</label>
                 <select class="form-control" name="timepicker" id="timepicker" required>
                     <option selected value=""></option>
@@ -115,7 +116,7 @@
             <input type="text" value="{{ affaire }}" name="affaire" id="affaire" hidden>
         </div>
         <div class="row">
-            <div class="form-group col-md-8">
+            <div class="form-group col-md-12">
                 <label for="expert" >Expert</label>
                 <select class="form-control" name="expert" id="expert" required>
                     <option selected value=""></option>
@@ -139,30 +140,50 @@
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-8">
+            <div class="form-group col-md-12">
                 <label for="natureTrav">nature des désordres</label>
                 <textarea class="form-control" name="natureTrav" id="natureTrav" cols="60" rows="2"></textarea>
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-6">
                 <label for="dateDesordre">Date désordres</label>
                 <input class="form-control" name="dateDesordre" id="dateDesordre">
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-6">
                 <label for="vref">v/ref</label>
                 <input class="form-control" name="vref" id="vref" type="text">
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-8">
+            <div class="form-group col-md-12">
                 <label for="numReco">Numéro recommandé</label>
                 <input class="form-control" name="numReco" id="numReco">
             </div>
         </div>
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label for="interlocuteur">A l'attention de</label>
+               <input class="form-control" name="interlocuteur" id="interlocuteur">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="dossier">Numéro de dossier</label>
+                <input class="form-control" name="dossier" id="dossier" type="text">
+            </div>
+            <div class="form-group col-lg-4">
+                <label for="pj">S'agit-il d'un Dossier PJ?</label>
+                <select class="form-control" name="pj" id="pj">
+                    <option value="oui">Oui</option>
+                    <option value="non">Non</option>
+                </select>
+            </div>
+        </div>
         <br/>
-        <div>
-            <input class="btn btn-primary btn-lg" type="submit">
+        <div class="row">
+            <div class="col-md-12">
+                <input style="width: 100%" class="btn btn-primary btn-lg" type="submit" value="Générer">
+
+            </div>
         </div>
     </form>
 

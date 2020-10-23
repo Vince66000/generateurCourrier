@@ -72,20 +72,39 @@
 {% block body %}
 <body>
 <div class="container">
-    <h1 style="text-align: center">Générateur de convocation Client (Hors Civis)</h1>
-    <form class="col-md-10"  action="{{ path('generateConvAss')}}" method="post">
+    <h1 style="text-align: center">Générateur de convocation assurance entreprise</h1>
+    <h4 style="text-align: center; color: red; text-decoration: blink">Attention! assurez vous de bien avoir renseigné le ou les contact(s) "Assureur"</h4>
+    <br/>
+    <div class="row justify-content-center" style="margin-left: auto; margin-right: auto">
+    <form class="col-md-12"  action="{{ path('generateConvAss')}}" method="post">
         <div class="row">
-            <div class="form-group col-lg">
-                <label for="affaire">Choisissez une affaire</label>
-                <input class="form-control" type="text" name="affaire" id="affaire" autocomplete="on" required>
+            <div class="form-group col-md-6">
+                <label for="entreprise">Entreprise</label>
+                <select class="form-control" name="entreprise" id="entreprise">
+                    {% for entreprise in ese %}
+                        <option value="{{entreprise.rowid }}">{{ entreprise.firstname ~ " " ~ entreprise.lastname ~ " " ~  entreprise.libelle}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="assurance">Assurance</label>
+                <select class="form-control" name="assurance" id="assurance">
+                    {% for assurance in ass %}
+                        <option value="{{assurance.rowid }}">
+                            {{ assurance.firstname ~ " " ~ assurance.lastname ~ " " ~  assurance.libelle}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <input type="text" value="{{ affaire }}" name="affaire" id="affaire" hidden>
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-6">
                 <label for="datepicker" > Date RDV</label>
                 <input class="form-control" type="text" id="datepicker" name="datepicker" autocomplete="off" required>
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-6">
                 <label for="timepicker">Heure RDV</label>
                 <select class="form-control" name="timepicker" id="timepicker" required>
                     <option selected value=""></option>
@@ -136,41 +155,38 @@
                     <option value="19h00">19h00</option>
                 </select>
             </div>
-            <div class="form-group col-md-4">
-                <label for="civilite">Civilité</label>
-                <select class="form-control" name="civilite" id="civilite" required>
+
+        </div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label for="expert" >Expert</label>
+                <select class="form-control" name="expert" id="expert" required>
                     <option selected value=""></option>
-                    <option value="F">Femme</option>
-                    <option value="H">Homme</option>
-                    <option value="S">Société</option>
+                    <option value="GR">Geoffrey REISER</option>
+                    <option value="JLB">Jean-Luc BEDEL</option>
+                    <option value="SB">Stéphane BERTRAND</option>
+                    <option value="JC">Jérémy CAPDEVILLE</option>
+                    <option value="BCE">Bastien CARLES-ESPITAU</option>
+                    <option value="PEC">Pierre-Emmanuel CAU</option>
+                    <option value="MC">Mickaël CHAUMONT</option>
+                    <option value="PC">Paul COLLINET</option>
+                    <option value="NC">Nicolas COMET</option>
+                    <option value="TC">Thierry COSTELLA</option>
+                    <option value="OD">Olivier DAVID</option>
+                    <option value="JD">Jérôme DECOR</option>
+                    <option value="BE">Ben EL ASSIOUI</option>
+                    <option value="FM">Florian MAILHE</option>
+                    <option value="LM">Laurent MONTARU</option>
+                    <option value="NU">Norbert URSO</option>
                 </select>
             </div>
+
         </div>
-        <div>
-            <label for="expert" >Expert</label>
-            <select class="form-control" name="expert" id="expert" required>
-                <option selected value=""></option>
-                <option value="GR">Geoffrey REISER</option>
-                <option value="JLB">Jean-Luc BEDEL</option>
-                <option value="SB">Stéphane BERTRAND</option>
-                <option value="JC">Jérémy CAPDEVILLE</option>
-                <option value="BCE">Bastien CARLES-ESPITAU</option>
-                <option value="PEC">Pierre-Emmanuel CAU</option>
-                <option value="MC">Mickaël CHAUMONT</option>
-                <option value="PC">Paul COLLINET</option>
-                <option value="NC">Nicolas COMET</option>
-                <option value="TC">Thierry COSTELLA</option>
-                <option value="OD">Olivier DAVID</option>
-                <option value="JD">Jérôme DECOR</option>
-                <option value="BE">Ben EL ASSIOUI</option>
-                <option value="FM">Florian MAILHE</option>
-                <option value="LM">Laurent MONTARU</option>
-                <option value="NU">Norbert URSO</option>
-            </select>
-        </div>
-        <div>
-            <label for="textelibre">Motifs mission<b>(facultatif)</b></label>
-            <textarea class="form-control" name="textelibre" id="textelibre" cols="60" rows="5" maxlength="480"></textarea>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label for="textelibre">Motifs mission</label>
+                <textarea class="form-control" name="textelibre" id="textelibre" cols="60" rows="5" maxlength="480"></textarea>
+            </div>
         </div>
         <div class="row">
             <div class="form-group col-md-4">
@@ -186,12 +202,31 @@
                 <input class="form-control" name="dateDesordre" id="dateDesordre" type="text">
             </div>
         </div>
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label for="interlocuteur">A l'attention de</label>
+                <input class="form-control" name="interlocuteur" id="interlocuteur">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="dossier">Numéro de dossier</label>
+                <input class="form-control" name="dossier" id="dossier" type="text">
+            </div>
+            <div class="form-group col-lg-4">
+                <label for="pj">S'agit-il d'un Dossier PJ?</label>
+                <select class="form-control" name="pj" id="pj">
+                    <option value="oui">Oui</option>
+                    <option value="non">Non</option>
+                </select>
+            </div>
+        </div>
         <br/>
-        <div>
-            <input class="btn btn-primary btn-lg" type="submit">
+        <div class="row">
+            <div class="col-md-12">
+                <input class="btn btn-primary btn-lg" type="submit" style="width: 100%" value="Générer">
+            </div>
         </div>
     </form>
-
+    </div>
 </div>
 </body>
 </html>

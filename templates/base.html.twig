@@ -10,6 +10,8 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
               integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.3.0/paper.css">
+        <link rel="stylesheet" href="../node_modules/paper-css/paper.css">
 
     {% endblock %}
     {% block menu %}
@@ -33,11 +35,11 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ path('assistanceReception') }}">Clients pour assistance à réception</a>
-                            <a class="dropdown-item" href="{{ path('convocationClient') }}">Clients pour suivi affaire</a>
-                            <a class="dropdown-item" href="{{ path('convocationClient') }}">Tiers ou entrepruse pour suivi affaire</a>
-                            <a class="dropdown-item" href="{{ path('convEse1') }}">Expert Jud pour info intervention</a>
-                            <a class="dropdown-item" href="{{ path('convEse1') }}">Expert Jud pour Dire</a>
-                            <a class="dropdown-item" href="{{ path('convocationAssEse') }}">Assurance PJ pour activation dossier (lrar)</a>
+{#                            <a class="dropdown-item" href="{{ path('convEse1') }}">Expert Jud pour Dire</a>#}
+{#                            <a class="dropdown-item" href="{{ path('convocationClient') }}">Clients pour suivi affaire</a>#}
+{#                            <a class="dropdown-item" href="{{ path('convocationClient') }}">Tiers ou entrepruse pour suivi affaire</a>#}
+                            <a class="dropdown-item" href="{{ path('formJudInter') }}">Expert Jud pour info intervention</a>
+                            <a class="dropdown-item" href="{{ path('formCourrAct1') }}">Assurance PJ pour activation dossier (lrar)</a>
                             <a class="dropdown-item" href="{{ path('convocationAssClt') }}">Assurance pour déclaration de sinistre(lrar)</a>
                         </div>
                     </li>
@@ -59,7 +61,7 @@
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
             <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
             <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>
+
 
 </body>
 

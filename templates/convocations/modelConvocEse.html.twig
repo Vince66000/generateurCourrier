@@ -10,7 +10,7 @@
     #noms   {
         text-align: left;
         padding-left: 400px;
-        line-height: 1px;
+        line-height: normal;
         margin-bottom: 25px;
     }
 
@@ -19,10 +19,14 @@
         padding-left: 40px;
         height: 30px;
         width: 70%;
+        font-size: 80%;
     }
-    #date_exp, #adresse_exp, #dateDesordre, #natureDesordres {
+    #date_exp, #adresse_exp, #dateDesordre {
 
         text-align: center;
+    }
+    #natureDesordres {
+        text-align: left;
     }
     #corps_texte {
 
@@ -52,7 +56,7 @@
 
 </style>
 
-<page  backimg="http://localhost/gestionCourrier/public/fondReiserCopie3.jpeg" backbottom="10mm" backimgw="100%" backimgy="30px" backimgx="35px" style="size: A4">
+<page  backimg="../public/fondReiserCopie3.jpeg" backbottom="10mm" backimgw="100%" backimgy="30px" backimgx="35px" style="size: A4">
 
 
     <div id="cadre">
@@ -65,9 +69,12 @@
                 {% elseif expert == "TC" %}<p>Nice{% elseif expert == "OD" %}<p>Clermont-Ferrand{% elseif expert == "JD" %}<p>Nîmes{% elseif expert == "BE" %}
                 <p>Marseille{% elseif expert == "FM" %}<p>Lyon{% elseif expert == "LM" %}<p>Bordeaux{% elseif expert == "NU" %}<p>Toulon
                 {% endif %}, le {{ "now" | date("d/m/Y") }}</p>
-                <p>{{ nameSoc.nomSoc }}</p>
-                <p>{{ client.address }}</p>
-                <p>{{ client.zip }} {{ client.town }}</p>
+                <br/>
+                <p><b>{{ nameSoc.nomSoc }}
+                   <br/>
+                   {{ client.address }}
+                    <br/>
+                   {{ client.zip }} {{ client.town }}</b></p>
             </div>
             {% if client.address is empty %}
                 <div style="height: 50px; width: 100%; background-color: red; text-align: center">
@@ -90,8 +97,7 @@
                         <td>{{ vref }}</td>
                     </tr>
                 </table>
-                <p><u>A l'attention de {% if client.civility == 'MME' %}Madame{% elseif client.civility == 'MR' %}Monsieur
-                        {% else%} la société {% endif %} {{ client.firstname }} {{ client.lastname }} </u></p>
+                {% if interlocuteur is not empty %}<p><u>A l'attention de {{  interlocuteur }}  </u></p> {% endif %}
             </div>
             <div id="corps_texte">
                 {% if client.civility == 'MME' %}
@@ -101,24 +107,24 @@
                 {% else%}
                     Madame, Monsieur
                 {% endif %}
-                <p>Je vous informe que j’ai été saisi en qualité d’Expert en bâtiment par  {% if res.clientCiv == 'MME' %}
+                <p>Je vous informe que j’ai été saisi en qualité d’Expert en bâtiment par {% if pj is not empty %}
+                        la protection juridique {{ pj.nomPJ }} {% if dossier is not empty %}  dossier N°{{ dossier }} {%  endif %} pour le compte de {% endif %} {% if res.clientCiv == 'MME' %}
                         Madame
                     {% elseif res.clientCiv == 'MR' %}
                         Monsieur
                     {% else%}
                         La société
-                    {% endif %} {{ res.clientPrenom }} {{ res.clientNom }}, demeurant au {{ res.clientAdd }}
+                    {% endif %}  {{ res.clientNom  }} {{ res.clientPrenom | upper }}, demeurant au {{ res.clientAdd }}
                     {{ res.clientCP }} {{ res.clientVille }}, concernant des
                     désordres affectant le bien situé à l'adresse : {{ lieuxExp }}.</p>
 
                 {% if natureTrav is not empty %}
                     <p>Les désordres sont les suivants :</p>
-                    <p id="natureDesordres"><b>{{ natureTrav | nl2br  }}</b></p>
+                    <p id="natureDesordres">{{ natureTrav | nl2br  }}</p>
                 {% endif %}
 
                 {% if dateDesordre is not empty %}
-                    <p>La date d’apparition des désordres  est du :</p>
-                    <p id="dateDesordre"><b>{{ dateDesordre }}</b></p>
+                    <p>La date d’apparition des désordres  est du : {{ dateDesordre }}</p>
                 {% endif %}
 
                 <p>Afin donc de trouver une solution dans un cadre amiable à ce dossier, je vous indique que je procéderai à une réunion d’expertise contradictoire sur les lieux,</p>
@@ -126,16 +132,14 @@
                 <p id="adresse_exp"><b> {{ lieuxExp }},</b></p>
                 <p id="date_exp"><b>le {{ dateRdv | format_datetime('full', 'none', locale='fr') }} à {{ heureRdv }}</b></p>
 
-                <p>Réunion à laquelle il est impératif que vous participiez.</p>
-
+                <p>Réunion à laquelle il est impératif que vous participiez ou que vous soyez représenté.</p>
 
 
 
             </div>
             <div id="deuxième_page">
-                <p>Je vous demanderai de bien vouloir transmettre copie de la présente convocation à votre compagnie d’assurances afin qu’elle missionne son Expert et que nous puissions trouver une solution
-                    dans un cadre
-                    amiable à ce dossier.
+                <p>Je vous demanderai de bien vouloir transmettre copie de la présente convocation à votre compagnie d’assurances afin qu’elle missionne son Expert
+                    et que nous puissions trouver une solution dans un cadre amiable à ce dossier.
                 </p>
 
                 <p>Dans le cas où vous n'assisteriez pas ou que vous ne seriez pas
@@ -147,8 +151,8 @@
                     à cette réunion, vous vous exposeriez à ce que les
                     constatations matérielles et l'évaluation des dommages faites par les parties présentes vous soient reconnues opposables.</p>
 
-                <p>Nous vous remercions pour cette expertise de prendre en considération qu'il est indispensable d'appliquer les gestes barrières imposés concernant le COVID-19.
-                    En l'absence de respect des gestes barrières l'accès à l'expertise pourrait vous être refusé.</p>
+                <p>Nous vous remercions pour cette expertise de prendre en considération qu'il est indispensable d'appliquer les gestes barrières imposés concernant le COVID-19.</p>
+                <p>En l'absence de respect des gestes barrières l'accès à l'expertise pourrait vous être refusé.</p>
 
                 <p>Vous souhaitant bonne réception de cet envoi et comptant sur votre présence, je vous prie d’agréer,
                     {% if client.civility == 'MME' %}

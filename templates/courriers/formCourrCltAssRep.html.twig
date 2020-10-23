@@ -30,17 +30,7 @@
 
     </script>
 
-    <script>
-        ClassicEditor
-            .create( document.querySelector( '#editor' ) )
-            .then( editor => {
-                console.log( editor );
-            } )
-            .catch( error => {
-                console.error( error );
-            } );
 
-    </script>
 
 {% endblock %}
 
@@ -57,37 +47,37 @@
                     <input class="form-control" type="text" name="affaire" id="affaire" autocomplete="on" required>
                 </div>
             </div>
-            <div>
-                <label for="expert" >Expert</label>
-                <select class="form-control" name="expert" id="expert" required>
-                    <option selected value=""></option>
-                    <option value="GR">Geoffrey REISER</option>
-                    <option value="JLB">Jean-Luc BEDEL</option>
-                    <option value="SB">StÃ©phane BERTRAND</option>
-                    <option value="JC">JÃ©rÃ©my CAPDEVILLE</option>
-                    <option value="BCE">Bastien CARLES-ESPITAU</option>
-                    <option value="PEC">Pierre-Emmanuel CAU</option>
-                    <option value="MC">MickaÃ«l CHAUMONT</option>
-                    <option value="PC">Paul COLLINET</option>
-                    <option value="NC">Nicolas COMET</option>
-                    <option value="TC">Thierry COSTELLA</option>
-                    <option value="OD">Olivier DAVID</option>
-                    <option value="JD">JÃ©rÃ´me DECOR</option>
-                    <option value="BE">Ben EL ASSIOUI</option>
-                    <option value="FM">Florian MAILHE</option>
-                    <option value="LM">Laurent MONTARU</option>
-                    <option value="NU">Norbert URSO</option>
-                </select>
-            </div>
             <div class="row">
-                <label for="editor"></label>
-                <textarea name="desordres" id="editor" cols="30" rows="10"></textarea>
+                <div class="form-group col-md-12">
+                    <label for="expert" >Expert</label>
+                    <select class="form-control" name="expert" id="expert" required>
+                        <option selected value=""></option>
+                        <option value="GR">Geoffrey REISER</option>
+                        <option value="JLB">Jean-Luc BEDEL</option>
+                        <option value="SB">Stéphane BERTRAND</option>
+                        <option value="JC">Jérémy CAPDEVILLE</option>
+                        <option value="BCE">Bastien CARLES-ESPITAU</option>
+                        <option value="PEC">Pierre-Emmanuel CAU</option>
+                        <option value="MC">Mickaël CHAUMONT</option>
+                        <option value="PC">Paul COLLINET</option>
+                        <option value="NC">Nicolas COMET</option>
+                        <option value="TC">Thierry COSTELLA</option>
+                        <option value="OD">Olivier DAVID</option>
+                        <option value="JD">Jérôme DECOR</option>
+                        <option value="BE">Ben EL ASSIOUI</option>
+                        <option value="FM">Florian MAILHE</option>
+                        <option value="LM">Laurent MONTARU</option>
+                        <option value="NU">Norbert URSO</option>
+                    </select>
+                </div>
             </div>
+
             <br/>
             <div>
                 <input class="btn btn-primary btn-lg" type="submit">
             </div>
         </form>
+
 
     </div>
     </body>

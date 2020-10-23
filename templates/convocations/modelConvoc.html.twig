@@ -1,17 +1,20 @@
 <style type="text/css">
 
     #cadre {
-        margin: 5px;
-        padding: 5px;
-        height: 95%;
+
+        margin-top: 120px;
+        margin-right: 40px;
+
     }
 
     #noms   {
         text-align: left;
         padding-left: 400px;
-        margin-top: 100px;
-        line-height: 1px;
+        line-height: normal;
         margin-bottom: 25px;
+
+
+
     }
 
     #ref {
@@ -19,19 +22,21 @@
         padding-left: 40px;
         height: 30px;
         width: 60%;
+        font-size: 90%;
     }
     #date_exp, #adresse_exp {
 
         text-align: center;
     }
     #corps_texte {
-        margin-left: 180px;
-        margin-right: 40px;
+        margin-left: 120px;
+        margin-right: 1.5cm;
         margin-top: 30px;
         text-align: justify;
         line-height: 150%;
 
     }
+
     td {
         border: solid 1px black
     }
@@ -41,7 +46,7 @@
 <page  backimg="../public/fondReiserCopie3.jpeg" backbottom="10mm" backimgw="100%" backimgy="30px" backimgx="35px" style="size: A4">
     <div id="cadre">
 
-        <div >
+
             <div id="noms">
                 {% if expert == "GR" %}
                 <p>Elne
@@ -76,9 +81,12 @@
                     {% elseif expert == "NU" %}
                 <p>Toulon
                     {% endif %}, le {{ "now" | date("d/m/Y") }}</p>
-                <p>{{ societe.firstname }} {{ societe.lastname }}</p>
-                <p>{{ societe.address }}</p>
-                <p>{{ societe.zip }} {{ societe.town }}</p>
+                <br/>
+                <p><b>{{ societe.firstname }} {{ societe.lastname | upper }}
+                <br/>
+                {{ societe.address|nl2br }}
+                <br/>
+                {{ societe.zip }} {{ societe.town }}</b></p>
             </div>
             {% if societe.address is empty %}
                 <div style="height: 50px; width: 100%; background-color: red; text-align: center">
@@ -99,40 +107,35 @@
 
             </div>
             <div id="corps_texte">
-                {% if civ == "F" %}
+                {% if societe.civility == "MME" %}
                     <p>Chère Madame,</p>
-                {% elseif civ == "H" %}
+                {% elseif societe.civility == "MR" %}
                     <p>Cher Monsieur,</p>
-                {% elseif civ == "S" %}
+                {% else %}
                     <p>Chère Madame, Cher Monsieur,</p>
                 {% endif %}
                 <p>Je reviens vers vous concernant votre dossier et, pour faire suite à la mission que vous m'avez confiée,
                     vous remercie de prendre note que je procèderai à une réunion d'expertise contradictoire sur les lieux,</p>
-                <p id="adresse_exp"><b> {{ lieuxexp }},</b></p>
+                <p id="adresse_exp"><b> {{ lieuxexp~',' }}</b></p>
                 <p id="date_exp"><b>le {{ dateRdv | format_datetime('full', 'none', locale='fr') }} à {{ heureRdv }}</b></p>
-                <p>Réunion à laquelle je vous remercie de bien vouloir être présent{% if civ=="F" %}e{% endif %}.</p>
-                {% if textelibre is not empty %}
-                    <p><b>Pour rappel voici les motifs de ma mission :</b></p>
-                    <p>{{ textelibre }}</p>
-                {% endif %}
-
-                <p>Nous vous remercions pour cette expertise de prendre en considération qu'il est indispensable d'appliquer les gestes barrières imposés concernant le COVID-19.
-
-                    En l'absence de respect des gestes barrières l'accès à l'expertise pourrait vous être refusé.</p>
-
-                <p>Vous souhaitant bonne réception de cet envoi, je vous prie d'agréer,</p>
-                {% if civ == "F" %} Chère Madame,
-                {% elseif  civ == "H" %}Cher Monsieur,
-                {%  elseif civ == "S" %} Chère Madame, Cher Monsieur,
-                {% endif %} l'expression de mes sentiments dévoués.
+                <p>Réunion à laquelle je vous remercie de bien vouloir être présent{% if societe.civility == "MME" %}e{% endif %}.</p>
+                <p>Vous souhaitant bonne réception de cet envoi, je vous prie d'agréer,
+                {% if societe.civility == "MME" %}
+                    Chère Madame,
+                {% elseif societe.civility == "MR" %}
+                    Cher Monsieur,
+                {% else %}
+                    Chère Madame, Cher Monsieur,
+                    {% endif %} l'expression de mes sentiments dévoués.</p>
             </div>
+
             <div style="padding-left: 400px; margin-top: 40px">
                 <img id="signature" src='../public/signature{{ expert }}.png' alt="signature">
 
             </div>
         </div>
-
-        {#  Ai adaptÃ© une faÃ§on de changer le footer. mÃ©thode pas top. Ã  changer dÃ©s que possible #}
+    <page_footer  style="size: A4">
+        {#  Ai adapté une façon de changer le footer. méthode pas top. à changer dés que possible #}
         <div style="text-align: center; font-size: x-small; width: 100%; height: 30px;  line-height: 1px; color: gray; margin-bottom: 10px" >
             {% if expert == "GR" %}
                 <p>Siège social et pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
@@ -212,7 +215,6 @@
                 <p>siret : 84893567700010 code NAF-APE : 7112B TVA: FR75884935677  </p>
             {% endif %}
         </div>
-
-    </div>
+    </page_footer>
 </page>
 
