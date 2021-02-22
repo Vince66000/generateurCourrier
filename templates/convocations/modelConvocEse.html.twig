@@ -49,6 +49,14 @@
         /*background-color: red;*/
 
     }
+    #pj {
+        margin-top: 20px;
+        margin-left: 180px;
+        margin-right: 40px;
+        text-align: justify;
+        page-break-after: avoid;
+
+    }
     td {
         border: solid 1px black
     }
@@ -63,12 +71,15 @@
 
         <div >
             <div id="noms">
-                 {% if expert == "GR" %}<p>Elne{% elseif expert == "JC" %}<p>Narbonne{% elseif expert == "JLB" %}<p>Toulouse
-                {% elseif expert == "SB" %}<p>Foix{% elseif expert == "BCE" %}<p>La Rochelle{% elseif expert == "PEC" %}<p>Montpellier
-                {% elseif expert == "MC" %}<p>Poitiers{% elseif expert == "PC" %}<p>Avignon{% elseif expert == "NC" %}<p>Pau
-                {% elseif expert == "TC" %}<p>Nice{% elseif expert == "OD" %}<p>Clermont-Ferrand{% elseif expert == "JD" %}<p>Nîmes{% elseif expert == "BE" %}
-                <p>Marseille{% elseif expert == "FM" %}<p>Lyon{% elseif expert == "LM" %}<p>Bordeaux{% elseif expert == "NU" %}<p>Toulon
-                {% endif %}, le {{ "now" | date("d/m/Y") }}</p>
+                 {% if expert == "GR" %}
+                <p>Elne,
+                {% elseif expert == "JC" %}<p>Narbonne,{% elseif expert == "JLB" %}<p>Toulouse,
+                {% elseif expert == "SB" %}<p>Foix,{% elseif expert == "BCE" %}<p>La Rochelle,{% elseif expert == "PEC" %}<p>Montpellier,
+                {% elseif expert == "MC" %}<p>Poitiers,{% elseif expert == "PC" %}<p>Avignon,{% elseif expert == "NC" %}<p>Pau,
+                {% elseif expert == "TC" %}<p>Nice,{% elseif expert == "OD" %}<p>Clermont-Ferrand,{% elseif expert == "JD" %}<p>Nîmes,{% elseif expert == "BE" %}
+                <p>Marseille,{% elseif expert == "FM" %}<p>Lyon,{% elseif expert == "LM" %}<p>Bordeaux,{% elseif expert == "AG" %}
+                <p>Le Mans,
+                {% endif %} le {{ "now" | date("d/m/Y") }}</p>
                 <br/>
                 <p><b>{{ nameSoc.nomSoc }}
                    <br/>
@@ -82,7 +93,11 @@
                 </div>
             {% endif %}
             <div id="ref">
+                {% if numReco is not empty %}
                 <p style="color:red">Lettre Recommandée avec Accusé de Réception {{ numReco }}</p>
+                {% elseif courriel is not empty %}
+                <p style="color:red">Courriel à {{ courriel }}</p>
+                {% endif %}
                 <table   style="border-collapse: collapse">
                     <tr>
                         <td><b>N/RÉF :</b></td>
@@ -100,27 +115,29 @@
                 {% if interlocuteur is not empty %}<p><u>A l'attention de {{  interlocuteur }}  </u></p> {% endif %}
             </div>
             <div id="corps_texte">
-                {% if client.civility == 'MME' %}
+                {% if client.civility == "MME" %}
                     Madame,
-                {% elseif client.civility == 'MR' %}
+                {% elseif client.civility == "MR" %}
                     Monsieur,
                 {% else%}
                     Madame, Monsieur
                 {% endif %}
                 <p>Je vous informe que j’ai été saisi en qualité d’Expert en bâtiment par {% if pj is not empty %}
-                        la protection juridique {{ pj.nomPJ }} {% if dossier is not empty %}  dossier N°{{ dossier }} {%  endif %} pour le compte de {% endif %} {% if res.clientCiv == 'MME' %}
+                        la protection juridique {{ pj.nomPJ | trim }}, {% if dossier is not empty %}  dossier n°{{ dossier | trim }}, {%  endif %} pour le compte de {% endif %} {% if res.clientCiv == "MME" %}
                         Madame
-                    {% elseif res.clientCiv == 'MR' %}
+                    {% elseif res.clientCiv == "MR" %}
                         Monsieur
-                    {% else%}
-                        La société
+                    {% elseif res.clientCiv == "Mme, M"%}
+                        Madame et Monsieur
+                    {% elseif res.clientCiv == "SOC"%}
+                        la société
                     {% endif %}  {{ res.clientNom  }} {{ res.clientPrenom | upper }}, demeurant au {{ res.clientAdd }}
                     {{ res.clientCP }} {{ res.clientVille }}, concernant des
-                    désordres affectant le bien situé à l'adresse : {{ lieuxExp }}.</p>
+                    désordres affectant le bien situé à l'adresse : {{ lieuxExp | trim }}.</p>
 
                 {% if natureTrav is not empty %}
-                    <p>Les désordres sont les suivants :</p>
-                    <p id="natureDesordres">{{ natureTrav | nl2br  }}</p>
+                    <p>Les désordres allégués sont les suivants :</p>
+                    <p id="natureDesordres"><b>{{ natureTrav | nl2br  }}</b></p>
                 {% endif %}
 
                 {% if dateDesordre is not empty %}
@@ -129,12 +146,17 @@
 
                 <p>Afin donc de trouver une solution dans un cadre amiable à ce dossier, je vous indique que je procéderai à une réunion d’expertise contradictoire sur les lieux,</p>
 
-                <p id="adresse_exp"><b> {{ lieuxExp }},</b></p>
+                <p id="adresse_exp"><b> {{ lieuxExp | trim}},</b></p>
                 <p id="date_exp"><b>le {{ dateRdv | format_datetime('full', 'none', locale='fr') }} à {{ heureRdv }}</b></p>
 
-                <p>Réunion à laquelle il est impératif que vous participiez ou que vous soyez représenté.</p>
-
-
+                <p>Réunion à laquelle il est impératif que vous participiez ou que vous soyez
+                {% if client.civility == 'MME' %}
+                    représentée.
+                {% elseif client.civility == 'MR' %}
+                    représenté.
+                {% else %}
+                    représentés.
+                {% endif %}</p>
 
             </div>
             <div id="deuxième_page">
@@ -147,6 +169,8 @@
                         représentée
                     {% elseif client.civility == 'MR' %}
                         représenté
+                    {% else %}
+                        représentés
                     {% endif %}
                     à cette réunion, vous vous exposeriez à ce que les
                     constatations matérielles et l'évaluation des dommages faites par les parties présentes vous soient reconnues opposables.</p>
@@ -155,9 +179,9 @@
                 <p>En l'absence de respect des gestes barrières l'accès à l'expertise pourrait vous être refusé.</p>
 
                 <p>Vous souhaitant bonne réception de cet envoi et comptant sur votre présence, je vous prie d’agréer,
-                    {% if client.civility == 'MME' %}
+                    {% if client.civility == "MME" %}
                         Madame,
-                    {% elseif client.civility == 'MR' %}
+                    {% elseif client.civility == "MR" %}
                         Monsieur,
                     {% else %}
                         Madame, Monsieur,
@@ -169,11 +193,17 @@
             <div style="padding-left: 400px; margin-top: 20px; margin-bottom: 0; position: relative">
                 <img id="signature" src='../public/signature{{ expert }}.png' alt="signature">
             </div>
+            {% if pjointe is not empty %}
+                <div id="pj">
+                    <p><u>Liste des pièces jointes</u></p>
+                    <p>{{ pjointe | nl2br }}</p>
+                </div>
+            {% endif %}
         </div>
 
     </div>
 
-    <page_footer  style="size: A4">
+    <page_footer>
         {#  Ai adapté une façon de changer le footer. méthode pas top. à changer dés que possible #}
         <div style="text-align: center; font-size: x-small; width: 100%; height: 30px;  line-height: 1px; color: gray; margin-bottom: 10px" >
             {% if expert == "GR" %}
@@ -182,8 +212,7 @@
                 <p>siret : 535 111 678 00012 code NAF-APE : 7490A TVA: FR81535111678</p>
             {% elseif expert == "JC" %}
                 <p>Siège social : ZAC Croix sud 55 rue Joseph Cugnot - 11000 NARBONNE</p>
-                <p>Pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
-                <p>mail : contact@assistance-expertise-batiment.com</p>
+                <p>Pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 - mail : contact@assistance-expertise-batiment.com</p>
                 <p>siret : 833 707 771 000 22 code NAF-APE : 7120B TVA: FR53833707771 </p>
             {% elseif expert == "JLB" %}
                 <p>Siège social : 22 Rue de la gaieté - 31400 TOULOUSE</p>
@@ -247,11 +276,11 @@
                 <p>Pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
                 <p>mail : contact@assistance-expertise-batiment.com</p>
                 <p>siret : 852 551 746 000 13 code NAF-APE : 7120B TVA: FR87852551746  </p>
-            {% elseif expert == "NU" %}
-                <p>Siège social : Espace Carousel 5B rue Picot le Carousel - 83000 Toulon  </p>
+            {% elseif expert == "AG" %}
+                <p>Siège social : 26 Avenue Henri Lefeuvre - 72100 LE MANS</p>
                 <p>Pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
                 <p>mail : contact@assistance-expertise-batiment.com</p>
-                <p>siret : 84893567700010 code NAF-APE : 7112B TVA: FR75884935677  </p>
+                <p>siret : 890 026 461 00016 code NAF-APE : 7120B TVA: FR68890026461 </p>
             {% endif %}
         </div>
     </page_footer>

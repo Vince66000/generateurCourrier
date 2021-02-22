@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container" >
+        <h1 style="text-align: center">Générateur de feuille d'émargement </h1>
+        <h4 style="text-align: center">Entrez le numéro d'affaire </h4>
+        <br/>
+        <div class="row justify-content-center" style="margin-left: auto; margin-right: auto">
+            <form class="col-md-10" action="{{ path('emargement2') }}" method="post">
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="affaire">Numéro affaire</label>
+                        <input class="form-control" id="affaire" name="affaire" type="text">
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <input class="btn btn-primary" style="width: 100%" type="submit" value="Suivant">
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+{% endblock %}

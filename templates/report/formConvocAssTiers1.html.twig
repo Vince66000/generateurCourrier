@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <h1 style="text-align: center">Généracteur de convocations pour assurances d'Entreprises </h1>
+        <br/>
+        <h2 style="text-align: center; color:red; text-decoration: blink">Entrez le numéro d'affaire pour retrouver la ou les assurances(s) qui y sont liés</h2>
+        <br/>
+        <div class="row justify-content-center" style="margin-right: auto; margin-left: auto">
+        <form class="form-group col-md-12 " action="{{ path('report/AssEse2') }}" method="post">
+
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="refAffaire">Numéro affaire</label>
+                    <input class="form-control" id="refAffaire" name="refAffaire" type="text">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-12">
+                    <input style="width: 100%" class="btn btn-primary" type="submit" value="Suivant">
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>
+{% endblock %}

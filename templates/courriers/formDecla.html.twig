@@ -1,0 +1,170 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/public/CSS/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>
+    <script>
+        $( function() {
+
+            $( "#droc" ).datepicker({
+                firstDay: 1,
+                closeText: 'Fermer',
+                prevText: 'PrÃ©cÃ©dent',
+                nextText: 'Suivant',
+                currentText: 'Aujourd\'hui',
+                monthNames: ['Janvier', 'FÃ©vrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'AoÃ»t', 'Septembre', 'Octobre', 'Novembre', 'DÃ©cembre'],
+                monthNamesShort: ['Janv.', 'FÃ©vr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'AoÃ»t', 'Sept.', 'Oct.', 'Nov.', 'DÃ©c.'],
+                dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+                dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+                dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+                weekHeader: 'Sem.',
+                dateFormat: 'dd-mm-yy'
+            });
+        });
+
+        $( function() {
+
+            $( "#dat" ).datepicker({
+                firstDay: 1,
+                closeText: 'Fermer',
+                prevText: 'PrÃ©cÃ©dent',
+                nextText: 'Suivant',
+                currentText: 'Aujourd\'hui',
+                monthNames: ['Janvier', 'FÃ©vrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'AoÃ»t', 'Septembre', 'Octobre', 'Novembre', 'DÃ©cembre'],
+                monthNamesShort: ['Janv.', 'FÃ©vr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'AoÃ»t', 'Sept.', 'Oct.', 'Nov.', 'DÃ©c.'],
+                dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+                dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+                dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+                weekHeader: 'Sem.',
+                dateFormat: 'dd-mm-yy'
+            });
+        });
+
+
+    </script>
+
+
+
+{% endblock %}
+
+{% block body %}
+    <body>
+
+    <div class="container">
+        <h1 style="text-align: center">Courrier de déclaration de sinistre</h1>
+        <form class="col-md-12"  action="{{ path('getModelDecla')}}" method="post" style="margin-left: auto; margin-right: auto">
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="affaire">Choisissez une affaire</label>
+                    <input class="form-control" type="text" name="affaire" id="affaire" autocomplete="on" value="{{ affaire | trim( '%') }}" readonly>
+                </div>
+                <div class="form-group col-lg">
+                    <label for="steAss">Choisissez un contact</label>
+                    <select class="form-control" name="steAss" id="steAss">
+                        {% for contact in res  %}
+                        <option value="{{ contact.firstname ~" " ~ contact.lastname ~ " " ~ contact.libelle  }}">
+                            {{ contact.firstname ~" " ~ contact.lastname ~ " " ~ contact.libelle  }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="expert" >Expert</label>
+                    <select class="form-control" name="expert" id="expert" required>
+                        <option selected value=""></option>
+                        <option value="GR">Geoffrey REISER</option>
+                        <option value="JLB">Jean-Luc BEDEL</option>
+                        <option value="SB">Stéphane BERTRAND</option>
+                        <option value="JC">Jérémy CAPDEVILLE</option>
+                        <option value="BCE">Bastien CARLES-ESPITAU</option>
+                        <option value="PEC">Pierre-Emmanuel CAU</option>
+                        <option value="MC">Mickaël CHAUMONT</option>
+                        <option value="PC">Paul COLLINET</option>
+                        <option value="NC">Nicolas COMET</option>
+                        <option value="TC">Thierry COSTELLA</option>
+                        <option value="OD">Olivier DAVID</option>
+                        <option value="JD">Jérôme DECOR</option>
+                        <option value="BE">Ben EL ASSIOUI</option>
+                        <option value="FM">Florian MAILHE</option>
+                        <option value="LM">Laurent MONTARU</option>
+                        <option value="AG">Alexandre GILBERT</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="texteLibre">Désordres constatés</label>
+                    <textarea class="form-control" type="text" name="texteLibre" id="texteLibre"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label for="droc">Date de DROC</label>
+                    <input class="form-control" type="text" name="droc" id="droc" required autocomplete="off">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="dat">Date de DAT</label>
+                    <input class="form-control" type="text" name="dat" id="dat" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="vref">V/ref</label>
+                    <input class="form-control" type="text" name="vref" id="vref" required >
+                </div>
+            </div>
+            <fieldset style="border: 2px black solid; padding: 15px">
+                <legend>Traçage</legend>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="numReco">Numéro recommandé</label>
+                        <input class="form-control" name="numReco" id="numReco">
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label for="">ou</label>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="courriel">Courriel</label>
+                        <input class="form-control" name="courriel" id="courriel">
+                    </div>
+                </div>
+            </fieldset>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="saisieEntreprise">Entrez l'entreprise</label>
+                    <input class="form-control" type="text" name="saisieEntreprise" id="saisieEntreprise">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="assurance">Type assurance</label>
+                    <select class="form-control" name="assurance" id="assurance">
+                        <option value="DO">Dommage Ouvrage</option>
+                        <option value="AE">Assurance Entreprise</option>
+                    </select>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="form-group col-lg-12">
+                    <label for="pieceJointe">Pièce(s) jointe(s) ( 3 MAXIMUM, sinon, tout sur une ligne.)</label>
+                    <textarea class="form-control" name="pieceJointe" id="pieceJointe" type="text"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <input style="width: 100%" class="btn btn-primary btn-lg" type="submit">
+                </div>
+            </div>
+        </form>
+
+
+    </div>
+    </body>
+    </html>
+{% endblock %}
+
+
+

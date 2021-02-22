@@ -16,8 +16,8 @@
                 prevText: 'PrÃ©cÃ©dent',
                 nextText: 'Suivant',
                 currentText: 'Aujourd\'hui',
-                monthNames: ['Janvier', 'FÃ©vrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'AoÃ»t', 'Septembre', 'Octobre', 'Novembre', 'DÃ©cembre'],
-                monthNamesShort: ['Janv.', 'FÃ©vr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'AoÃ»t', 'Sept.', 'Oct.', 'Nov.', 'DÃ©c.'],
+                monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
                 dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
                 dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
                 dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
@@ -40,19 +40,26 @@
         <div class="row justify-content-center" >
 
 
-            <form class="col-md-12"  action="{{ path('generateConvClt')}}" method="post">
+            <form class="col-md-12"  action="{{ path('genConvAssClt')}}" method="post">
                 <div class="row">
                     <div class="form-group col-md-12">
-                        <label for="affaire">Choisissez une affaire</label>
-                        <input class="form-control" type="text" name="affaire" id="affaire" autocomplete="on" required>
+                        <label for="assurance">Assurance</label>
+                        <select class="form-control" name="assurance" id="assurance">
+                            {% for assurance in ass %}
+                                <option value="{{assurance.libelle }}">{{ assurance.libelle ~ " " ~ assurance.firstname ~ " " ~ assurance.lastname }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div>
+                        <input type="text" value="{{ affaire }}" name="affaire" id="affaire" hidden>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-6">
                         <label for="datepicker" > Date RDV</label>
                         <input class="form-control" type="text" id="datepicker" name="datepicker" autocomplete="off" required>
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-6">
                         <label for="timepicker">Heure RDV</label>
                         <select class="form-control" name="timepicker" id="timepicker" required>
                             <option selected value=""></option>
@@ -103,11 +110,23 @@
                             <option value="19h00">19h00</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-4">
-                        <label for="numReco">Numéro recommandé</label>
-                        <input class="form-control" name="numReco" id="numReco" type="text">
-                    </div>
                 </div>
+                <fieldset style="border: 2px black solid; padding: 15px">
+                    <legend>Traçage</legend>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="numReco">Numéro recommandé</label>
+                            <input class="form-control" name="numReco" id="numReco">
+                        </div>
+                        <div class="form-group col-md-1">
+                            <label for="">ou</label>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="courriel">Courriel</label>
+                            <input class="form-control" name="courriel" id="courriel">
+                        </div>
+                    </div>
+                </fieldset>
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label for="expert" >Expert</label>
@@ -126,9 +145,10 @@
                             <option value="OD">Olivier DAVID</option>
                             <option value="JD">Jérôme DECOR</option>
                             <option value="BE">Ben EL ASSIOUI</option>
+                            <option value="AG">Alexandre GILBERT</option>
                             <option value="FM">Florian MAILHE</option>
                             <option value="LM">Laurent MONTARU</option>
-                            <option value="NU">Norbert URSO</option>
+
                         </select>
                     </div>
                 </div>
@@ -154,17 +174,17 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-4">
-                        <label for="numReco">Numéro de recommandé</label>
-                        <input class="form-control" name="numReco" id="numReco" type="text">
+                        <label for="pieceJointe">Pièce(s) jointe(s)</label>
+                        <textarea class="form-control" name="pieceJointe" id="pieceJointe" type="text"></textarea>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="interlocuteur">A l'attention de</label>
                         <input class="form-control" name="interlocuteur" id="interlocuteur">
                     </div>
-{#                    <div class="form-group col-md-4">#}
-{#                        <label for="montTrav">Montant déjà pris en charge </label>#}
-{#                        <input class="form-control" name="montTrav" id="montTrav" type="text">#}
-{#                    </div>#}
+                    <div class="form-group col-md-4">
+                        <label for="pj">Nom PJ et Numéro de dossier (n° XXXX) </label>
+                        <input class="form-control" name="pj" id="pj" type="text">
+                    </div>
                 </div>
                 <br/>
                 <div>

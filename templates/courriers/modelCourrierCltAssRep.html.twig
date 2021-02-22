@@ -11,7 +11,7 @@
         text-align: left;
         padding-left: 400px;
         margin-top: 100px;
-        line-height: 1px;
+        line-height: normal;
         margin-bottom: 25px;
     }
 
@@ -20,6 +20,7 @@
         padding-left: 10px;
         height: 30px;
         width: 60%;
+        font-size: 90%;
     }
     #date_exp, #adresse_exp {
 
@@ -36,10 +37,17 @@
     td {
         border: solid 1px black
     }
+    #pj {
+        margin-top: 20px;
+        margin-left: 180px;
+        margin-right: 40px;
+        text-align: justify;
+        page-break-after: avoid;
 
+    }
 
 </style>
-<page  backimg="http://localhost/gestionCourrier/public/fondReiserCopie2.jpeg"  backimgw="100%" backimgy="30px" backimgx="35px" style="size: A4;">
+<page  backimg="../public/fondReiserCopie2.jpeg"  backimgw="100%" backimgy="30px" backimgx="35px" style="size: A4;">
     <div id="cadre">
 
         <div >
@@ -48,11 +56,13 @@
                 {% elseif expert == "SB" %}<p>Foix{% elseif expert == "BCE" %}<p>La Rochelle{% elseif expert == "PEC" %}<p>Montpellier
                 {% elseif expert == "MC" %}<p>Poitiers{% elseif expert == "PC" %}<p>Avignon{% elseif expert == "NC" %}<p>Pau
                 {% elseif expert == "TC" %}<p>Nice{% elseif expert == "OD" %}<p>Clermont-Ferrand{% elseif expert == "JD" %}<p>Nîmes{% elseif expert == "BE" %}
-                <p>Marseille{% elseif expert == "FM" %}<p>Lyon{% elseif expert == "LM" %}<p>Bordeaux{% elseif expert == "NU" %}<p>Toulon
+                <p>Marseille{% elseif expert == "FM" %}<p>Lyon{% elseif expert == "LM" %}<p>Bordeaux{% elseif expert == "AG" %}<p>Le Mans
                     {% endif %}, le {{ "now" | date("d/m/Y") }}</p>
-                <p>{% if client.civility is not empty%} {{ client.civility}} {% endif %} {{ client.firstname }} {{ client.lastname }}</p>
-                <p>{{ client.address }}</p>
-                <p>{{ client.zip }} {{ client.town }}</p>
+                <p><b>{% if client.civility == "MR" %}Monsieur {% elseif client.civility == "MME" %}Madame {% endif %}
+                        {{ client.firstname }} {{ client.lastname |upper }}
+                        <br/>
+                {{ client.address | nl2br }} <br/>
+                {{ client.zip }} {{ client.town }}</b></p>
             </div>
             {% if client.address is empty %}
                 <div style="height: 50px; width: 100%; background-color: red; text-align: center">
@@ -96,6 +106,12 @@
                 <img id="signature" src='../public/signature{{ expert }}.png' alt="signature">
 
             </div>
+            {% if pjointe is not empty %}
+                <div id="pj">
+                    <p><u>Liste des pièces jointes</u></p>
+                    <p>{{ pjointe | nl2br }}</p>
+                </div>
+            {% endif %}
         </div>
 
         {#  Ai adapté une façon de changer le footer. méthode pas top. à changer dés que possible #}
@@ -169,11 +185,10 @@
                 <p>Pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
                 <p>mail : contact@assistance-expertise-batiment.com</p>
                 <p>siret : 852 551 746 000 13 code NAF-APE : 7120B TVA: FR87852551746  </p>
-            {% elseif expert == "NU" %}
-                <p>Siège social : Espace Carousel 5B rue Picot le Carousel - 83000 Toulon  </p>
-                <p>Pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
+            {% elseif expert == "AG" %}
+                <p>Siège social et pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
                 <p>mail : contact@assistance-expertise-batiment.com</p>
-                <p>siret : 84893567700010 code NAF-APE : 7112B TVA: FR75884935677  </p>
+                <p>siret : 535 111 678 00012 code NAF-APE : 7490A TVA: FR81535111678</p>
             {% endif %}
         </div>
 

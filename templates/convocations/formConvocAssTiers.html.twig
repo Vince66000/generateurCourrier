@@ -82,7 +82,7 @@
                 <label for="entreprise">Entreprise</label>
                 <select class="form-control" name="entreprise" id="entreprise">
                     {% for entreprise in ese %}
-                        <option value="{{entreprise.rowid }}">{{ entreprise.firstname ~ " " ~ entreprise.lastname ~ " " ~  entreprise.libelle}}</option>
+                        <option value="{{entreprise.libelle }}">{{ entreprise.libelle ~ " " ~ entreprise.firstname ~ " " ~ entreprise.lastname }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -90,8 +90,7 @@
                 <label for="assurance">Assurance</label>
                 <select class="form-control" name="assurance" id="assurance">
                     {% for assurance in ass %}
-                        <option value="{{assurance.rowid }}">
-                            {{ assurance.firstname ~ " " ~ assurance.lastname ~ " " ~  assurance.libelle}}</option>
+                        <option value="{{assurance.libelle }}">{{ assurance.libelle ~ " " ~ assurance.firstname ~ " " ~ assurance.lastname }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -175,12 +174,12 @@
                     <option value="OD">Olivier DAVID</option>
                     <option value="JD">Jérôme DECOR</option>
                     <option value="BE">Ben EL ASSIOUI</option>
+                    <option value="AG">Alexandre GILBERT</option>
                     <option value="FM">Florian MAILHE</option>
                     <option value="LM">Laurent MONTARU</option>
-                    <option value="NU">Norbert URSO</option>
+
                 </select>
             </div>
-
         </div>
         <div class="row">
             <div class="form-group col-md-12">
@@ -189,19 +188,31 @@
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-4">
-                <label for="numReco">Numéro recommandé</label>
-                <input class="form-control" name="numReco" id="numReco">
-            </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-6">
                 <label for="vref">v/ref</label>
                 <input class="form-control" name="vref" id="vref" type="text">
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-6">
                 <label for="dateDesordre">Date des désordres</label>
                 <input class="form-control" name="dateDesordre" id="dateDesordre" type="text">
             </div>
         </div>
+        <fieldset style="border: 2px black solid; padding: 15px">
+            <legend>Traçage</legend>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="numReco">Numéro recommandé</label>
+                    <input class="form-control" name="numReco" id="numReco">
+                </div>
+                <div class="form-group col-md-1">
+                    <label for="">ou</label>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="courriel">Courriel</label>
+                    <input class="form-control" name="courriel" id="courriel">
+                </div>
+            </div>
+        </fieldset>
         <div class="row">
             <div class="form-group col-md-4">
                 <label for="interlocuteur">A l'attention de</label>
@@ -217,6 +228,12 @@
                     <option value="oui">Oui</option>
                     <option value="non">Non</option>
                 </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-lg-12">
+                <label for="pieceJointe">Pièce(s) jointe(s) ( 3 MAXIMUM, sinon, tout sur une ligne.)</label>
+                <textarea class="form-control" name="pieceJointe" id="pieceJointe" type="text"></textarea>
             </div>
         </div>
         <br/>

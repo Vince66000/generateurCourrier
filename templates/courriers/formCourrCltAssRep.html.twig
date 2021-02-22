@@ -40,7 +40,7 @@
     <div class="container">
         <h1 style="text-align: center">Courrier à client pour assistance à réception</h1>
         <h2 style="text-align: center; color: red;"> Attention! soyez sur(e) d'avoir bien renseigné le contact "Entreprise" </h2>
-        <form class="col-md-10"  action="{{ path('generateCourrAssRec')}}" method="post">
+        <form class="col-md-12"  action="{{ path('generateCourrAssRec')}}" method="post" style="margin-right: auto; margin-left: auto">
             <div class="row">
                 <div class="form-group col-lg">
                     <label for="affaire">Choisissez une affaire</label>
@@ -67,14 +67,21 @@
                         <option value="BE">Ben EL ASSIOUI</option>
                         <option value="FM">Florian MAILHE</option>
                         <option value="LM">Laurent MONTARU</option>
-                        <option value="NU">Norbert URSO</option>
+                        <option value="AG">Alexandre GILBERT</option>
                     </select>
                 </div>
             </div>
-
+            <div class="row">
+                <div class="form-group col-lg-12">
+                    <label for="pieceJointe">Pièce(s) jointe(s) ( 3 MAXIMUM, sinon, tout sur une ligne.)</label>
+                    <textarea class="form-control" name="pieceJointe" id="pieceJointe" type="text"></textarea>
+                </div>
+            </div>
             <br/>
-            <div>
-                <input class="btn btn-primary btn-lg" type="submit">
+            <div class="row">
+                <div class="col-md-12">
+                    <input class="btn btn-primary btn-lg" type="submit" style="width: 100%">
+                </div>
             </div>
         </form>
 

@@ -27,6 +27,8 @@
                             <a class="dropdown-item" href="{{ path('convEse1') }}">Entreprises tierces (lrar)</a>
                             <a class="dropdown-item" href="{{ path('convocationAssEse') }}">Assurance Entreprise (lrar)</a>
                             <a class="dropdown-item" href="{{ path('convocationAssClt') }}">Assurance Client (lrar)</a>
+                            <a class="dropdown-item" href="{{ path('convocationLocataire') }}">Locataire non mis en cause</a>
+
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -35,13 +37,27 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ path('assistanceReception') }}">Clients pour assistance à réception</a>
-{#                            <a class="dropdown-item" href="{{ path('convEse1') }}">Expert Jud pour Dire</a>#}
-{#                            <a class="dropdown-item" href="{{ path('convocationClient') }}">Clients pour suivi affaire</a>#}
-{#                            <a class="dropdown-item" href="{{ path('convocationClient') }}">Tiers ou entrepruse pour suivi affaire</a>#}
                             <a class="dropdown-item" href="{{ path('formJudInter') }}">Expert Jud pour info intervention</a>
                             <a class="dropdown-item" href="{{ path('formCourrAct1') }}">Assurance PJ pour activation dossier (lrar)</a>
-                            <a class="dropdown-item" href="{{ path('convocationAssClt') }}">Assurance pour déclaration de sinistre(lrar)</a>
+                            <a class="dropdown-item" href="{{ path('getFormDecla1') }}">Assurance pour déclaration de sinistre(lrar)</a>
                         </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Reports
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ path('report/client') }}">Clients</a>
+                            <a class="dropdown-item" href="{{ path('report/convEse1') }}">Entreprises tierces</a>
+                            <a class="dropdown-item" href="{{ path('report/AssEse') }}">Assurance Entreprise</a>
+                            <a class="dropdown-item" href="{{ path('report/convocationAssClt') }}">Assurance Client</a>
+                            <a class="dropdown-item" href="{{ path('report/Expert1') }}">Expert</a>
+                            <a class="dropdown-item" href="{{ path('report/Locataire') }}">Locataire non mis en cause</a>
+
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ path('emargement1') }}" class="nav-link">Feuille de présence</a>
                     </li>
                 </ul>
             </div>

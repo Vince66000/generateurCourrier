@@ -1,7 +1,7 @@
 <style type="text/css">
 
     #cadre {
-        border: 1px solid #1b1b1b;
+        /*border: 1px solid #1b1b1b;*/
         margin: 5px;
         padding: 5px;
         height: 95%;
@@ -11,7 +11,7 @@
         text-align: left;
         padding-left: 400px;
         margin-top: 100px;
-        line-height: 1px;
+        line-height: normal;
         margin-bottom: 25px;
     }
 
@@ -20,6 +20,7 @@
         padding-left: 10px;
         height: 30px;
         width: 60%;
+        font-size: 90%;
     }
     #date_exp, #adresse_exp {
 
@@ -39,7 +40,7 @@
 
 
 </style>
-<page  backimg="http://localhost/gestionCourrier/public/fondReiserCopie2.jpeg"  backimgw="100%" backimgy="30px" backimgx="35px" style="size: A4;">
+<page  backimg="../public/fondReiserCopie3.jpeg"  backimgw="100%" backimgy="30px" backimgx="35px" style="size: A4;">
     <div id="cadre">
 
         <div>
@@ -48,11 +49,11 @@
                 {% elseif expert == "SB" %}<p>Foix{% elseif expert == "BCE" %}<p>La Rochelle{% elseif expert == "PEC" %}<p>Montpellier
                 {% elseif expert == "MC" %}<p>Poitiers{% elseif expert == "PC" %}<p>Avignon{% elseif expert == "NC" %}<p>Pau
                 {% elseif expert == "TC" %}<p>Nice{% elseif expert == "OD" %}<p>Clermont-Ferrand{% elseif expert == "JD" %}<p>Nîmes{% elseif expert == "BE" %}
-                <p>Marseille{% elseif expert == "FM" %}<p>Lyon{% elseif expert == "LM" %}<p>Bordeaux{% elseif expert == "NU" %}<p>Toulon
+                <p>Marseille{% elseif expert == "FM" %}<p>Lyon{% elseif expert == "LM" %}<p>Bordeaux{% elseif expert == "AG" %}<p>Le Mans
                     {% endif %}, le {{ "now" | date("d/m/Y") }}</p>
-                <p>{% if expertJud.civility == "MR" %} Monsieur {% elseif expertJud.civility == "MME" %} Madame {% endif %} {{ expertJud.firstname }} {{ expertJud.lastname }}</p>
-                <p>{{ expertJud.address }}</p>
-                <p>{{ expertJud.zip }} {{ expertJud.town }}</p>
+                <p><b>{% if expertJud.civility == "MR" %}Monsieur {% elseif expertJud.civility == "MME" %}Madame {% endif %} {{ expertJud.firstname }} {{ expertJud.lastname | upper }}<br/>
+              {{ expertJud.address }}<br/>
+              {{ expertJud.zip }} {{ expertJud.town }}</b></p>
             </div>
             {% if expertJud.address is empty %}
                 <div style="height: 50px; width: 100%; background-color: red; text-align: center">
@@ -82,24 +83,24 @@
 
                 <p>{% if expertJud.civility == "MR" %} Monsieur {% else%} Madame {% endif %} l'Expert,</p>
 
-                <p>Je reviens vers vous concernant votre dossier {{ client.ref }} et fais suite à votre nomination par le tribunal de Grande Instance de
+                <p>Je reviens vers vous concernant votre dossier {{ numref }} et fais suite à votre nomination par le tribunal de Grande Instance de
                     {{ tgi }}, vous commettant comme Expert Judiciaire dans cette affaire.</p>
 
                 <p>Je vous {{ action }} que j'interviens à la demande de {% if client.civility == "MR" %} Monsieur {% elseif client.civility == "MME" %}
-                        Madame {%  else %} La société {%  endif %}{{ client.firstname }} {{ client.lastname }}, en qualité d'Expert Conseil, pour l'assister au
-                    cours de vos opértions d'expertise.</p>
+                        Madame {%  elseif client.civility == "Mme, M" or "Crt"%} Madame,Monsieur {%  elseif client.civility == " " %} la société {%  endif %}{{ client.firstname }} {{ client.lastname | upper }}, en qualité d'Expert Conseil, pour l'assister au
+                    cours de vos opérations d'expertise.</p>
 
-                <p>Je me tiendrai donc à votre disposition pour toutes réunions que vous estimerez nécessaire de provoquer</p>
+                <p>Je me tiendrai donc à votre disposition pour toutes réunions que vous estimerez nécessaire de provoquer.</p>
 
                 <p>Néanmoins, avant toute réunion, vous serait-il possible de bien vouloir prendre contact avec mon secrétariat afin qu'en fonction de nos plannings
-                    respectifs, j'ai la possibilité d'assister à vos opérations d'expertise?</p>
+                    respectifs, j'aie la possibilité d'assister à vos opérations d'expertise?</p>
 
                 {% if debut == "oui" %}
                     <p>À cet effet, je vous remercie de bien vouloir me transmettre les comptes-rendus que vous avez déjà établis.</p>
                 {% endif %}
 
                 <p>Vous souhaitant bonne réception de la présente et comptant sur votre compréhension,
-                je vous prie d’agréer, {% if expertJud.civility == "MR" %}Monsieur {% else %} Madame {% endif %}, l’expression de mes sentiments dévoués.</p>
+                je vous prie d’agréer, {% if expertJud.civility == "MR" %}Monsieur {% else %} Madame {% endif %} l'expert, l’expression de mes sentiments dévoués.</p>
 
 
             </div>
@@ -180,11 +181,10 @@
                 <p>Pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
                 <p>mail : contact@assistance-expertise-batiment.com</p>
                 <p>siret : 852 551 746 000 13 code NAF-APE : 7120B TVA: FR87852551746  </p>
-            {% elseif expert == "NU" %}
-                <p>Siège social : Espace Carousel 5B rue Picot le Carousel - 83000 Toulon  </p>
-                <p>Pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
+            {% elseif expert == "AG" %}
+                <p>Siège social et pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
                 <p>mail : contact@assistance-expertise-batiment.com</p>
-                <p>siret : 84893567700010 code NAF-APE : 7112B TVA: FR75884935677  </p>
+                <p>siret : 535 111 678 00012 code NAF-APE : 7490A TVA: FR81535111678</p>
             {% endif %}
         </div>
     </div>

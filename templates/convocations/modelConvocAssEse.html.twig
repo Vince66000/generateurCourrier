@@ -23,9 +23,15 @@
         width: 70%;
         font-size: 80%;
     }
-    #date_exp, #adresse_exp, #dateDesordre, #natureDesordres {
+    #date_exp, #adresse_exp, #dateDesordre {
 
         text-align: center;
+    }
+
+    #natureDesordres {
+
+        text-align: left;
+
     }
     #corps_texte {
 
@@ -51,7 +57,14 @@
     td {
         border: solid 1px black
     }
+    #pj {
+        margin-top: 20px;
+        margin-left: 180px;
+        margin-right: 40px;
+        text-align: justify;
+        /*background-color: red;*/
 
+    }
 </style>
 
 <page  backimg="../public/fondReiserCopie3.jpeg" backbottom="10mm" backimgw="100%" backimgy="30px" backimgx="35px" style="size: A4">
@@ -65,7 +78,8 @@
                 {% elseif expert == "SB" %}<p>Foix{% elseif expert == "BCE" %}<p>La Rochelle{% elseif expert == "PEC" %}<p>Montpellier
                 {% elseif expert == "MC" %}<p>Poitiers{% elseif expert == "PC" %}<p>Avignon{% elseif expert == "NC" %}<p>Pau
                 {% elseif expert == "TC" %}<p>Nice{% elseif expert == "OD" %}<p>Clermont-Ferrand{% elseif expert == "JD" %}<p>Nîmes{% elseif expert == "BE" %}
-                <p>Marseille{% elseif expert == "FM" %}<p>Lyon{% elseif expert == "LM" %}<p>Bordeaux{% elseif expert == "NU" %}<p>Toulon
+                <p>Marseille{% elseif expert == "FM" %}<p>Lyon{% elseif expert == "LM" %}<p>Bordeaux{% elseif expert == "AG" %}
+                <p>Le Mans
                     {% endif %}, le {{ "now" | date("d/m/Y") }}</p>
                 <p><b>{{ socAss.nom }}<br/>
                 {{ assurance.address }}<br/>
@@ -77,7 +91,11 @@
                 </div>
             {% endif %}
             <div id="ref">
-                <p style="color:red">Lettre recommandée avec accusé de réception {{ numReco }}</p>
+                {% if numReco is not empty %}
+                    <p style="color:red">Lettre Recommandée avec Accusé de Réception {{ numReco }}</p>
+                {% elseif courriel is not empty %}
+                    <p style="color:red">Courriel à {{ courriel }}</p>
+                {% endif %}
                 <table   style="border-collapse: collapse">
                     <tr>
                         <td><b>N/RÉF :</b></td>
@@ -100,22 +118,24 @@
                 {% elseif assurance.civility == 'MR' %}
                     Monsieur,
                 {% else%}
-                    Madame, Monsieur
+                    Madame, Monsieur,
                 {% endif %}
                 <p>Je vous informe que j’ai été saisi en qualité d’Expert en bâtiment par {% if pj is not empty %}
-                        la protection juridique {{ pj.nomPJ }} {% if dossier is not empty %}  dossier N°{{ dossier }} {%  endif %} pour le compte de {% endif %}  {% if client.civility == 'MME' %}
+                        la protection juridique {{ pj.nomPJ | trim }}, {% if dossier is not empty %}  dossier n°{{ dossier | trim ~ ',' }} {%  endif %} pour le compte de {% endif %}  {% if client.civility == 'MME' %}
                         Madame
-                    {% elseif client.civility == 'MR' %}
+                    {% elseif client.civility == "MR" %}
                         Monsieur
-                    {% else%}
-                        La société
+                    {% elseif client.civility == "Mme, M"%}
+                        Madame et Monsieur
+                    {% elseif client.civility == "SOC"%}
+                        la société
                     {% endif %} {{ client.firstname }} {{ client.lastname | upper }}, demeurant au {{ client.address }}
                     {{ client.zip }} {{ client.town }}, concernant des
-                    désordres affectant le bien situé à l'adresse : {{ lieuxexp }}.</p>
+                    désordres affectant le bien situé à l'adresse : {{ lieuxexp | trim}}.</p>
 
                 {% if textelibre is not empty %}
                     <p>Les désordres sont les suivants :</p>
-                    <p id="natureDesordres"><b>{{ textelibre }}</b></p>
+                    <p id="natureDesordres"><b>{{ textelibre | nl2br }}</b></p>
                 {% endif %}
 
                 {% if dateDes is not empty %}
@@ -124,22 +144,18 @@
 
                 <p>Afin donc de trouver une solution dans un cadre amiable à ce dossier, je vous indique que je procéderai à une réunion d’expertise contradictoire sur les lieux,</p>
 
-                <p id="adresse_exp"><b> {{ lieuxexp }},</b></p>
+                <p id="adresse_exp"><b> {{ lieuxexp | trim }},</b></p>
                 <p id="date_exp"><b>le {{ dateRdv | format_datetime('full', 'none', locale='fr') }} à {{ heureRdv }}</b></p>
 
                 <p>Réunion pour laquelle je demanderai de bien vouloir missionner l'expert de votre compagnie.</p>
 
+                <p>J'ai également convoqué {{ nomEse.nom }} à cette réunion, suivant courrier joint en annexe.</p>
 
 
 
             </div>
             <div id="deuxième_page">
-{#                <p>Je vous demanderai de bien vouloir transmettre copie de la présente convocation à votre compagnie d’assurances afin qu’elle missionne son Expert et que nous puissions trouver une solution#}
-{#                    dans un cadre#}
-{#                    amiable à ce dossier.#}
-{#                </p>#}
 
-                <p>J'ai également convoqué {{ nomEse.nom }} à cette réunion, suivant courrier joint en annexe.</p>
                 <p>Pourriez-vous me confirmer, <u>si possible par retour de courrier</u> qu'un expert de votre compagnie sera bien présent sur les lieux aux jour et heures mentionnées si-avant?</p>
 
                 <p>Nous vous remercions pour cette expertise de prendre en considération qu'il est indispensable d'appliquer les gestes barrières imposés concernant le COVID-19.
@@ -160,7 +176,15 @@
             <div style="padding-left: 400px; margin-top: 20px; margin-bottom: 0; position: relative">
                 <img id="signature" src='../public/signature{{ expert }}.png' alt="signature">
             </div>
+            {% if pjointe is not empty %}
+                <div id="pj">
+                    <p><u>Liste des pièces jointes</u></p>
+                    <p>{{ pjointe | nl2br }}</p>
+                </div>
+            {% endif %}
+
         </div>
+
 
     </div>
 
@@ -238,11 +262,11 @@
                 <p>Pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
                 <p>mail : contact@assistance-expertise-batiment.com</p>
                 <p>siret : 852 551 746 000 13 code NAF-APE : 7120B TVA: FR87852551746  </p>
-            {% elseif expert == "NU" %}
-                <p>Siège social : Espace Carousel 5B rue Picot le Carousel - 83000 Toulon  </p>
+            {% elseif expert == "AG" %}
+                <p>Siège social : 26 Avenue Henri Lefeuvre - 72100 LE MANS</p>
                 <p>Pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
                 <p>mail : contact@assistance-expertise-batiment.com</p>
-                <p>siret : 84893567700010 code NAF-APE : 7112B TVA: FR75884935677  </p>
+                <p>siret : 890 026 461 00016 code NAF-APE : 7120B TVA: FR68890026461 </p>
             {% endif %}
         </div>
     </page_footer>

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -11,32 +14,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9981cd85-3793-4ddb-bfb0-4d19d119e25f" name="Default Changelist" comment="²">
-      <change beforePath="$PROJECT_DIR$/.idea/gestionCourrier.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gestionCourrier.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/signatureBCE.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signatureBCE.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/signatureBE.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signatureBE.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/signatureFM.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signatureFM.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/signatureGR.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signatureGR.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/signatureJC.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signatureJC.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/signatureJD.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signatureJD.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/signatureJLB.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signatureJLB.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/signatureLM.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signatureLM.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/signatureMC.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signatureMC.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/signatureNC.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signatureNC.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/signatureNU.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signatureNU.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/signatureOD.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signatureOD.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/signaturePC.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signaturePC.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/signaturePEC.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signaturePEC.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/signatureSB.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signatureSB.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/signatureTC.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/signatureTC.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/HtmlToWord.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/convocController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/convocController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/courrierController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/courrierController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/convocations/FormConvEse1.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/convocations/FormConvEse1.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/convocations/formConvocAssClient.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/convocations/formConvocAssClient.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/convocations/formConvocAssTiers.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/convocations/formConvocAssTiers.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/convocations/formConvocClient.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/convocations/formConvocClient.html.twig" afterDir="false" />
@@ -46,6 +30,10 @@
       <change beforePath="$PROJECT_DIR$/templates/convocations/modelConvocAssEse.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/convocations/modelConvocAssEse.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/convocations/modelConvocEse.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/convocations/modelConvocEse.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/courriers/formCourrCltAssRep.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courriers/formCourrCltAssRep.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/courriers/formCourrEJ.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courriers/formCourrEJ.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/courriers/formCourrPjActivDoss.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courriers/formCourrPjActivDoss.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/courriers/modelCourrEJInterv.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courriers/modelCourrEJInterv.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/courriers/modelCourrPjActiv.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courriers/modelCourrPjActiv.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/courriers/modelCourrierCltAssRep.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courriers/modelCourrierCltAssRep.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -159,22 +147,25 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.jetbrains.php.phpunit.codeGeneration.PhpNewTestDialog.defaultLibrary" value="PHPUnit" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/courriers" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/report" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\gestionCourrier\templates\report" />
+      <recent name="C:\wamp64\www\gestionCourrier\templates\convocations" />
+      <recent name="C:\wamp64\www\gestionCourrier\templates\courriers" />
+      <recent name="C:\wamp64\www\gestionCourrier\templates\convocationCivis" />
+      <recent name="C:\wamp64\www\gestionCourrier\src\Controller" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\gestionCourrier\templates\courriers" />
       <recent name="C:\wamp64\www\gestionCourrier\templates\convocations" />
       <recent name="C:\wamp64\www\gestionCourrier\templates\convocation CIVIS" />
       <recent name="C:\wamp64\www\gestionCourrier\src\Controller" />
       <recent name="C:\wamp64\www\gestionCourrier\public" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\gestionCourrier\templates\courriers" />
-      <recent name="C:\wamp64\www\gestionCourrier\templates\convocationCivis" />
-      <recent name="C:\wamp64\www\gestionCourrier\src\Controller" />
     </key>
   </component>
   <component name="RunManager" selected="PHPUnit.convocControllerTest2.testIndex">
@@ -285,6 +276,58 @@
       <workItem from="1603266528473" duration="2238000" />
       <workItem from="1603283872612" duration="4528000" />
       <workItem from="1603350776942" duration="17253000" />
+      <workItem from="1603437465124" duration="17528000" />
+      <workItem from="1603699113885" duration="9535000" />
+      <workItem from="1603792896002" duration="23000" />
+      <workItem from="1603877778290" duration="6000" />
+      <workItem from="1603881700361" duration="975000" />
+      <workItem from="1603882926070" duration="2405000" />
+      <workItem from="1603888269499" duration="40000" />
+      <workItem from="1603964528820" duration="3917000" />
+      <workItem from="1603977610543" duration="632000" />
+      <workItem from="1604044655512" duration="12480000" />
+      <workItem from="1604304715925" duration="5424000" />
+      <workItem from="1604314224969" duration="5104000" />
+      <workItem from="1604393303560" duration="16000" />
+      <workItem from="1604397203520" duration="41000" />
+      <workItem from="1604399282287" duration="2595000" />
+      <workItem from="1604405905895" duration="620000" />
+      <workItem from="1604410398091" duration="719000" />
+      <workItem from="1604416860949" duration="729000" />
+      <workItem from="1604477676927" duration="595000" />
+      <workItem from="1604479168395" duration="4461000" />
+      <workItem from="1604504262109" duration="1301000" />
+      <workItem from="1604565908160" duration="1874000" />
+      <workItem from="1604585659367" duration="2625000" />
+      <workItem from="1604918524247" duration="2521000" />
+      <workItem from="1605022703475" duration="712000" />
+      <workItem from="1605528678300" duration="1350000" />
+      <workItem from="1605535050517" duration="459000" />
+      <workItem from="1605693440311" duration="1531000" />
+      <workItem from="1605712983570" duration="573000" />
+      <workItem from="1605788715404" duration="643000" />
+      <workItem from="1605877425064" duration="1914000" />
+      <workItem from="1606120154838" duration="3965000" />
+      <workItem from="1606399926700" duration="6063000" />
+      <workItem from="1606470902649" duration="13048000" />
+      <workItem from="1606723995099" duration="1256000" />
+      <workItem from="1606903698944" duration="1310000" />
+      <workItem from="1608725597324" duration="666000" />
+      <workItem from="1609942050137" duration="884000" />
+      <workItem from="1611303937960" duration="1227000" />
+      <workItem from="1611845187847" duration="2354000" />
+      <workItem from="1611907776869" duration="625000" />
+      <workItem from="1611927330375" duration="3000" />
+      <workItem from="1611933907871" duration="617000" />
+      <workItem from="1612166870597" duration="1196000" />
+      <workItem from="1613031126503" duration="21016000" />
+      <workItem from="1613118545640" duration="12991000" />
+      <workItem from="1613380240413" duration="1194000" />
+      <workItem from="1613464948722" duration="1189000" />
+      <workItem from="1613550994102" duration="7931000" />
+      <workItem from="1613636503172" duration="10831000" />
+      <workItem from="1613721670774" duration="6935000" />
+      <workItem from="1613981012868" duration="594000" />
     </task>
     <servers />
   </component>
@@ -320,22 +363,23 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="722" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1601976645146" />
-    <state x="355" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1601276363311">
+    <state x="355" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1606402673179">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="355" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1601276363311" />
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1602836262063">
+    <state x="355" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606402673179" />
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1605877956739">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1602836262063" />
-    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1602231768755">
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1605877956739" />
+    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1606405974168">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1602231768755" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1603115617023">
+    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606405974168" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1606724656631">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1603115617023" />
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606724656631" />
     <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1602682260386">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -352,10 +396,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1602682260386" />
-    <state x="739" y="243" key="NewPhpClassDialog" timestamp="1601982784852">
+    <state x="739" y="243" key="NewPhpClassDialog" timestamp="1604063677423">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="739" y="243" key="NewPhpClassDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1601982784852" />
+    <state x="739" y="243" key="NewPhpClassDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1604063677423" />
     <state x="794" y="443" key="NewPhpFileDialog" timestamp="1598861445036">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -376,5 +420,9 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="1962" y="0" width="1459" height="597" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1599056256022" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1604061153071">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1604061153071" />
   </component>
 </project>

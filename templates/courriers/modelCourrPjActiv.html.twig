@@ -21,8 +21,9 @@
         padding-left: 40px;
         height: 30px;
         width: 70%;
+        font-size: 90%;
     }
-    #date_exp, #adresse_exp, #dateDesordre, #natureDesordres {
+     #natureDesordres {
 
         text-align: center;
     }
@@ -64,7 +65,7 @@
                 {% elseif expert == "SB" %}<p>Foix{% elseif expert == "BCE" %}<p>La Rochelle{% elseif expert == "PEC" %}<p>Montpellier
                 {% elseif expert == "MC" %}<p>Poitiers{% elseif expert == "PC" %}<p>Avignon{% elseif expert == "NC" %}<p>Pau
                 {% elseif expert == "TC" %}<p>Nice{% elseif expert == "OD" %}<p>Clermont-Ferrand{% elseif expert == "JD" %}<p>Nîmes{% elseif expert == "BE" %}
-                <p>Marseille{% elseif expert == "FM" %}<p>Lyon{% elseif expert == "LM" %}<p>Bordeaux{% elseif expert == "NU" %}<p>Toulon
+                <p>Marseille{% elseif expert == "FM" %}<p>Lyon{% elseif expert == "LM" %}<p>Bordeaux{% elseif expert == "AG" %}<p>Le Mans
                     {% endif %}, le {{ "now" | date("d/m/Y") }}</p>
                 <p><b>{{ nomAss.nom }}<br/>
                         {{ pj.address }}<br/>
@@ -76,7 +77,11 @@
                 </div>
             {% endif %}
             <div id="ref">
-                <p style="color:red">Lettre recommandée avec accusé de réception {{ numReco }}</p>
+                {% if numReco is not empty %}
+                    <p style="color:red">Lettre Recommandée avec Accusé de Réception {{ numReco }}</p>
+                {% elseif courriel is not empty %}
+                    <p style="color:red">Courriel à {{ courriel }}</p>
+                {% endif %}
                 <table   style="border-collapse: collapse">
                     <tr>
                         <td><b>N/RÉF :</b></td>
@@ -122,14 +127,14 @@
                 <p>Si tel était le cas, il va de soi que je me rangerais à votre barême d'honoraires.</p>
 
 
-                {% if check == 1 %}
+                {% if check == 'true' %}
                     <p>Je vous informe également convoquer <b>{{ eseConv }}</b> à une réunion d'expertise contradictoire, sur les lieux, <b>{{ lieuxexp }}</b>
                          <b>le {{ dateRdv | format_datetime('full', 'none', locale='fr') }} à {{ heureRdv }}</b> , en leur demandant de bien vouloir transmettre ma convocation
-                        à leur compagnie d'assureance afin que leur expert soit également présent à ladite réunion.</p>
-                {% else %}
+                        à leur compagnie d'assurance afin que leur expert soit également présent à ladite réunion.</p>
+                {% elseif check == 'false'%}
                     <p>Je vous informe également convoquer <b>{{ eseConv }}</b> à une réunion d'expertise contradictoire, sur les lieux, <b>{{ lieuxexp }}</b>
                         <b>le {{ dateRdv | format_datetime('full', 'none', locale='fr') }} à {{ heureRdv }}</b>, en lui demandant de bien vouloir transmettre ma convocation
-                        à sa compagnie d'assureance afin que son expert soit également présent à ladite réunion.</p>
+                        à sa compagnie d'assurance afin que son expert soit également présent à ladite réunion.</p>
                 {% endif %}
             </div>
             <div id="deuxième_page">
@@ -226,11 +231,10 @@
                 <p>Pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
                 <p>mail : contact@assistance-expertise-batiment.com</p>
                 <p>siret : 852 551 746 000 13 code NAF-APE : 7120B TVA: FR87852551746  </p>
-            {% elseif expert == "NU" %}
-                <p>Siège social : Espace Carousel 5B rue Picot le Carousel - 83000 Toulon  </p>
-                <p>Pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
+            {% elseif expert == "AG" %}
+                <p>Siège social et pôle administratif : 1 boulevard Jacques Albert - 66200 ELNE - 09 70 24 68 44 </p>
                 <p>mail : contact@assistance-expertise-batiment.com</p>
-                <p>siret : 84893567700010 code NAF-APE : 7112B TVA: FR75884935677  </p>
+                <p>siret : 535 111 678 00012 code NAF-APE : 7490A TVA: FR81535111678</p>
             {% endif %}
         </div>
     </page_footer>

@@ -51,8 +51,8 @@
                 <label for="nom">Nom du contact</label>
                 <select class="form-control" name="nom" id="nom">
                     {% for contact in res %}
-                        <option value="{{ contact.firstname ~ " " ~ contact.lastname ~ " "  ~ contact.libelle }}">
-                            {{ contact.firstname ~ " " ~ (contact.lastname | upper)  ~ " " ~  contact.libelle}}</option>
+                        <option value="{{  contact.libelle }}">
+                            {{  contact.libelle}}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -133,9 +133,9 @@
                     <option value="OD">Olivier DAVID</option>
                     <option value="JD">Jérôme DECOR</option>
                     <option value="BE">Ben EL ASSIOUI</option>
+                    <option value="AG">Alexandre GILBERT</option>
                     <option value="FM">Florian MAILHE</option>
                     <option value="LM">Laurent MONTARU</option>
-                    <option value="NU">Norbert URSO</option>
                 </select>
             </div>
         </div>
@@ -155,12 +155,22 @@
                 <input class="form-control" name="vref" id="vref" type="text">
             </div>
         </div>
+        <fieldset style="border: 2px black solid; padding: 15px">
+            <legend>Traçage</legend>
         <div class="row">
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-6">
                 <label for="numReco">Numéro recommandé</label>
                 <input class="form-control" name="numReco" id="numReco">
             </div>
+            <div class="form-group col-md-1">
+                <label for="">ou</label>
+            </div>
+            <div class="form-group col-md-5">
+                <label for="courriel">Courriel</label>
+                <input class="form-control" name="courriel" id="courriel">
+            </div>
         </div>
+        </fieldset>
         <div class="row">
             <div class="form-group col-md-4">
                 <label for="interlocuteur">A l'attention de</label>
@@ -176,6 +186,12 @@
                     <option value="oui">Oui</option>
                     <option value="non">Non</option>
                 </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-lg-12">
+                <label for="pieceJointe">Pièce(s) jointe(s) ( 3 MAXIMUM, sinon, tout sur une ligne.)</label>
+                <textarea class="form-control" name="pieceJointe" id="pieceJointe" type="text"></textarea>
             </div>
         </div>
         <br/>

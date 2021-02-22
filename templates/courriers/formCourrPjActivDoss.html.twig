@@ -127,7 +127,7 @@
                     <option value="BE">Ben EL ASSIOUI</option>
                     <option value="FM">Florian MAILHE</option>
                     <option value="LM">Laurent MONTARU</option>
-                    <option value="NU">Norbert URSO</option>
+                    <option value="AG">Alexandre GILBERT</option>
                 </select>
             </div>
         </div>
@@ -147,12 +147,22 @@
                 <input class="form-control" name="vref" id="vref" type="text">
             </div>
         </div>
-        <div class="row">
-            <div class="form-group col-md-12">
-                <label for="numReco">Numéro recommandé</label>
-                <input class="form-control" name="numReco" id="numReco">
+        <fieldset style="border: 2px black solid; padding: 15px">
+            <legend>Traçage</legend>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="numReco">Numéro recommandé</label>
+                    <input class="form-control" name="numReco" id="numReco">
+                </div>
+                <div class="form-group col-md-1">
+                    <label for="">ou</label>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="courriel">Courriel</label>
+                    <input class="form-control" name="courriel" id="courriel">
+                </div>
             </div>
-        </div>
+        </fieldset>
         <div class="row">
             <div class="form-group col-md-4">
                 <label for="interlocuteur">A l'attention de</label>
@@ -164,7 +174,7 @@
             </div>
             <div class="form-check col-md-4">
                 <br/>
-                <input class="form-check-inline" type="checkbox" name="multi" id="multi" style="width: 30px; height: 30px" value="1">
+                <input class="form-check-inline" type="checkbox" name="multi" id="multi" style="width: 30px; height: 30px">
                 <label class="form-check-label" for="multi">Plusieurs entreprises/tiers convoqués</label>
 
             </div>
